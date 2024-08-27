@@ -15,11 +15,9 @@ public class LoginUserService {
     @Autowired
     LoginUserRepo loginUserRepo;
     public LoginUserDto saveLoginUser(LoginUserDto loginUserDto){
-        if(loginUserDto.equals()) {
+
             LoginUser save = loginUserRepo.save(new LoginUser(loginUserDto.getContactNo(), loginUserDto.getPassword(), loginUserDto.getEmail()));
             return new LoginUserDto(save.getId(), save.getContactNo(), save.getPassword(), save.getEmail());
-        }
-        return null;
     }
     public LoginUserDto updateLoginUser(Integer id, LoginUserDto loginUserDto){
         if(loginUserRepo.existsById(id)){
