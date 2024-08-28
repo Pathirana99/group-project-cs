@@ -16,9 +16,12 @@ public class LoginUserController {
     LoginUserService service;
 
     @PostMapping("/saveLoginUser")
-    public ResponseEntity<LoginUserDto> saveLoginUser(@RequestBody LoginUserDto loginUserDto){
+    public ResponseEntity<Object> saveLoginUser(@RequestBody LoginUserDto loginUserDto){
         LoginUserDto loginuser = service.saveLoginUser(loginUserDto);
-        return new ResponseEntity<>(loginuser, HttpStatus.CREATED);
+        if(loginuser != null){
+            return new ResponseEntity<>(loginuser, HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Already regitered with this Email", HttpStatus.CREATED);
     }
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateLoginUser(@PathVariable Integer id, @RequestBody LoginUserDto loginuser){
