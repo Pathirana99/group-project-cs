@@ -1,6 +1,7 @@
 package com.example.testing.controller;
 
 import com.example.testing.dto.LoginUserDto;
+import com.example.testing.dto.ReturnLoginUserDto;
 import com.example.testing.service.LoginUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,9 +18,9 @@ public class LoginUserController {
 
     @PostMapping("/saveLoginUser")
     public ResponseEntity<Object> saveLoginUser(@RequestBody LoginUserDto loginUserDto){
-        LoginUserDto loginuser = service.saveLoginUser(loginUserDto);
-        if(loginuser != null){
-            return new ResponseEntity<>(loginuser, HttpStatus.OK);
+        ReturnLoginUserDto ReturnLoginUserDto = service.saveLoginUser(loginUserDto);
+        if(ReturnLoginUserDto != null){
+            return new ResponseEntity<>(ReturnLoginUserDto, HttpStatus.OK);
         }
         return new ResponseEntity<>("Already regitered with this Email", HttpStatus.CREATED);
     }
