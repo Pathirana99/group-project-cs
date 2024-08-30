@@ -5,8 +5,6 @@ import com.example.testing.dto.ReturnLoginUserDto;
 import com.example.testing.entity.LoginUser;
 import com.example.testing.repo.LoginUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
