@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="94d6b09f-27c3-4701-b1af-11a675fe32a9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/Back_End/testing/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Back_End/testing/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back_End/testing/src/main/java/com/example/testing/controller/LoginUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back_End/testing/src/main/java/com/example/testing/controller/LoginUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back_End/testing/src/main/java/com/example/testing/service/LoginUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Back_End/testing/src/main/java/com/example/testing/service/LoginUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back_End/testing/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Back_End/testing/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,9 +18,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2lKj8DbmnAXZ2IyBU72r692relt" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -28,7 +31,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.TestingApplication.executor": "Run",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/final project/finelProject/test",
+    "last_opened_file_path": "D:/final project/group project/group-project-cs/Back_End/testing",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -63,6 +66,7 @@
       <option name="presentableId" value="Default" />
       <updated>1724935501728</updated>
       <workItem from="1724935504401" duration="1405000" />
+      <workItem from="1725007716313" duration="127000" />
     </task>
     <servers />
   </component>
