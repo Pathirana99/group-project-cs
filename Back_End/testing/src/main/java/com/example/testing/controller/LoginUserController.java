@@ -20,7 +20,7 @@ public class LoginUserController {
     public ResponseEntity<Object> saveLoginUser(@RequestBody LoginUserDto loginUserDto){
         ReturnLoginUserDto ReturnLoginUserDto = service.saveLoginUser(loginUserDto);
         if(ReturnLoginUserDto != null){
-            return new ResponseEntity<>("Success", HttpStatus.OK);
+            return new ResponseEntity<>("Register Success", HttpStatus.OK);
         }
         return new ResponseEntity<>("Already regitered with this Email", HttpStatus.CREATED);
     }
