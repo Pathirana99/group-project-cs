@@ -1,0 +1,295 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(205, 201, 201, 0.118); /* semi-transparent background */
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.login {
+  width: 880px;
+  height: 560px;
+  display: flex;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+}
+
+.login-left,
+.login-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Make the container relative */
+}
+
+.login-left {
+  width: 40%;
+  background-color: #92D3D0;
+  padding: 20px;
+}
+
+.logo {
+  width: 188px;
+  height: 188px;
+  object-fit: cover;
+  margin-top: -100px;
+  margin-bottom: 132px;
+}
+
+
+.signup-text {
+  font-size: 14px;
+  color: #777777;
+  text-align: center;
+  margin-bottom:30px;
+  font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.signup-button {
+  background-color: #ACDEDB;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: -120px; /* Added margin-bottom for consistency */
+}
+
+.signup-button:hover {
+  background-color: #00BFB4;
+}
+
+.login-right {
+  width: 60%;
+  padding: 40px;
+}
+
+.close-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  color: #868383;
+}
+
+.signin-header {
+  font-size: 43px;
+  line-height:auto;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.input-field {
+  width: 100%; /* Adjusted to take up full width of parent */
+  max-width: 392px;
+  height: 32px;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  line-height: 1.5; /* Adjust this to control vertical centering */
+  padding-left: 50px; /* Adjust this for horizontal positioning */
+}
+
+.input-field::placeholder {
+  color: #c2c0c0; /* Customize placeholder text color */
+  opacity: 1; /* Make sure it's visible */
+  font-size: 14px; /* Adjust font size */
+}
+
+
+.icon {
+  position: absolute;
+  margin-left: 15px;
+  margin-top: -56px;
+  color: #c2c0c0;
+}
+
+.input-field-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end; /* Aligns child elements to the right */
+}
+
+.forgot-password {
+  display: inline-block;
+  text-align: right;
+  color: #72d6c9;
+  text-decoration: none;
+  margin-bottom: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.3s ease; 
+}
+
+.forgot-password:hover {
+  color: #00bfb4; /* Color change on hover */
+}
+
+
+.signin-button {
+  background-color: #92D3D0;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  text-align: center;
+  display: block;
+  margin-left: auto; /* Center the button horizontally */
+  margin-right: auto; /* Center the button horizontally */
+}
+
+.signin-button:hover {
+  background-color: #00BFB4;
+}
+
+.or-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #888;
+  font-weight: 400;
+}
+
+.or-divider::before,
+.or-divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #4e4d4d;
+  margin: 0 10px; /* Adjust the margin to control the space between the lines and the text */
+}
+
+.or-divider span {
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+
+.google-signin-button {
+  width: 100%; /* Adjusted to take up full width of parent */
+  max-width: 392px;
+  background-color: white;
+  border: 1px solid #ddd;
+  color: #555;
+  padding: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.google-signin-button:hover {
+  background-color: rgb(225, 228, 228);
+}
+
+.google-signin-button img {
+  margin-right: 10px;
+}
+
+.googlelogo {
+  width: 20px;
+  height: 22px;
+  object-fit: cover;
+}
+
+.vectorimage1 {
+  position: absolute;
+  left: 50%;
+  bottom: -15px;
+  transform: translateX(-50%);
+  width: 244px;
+  max-width: 200px; /* Adjust the size as needed */
+  opacity: 0.8;
+  margin-left: 165px;
+}
+
+.josefin-sans-signin-header {
+  font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+
+.popup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.popup {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 500px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.close-popup {
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 485px;
+  margin-top: -30px;
+  
+}
+
+.popup .confirm-button {
+  width: 100%;
+  background-color: #8ebeb8;
+  border: none;
+  color: white;
+  padding: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px; /* Space above the button */
+  font-size: 16px;
+}
+
+.popup .confirm-button.active {
+  background-color: #72d6c9; /* Active state color */
+  color: #fff;
+  cursor: pointer;
+}
+
+.popup h2 {
+  font-weight: 600;
+  font-size: 24px;
+  margin-bottom: 20px; /* Space below the heading */
+  color: #333; /* Heading color */
+}
+
+.popup .input-field {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px; /* Space between text fields */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
