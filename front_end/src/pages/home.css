@@ -1,0 +1,14 @@
+.homePage {
+    height: 100vh; /* Makes the section full height */
+    background: linear-gradient(to bottom,#BBFFFB 0% , #FFFFFF 9%, #FFFFFF 85% , #B1EBE8 100%); /* Horizontal gradient */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+  }
+
+  .homepage-container {
+    margin-left: 200PX;
+    margin-right: 200px;
+  }
