@@ -1,0 +1,74 @@
+
+.nav {
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: transparent; 
+  font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  position: fixed;
+}
+
+/* Logo section styling */
+.navbarlogo img {
+  width: 149px; /* Adjust logo size */
+  height: auto;
+}
+
+/* Links container styling */
+.navbarLinks {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  gap: 43px; /* Space between the links */
+}
+
+/* Styling for the individual links */
+.navbarLinks li a {
+  text-decoration: none;
+  color: #000; /* Black color for the links */
+  font-size: 18px;
+  line-height: 16px;
+  font-weight: 400;
+  transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Change color on hover */
+.navbarLinks li a:hover {
+  color: #20B2AA; /* Light sea green on hover */
+}
+
+/* Styling for the login icon */
+.loginIcon {
+  font-size: 24px;
+  color: #000; /* Black color for the icon */
+  transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Change icon color on hover */
+.loginIcon:hover {
+  color: #20B2AA; /* Light sea green on hover */
+}
+
+/* Styling for the button */
+.navbarLinks li .MuiButton-root {
+  background-color: #00BFB4; /* Light sea green background */
+  color: white;
+  border-radius: 16px; /* Rounded corners */
+  padding: 8px 16px;
+  text-transform: none; /* Prevent uppercase text */
+  font-size: 16px;
+  box-shadow: none; /* Remove the default box-shadow */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Button hover effect */
+.navbarLinks li .MuiButton-root:hover {
+  background-color: #009F96; /* Darker shade on hover */
+}
