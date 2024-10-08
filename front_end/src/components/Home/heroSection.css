@@ -1,0 +1,83 @@
+.hero-container {
+    position: relative;
+    width: 100%;
+    height: auto; /* Allow the container to adjust to the content */
+    max-height: max-content; /* Limit the max height for larger screens */
+    overflow: hidden;
+  }
+  
+  .image-section {
+    position: relative;
+    width: 100%;
+    height: auto; /* Image height adjusts based on the aspect ratio */
+    max-height: 401px; /* Limit the max height */
+    overflow: hidden;
+  }
+  
+  .image-section img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Ensures the image covers the section */
+    transform: scaleX(-1);
+    transition: all 0.5s ease; /* Smooth transition */
+  }
+  
+  .text-section {
+    text-align: left;
+    position: absolute;
+    font-size: clamp(2rem, 4vw, 43px); /* Fluid font size for responsiveness */
+    font-weight: bold;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    color: black;
+    transition: all 0.5s ease; /* Smooth transition */
+  }
+  
+  .searchbar-section {
+    margin-top: -128px; /* Pull the search bar closer to the image */
+    transition: all 0.5s ease;
+    
+   
+  }
+  
+  /* Adjustments for large screens */
+  @media screen and (max-width: 1200px) {
+    .text-section {
+      font-size: clamp(1.5rem, 3vw, 32px); /* Adjust for medium-large screens */
+      left: 35%; /* Adjust text positioning */
+    }
+  }
+  
+  /* Adjustments for medium and small screens */
+  @media screen and (max-width: 768px) {
+    .text-section {
+      font-size: 3vw; /* Fluid text size for mobile */
+      left: 30%; /* Adjust text positioning on smaller screens */
+      text-align: center; /* Center align for smaller screens */
+    }
+  
+    .searchbar-section {
+      margin-top: -20px;
+      padding: 20px;
+      width: 100%;
+    }
+  
+    .hero-container {
+      max-height: 300px; /* Reduce hero section height for smaller screens */
+    }
+  }
+  
+  /* Adjustments for very small mobile devices */
+  @media screen and (max-width: 480px) {
+    .text-section {
+      font-size: clamp(1rem, 5vw, 24px); /* Smaller font size for small screens */
+      left: 40%; /* Center the text */
+      transform: translate(-50%, -50%);
+    }
+  
+    .searchbar-section {
+      margin-top: 0px;
+    }
+  }
+  

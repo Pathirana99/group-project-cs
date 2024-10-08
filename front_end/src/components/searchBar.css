@@ -1,0 +1,133 @@
+/* Container for the search bar */
+.search-bar {
+    display: flex;
+    flex-direction: row; /* Horizontal layout on larger screens */
+    justify-content: space-between; /* Distribute space between items */
+    align-items: center; /* Center items vertically */
+    gap: 8px; /* Space between fields */
+    margin: -20px auto; /* Center the search bar on the page */
+    padding: 20px;
+    background-color: #c3e1e023; /* Light background for visibility */
+    border-radius: 16px;
+}
+
+/* Input fields styling (TextField and Autocomplete) */
+.MuiFormControl-root {
+    flex: 1; /* Make input fields take equal space */
+    min-width: 150px; /* Ensure a minimum width for each input */
+}
+
+/* Search button styles */
+.search-bar .search-button {
+    background-color: #00BFB4; /* Light sea green background */
+    color: white; /* Text color */
+    height: 56px;
+    margin-top: -10px;
+    margin-right: 5px;
+    min-width: 64px; /* Minimum width for the button */
+    flex-shrink: 0; /* Prevent the button from shrinking */
+    display: flex;
+    justify-content: center; /* Horizontally center text */
+    align-items: center; /* Vertically center text */
+    padding: 0 16px; /* Optional: Adjust padding */
+    box-sizing: border-box; /* Ensure padding and borders are counted in the total size */
+}
+
+.search-bar .search-button:hover {
+    background-color: #009F96; /* Darker shade on hover */
+    color: white; /* Text color on hover */
+}
+
+/* Ensure input fields and buttons take the same height and align */
+.search-bar .MuiTextField-root,
+.search-bar .MuiAutocomplete-root {
+    flex: 1; /* Distribute the space evenly among all elements */
+    min-width: 64px; /* Ensure a minimum width for the fields */
+    margin-right: 5px;
+}
+
+.search-bar .MuiInputBase-root {
+    height: 56px; /* Ensure the height is consistent inside the input field */
+    border: 2px solid #00BFB4;
+    background-color: #1b181852;
+    display: flex;
+    align-items: center; /* Vertically center the text inside the input */
+    padding: 0 16px; /* Add padding to ensure text is not too close to the edge */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+.search-bar .MuiInputLabel-root {
+    line-height: normal; /* Ensure label does not interfere with alignment */
+    color: white; 
+}
+
+.search-bar .MuiInputLabel-root.Mui-focused {
+    color: white; /* Change label color when focused */
+}
+
+.search-bar .MuiAutocomplete-inputRoot {
+    height: 56px; /* Same height for the Autocomplete input */
+    display: flex;
+    align-items: center; /* Vertically center content */
+}
+
+.search-bar .MuiSelect-icon {
+    color: #d3fffd; /* Change this color to your desired color */
+}
+
+.search-bar .MuiAutocomplete-popupIndicator {
+    color: #d3fffd; /* Change this color to your desired color */
+}
+
+/* Responsive adjustments for smaller screens */
+@media screen and (max-width: 768px) {
+    .search-bar .MuiInputBase-root {
+        height: 56px; /* Ensure the height is consistent inside the input field */
+        border: 2px solid #00BFB4;
+        background-color: transparent;
+    }
+    
+    .search-bar {
+        flex-direction: column; /* Switch to vertical layout on smaller screens */
+        align-items: stretch;
+        width: calc(100% - 80px); /* Adjust margin for smaller screens */
+        margin: 10px 0; /* Smaller margins */
+    }
+
+    .search-bar .MuiInputLabel-root {
+        color: black; 
+    }
+
+    .search-bar .MuiInputLabel-root.Mui-focused {
+        color: black; /* Change label color when focused */
+    }
+
+    .MuiFormControl-root {
+        width: 100%; /* Full width inputs on mobile */
+    }
+
+    .MuiButton-containedPrimary {
+        width: 100%; /* Full width search button on mobile */
+        font-size: 14px; /* Smaller text on mobile */
+    }
+
+    .search-bar .MuiTextField-root,
+    .search-bar .MuiAutocomplete-root {
+        width: 100%; /* Full width for mobile */
+        margin-bottom: 10px; /* Add some space between fields */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    /* Further adjustments for smaller mobile screens */
+    .search-bar {
+        font-size: 14px;
+        width: calc(100% - 80px); /* Adjust width for smaller screens */
+    }
+}
+
+/* Fix for Autocomplete dropdown size */
+.MuiAutocomplete-popper {
+    width: auto !important; /* Ensure dropdown width adapts to input field */
+    min-width: 20% !important; /* Set dropdown width to match input width */
+}
