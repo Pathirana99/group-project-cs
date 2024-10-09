@@ -2,6 +2,7 @@ import React from 'react'
 import "./home.css";
 import NavigationBar from '../components/NavigationBar';
 import HeroSection from '../components/Home/HeroSection';
+import ComfortSection from '../components/Home/ComfortSection';
 
 
 export default function Home() {
@@ -15,6 +16,10 @@ export default function Home() {
 
         <div className="hero">
           <HeroSection/>
+        </div>
+
+        <div className="comfort">
+          <ComfortSection/>
         </div>
 
           

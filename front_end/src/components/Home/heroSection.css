@@ -4,6 +4,10 @@
     height: auto; /* Allow the container to adjust to the content */
     max-height: max-content; /* Limit the max height for larger screens */
     overflow: hidden;
+    max-height: 401px;
+    margin-top:144px;
+    border-radius: 16px;
+
   }
   
   .image-section {
@@ -12,6 +16,8 @@
     height: auto; /* Image height adjusts based on the aspect ratio */
     max-height: 401px; /* Limit the max height */
     overflow: hidden;
+    
+  
   }
   
   .image-section img {
@@ -20,6 +26,8 @@
     object-fit: cover; /* Ensures the image covers the section */
     transform: scaleX(-1);
     transition: all 0.5s ease; /* Smooth transition */
+    border-radius: 16px;
+
   }
   
   .text-section {
@@ -27,7 +35,7 @@
     position: absolute;
     font-size: clamp(2rem, 4vw, 43px); /* Fluid font size for responsiveness */
     font-weight: bold;
-    top: 50%;
+    top: 32%;
     left: 30%;
     transform: translate(-50%, -50%);
     color: black;
@@ -35,7 +43,7 @@
   }
   
   .searchbar-section {
-    margin-top: -128px; /* Pull the search bar closer to the image */
+    margin-top: -88px; /* Pull the search bar closer to the image */
     transition: all 0.5s ease;
     
    
@@ -47,6 +55,11 @@
       font-size: clamp(1.5rem, 3vw, 32px); /* Adjust for medium-large screens */
       left: 35%; /* Adjust text positioning */
     }
+
+    .hero-container {
+      width: calc(100%-50px);;
+      margin-top: 64px;
+    }
   }
   
   /* Adjustments for medium and small screens */
@@ -55,6 +68,7 @@
       font-size: 3vw; /* Fluid text size for mobile */
       left: 30%; /* Adjust text positioning on smaller screens */
       text-align: center; /* Center align for smaller screens */
+      top: 40%;
     }
   
     .searchbar-section {
@@ -64,7 +78,8 @@
     }
   
     .hero-container {
-      max-height: 300px; /* Reduce hero section height for smaller screens */
+      max-height: 300px;/* Reduce hero section height for smaller screens */
+      margin-top: 64px;;
     }
   }
   
