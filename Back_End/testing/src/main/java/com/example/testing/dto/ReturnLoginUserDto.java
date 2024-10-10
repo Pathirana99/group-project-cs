@@ -11,4 +11,5 @@ import lombok.NoArgsConstructor;
 public class ReturnLoginUserDto {
     private String email;
     private Integer id;
+
 }

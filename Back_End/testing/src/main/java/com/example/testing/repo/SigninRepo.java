@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface SigninRepo extends JpaRepository<LoginUser, Integer> {
-    Optional<LoginUser> findByEmail(String email);
+    Optional<LoginUser> getLoginUserByEmail(String email);
 }

@@ -1,5 +1,6 @@
 package com.example.testing.service;
 
+import com.example.testing.dto.ReturnLoginUserDto;
 import com.example.testing.dto.SignInDto;
 import com.example.testing.entity.LoginUser;
 import com.example.testing.repo.SigninRepo;
@@ -14,19 +15,20 @@ public class SignInService {
     @Autowired
     SigninRepo signinRepo;
     public SignInDto SignIn(SignInDto signInDto) {
-        Optional<LoginUser> loginUserByEmail = signinRepo.findByEmail(signInDto.getEmail());
+        Optional<LoginUser> loginUserByEmail = signinRepo.getLoginUserByEmail(signInDto.getEmail());
         if(loginUserByEmail.isPresent()) {
             LoginUser loginUser = loginUserByEmail.get();
-            byte[] decodedBytes = Base64.getDecoder().decode(signInDto.getPassword());
+            byte[] decodedBytes = Base64.getDecoder().decode(loginUser.getPassword());
 
             String decodedpassword = new String(decodedBytes);
 
             if(decodedpassword.equals(signInDto.getPassword())) {
-                return new SignInDto(loginUser.getEmail(), "Login Succes !");
+                return new SignInDto(loginUser.getEmail(),"Login Success");
             }else {
-                return new SignInDto(loginUser.getEmail(), "Login Failed !");
+                return new SignInDto(loginUser.getEmail(), "Login Failed1 !");
             }
+        }else {
+            return new SignInDto(signInDto.getEmail(), "Login Failed2 !");
         }
-        return new SignInDto(loginUserByEmail.get().getEmail(), "Login Failed !");
     }
 }

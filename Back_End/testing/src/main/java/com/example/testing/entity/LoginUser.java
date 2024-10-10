@@ -25,9 +25,4 @@ public class LoginUser {
         this.password = password;
         this.email = email;
     }
-
-    public LoginUser(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
 }

@@ -1,5 +1,6 @@
 package com.example.testing.controller;
 
+import com.example.testing.dto.ReturnLoginUserDto;
 import com.example.testing.dto.SignInDto;
 import com.example.testing.service.SignInService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/SignIn")
+@RequestMapping("/SignInUser")
 public class SignInController {
     @Autowired
     SignInService signInService;
 
     @PostMapping("/SignIn")
-    public ResponseEntity<SignInDto> SignIn(@RequestBody SignInDto signInDto){
+    public ResponseEntity<Object> SignIn(@RequestBody SignInDto signInDto){
         SignInDto signIn = signInService.SignIn(signInDto);
         return new ResponseEntity<>(signIn, HttpStatus.OK);
     }
