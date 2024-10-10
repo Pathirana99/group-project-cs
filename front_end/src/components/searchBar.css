@@ -49,7 +49,7 @@
 .search-bar .MuiInputBase-root {
     height: 56px; /* Ensure the height is consistent inside the input field */
     border: 2px solid #00BFB4;
-    background-color: #1b181852;
+    background-color: #ffffffe2;
     display: flex;
     align-items: center; /* Vertically center the text inside the input */
     padding: 0 16px; /* Add padding to ensure text is not too close to the edge */
@@ -58,11 +58,15 @@
 
 .search-bar .MuiInputLabel-root {
     line-height: normal; /* Ensure label does not interfere with alignment */
-    color: white; 
+    color:black; 
 }
 
 .search-bar .MuiInputLabel-root.Mui-focused {
-    color: white; /* Change label color when focused */
+    color:rgb(255, 255, 255); /* Change label color when focused */
+    font-size: 20px;
+    background-color: #00BFB4;
+    border-radius: 8px;
+    padding: 5px;
 }
 
 .search-bar .MuiAutocomplete-inputRoot {
@@ -72,11 +76,14 @@
 }
 
 .search-bar .MuiSelect-icon {
-    color: #d3fffd; /* Change this color to your desired color */
+    color: #000000; /* Change this color to your desired color */
 }
 
 .search-bar .MuiAutocomplete-popupIndicator {
-    color: #d3fffd; /* Change this color to your desired color */
+    color: #000000; /* Change this color to your desired color */
+}
+.search-bar .MuiInputBase-input {
+    color: rgb(0, 0, 0); /* Set input text color to white */
 }
 
 /* Responsive adjustments for smaller screens */
@@ -99,7 +106,7 @@
     }
 
     .search-bar .MuiInputLabel-root.Mui-focused {
-        color: black; /* Change label color when focused */
+        color: rgb(255, 255, 255); /* Change label color when focused */
     }
 
     .MuiFormControl-root {

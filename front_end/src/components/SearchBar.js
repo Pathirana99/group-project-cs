@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./searchBar.css";
+import './searchBar.css';
 import { TextField, Button, MenuItem, Autocomplete } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -7,19 +7,41 @@ import SearchIcon from '@mui/icons-material/Search';
 const areas = [
   { title: 'Colombo', region: 'Western' },
   { title: 'Gampaha', region: 'Western' },
+  { title: 'Kaluthara', region: 'Western' },
   { title: 'Kandy', region: 'Central' },
   { title: 'Matale', region: 'Central' },
+  { title: 'Nuwara Eliya', region: 'Central' },
   { title: 'Galle', region: 'Southern' },
   { title: 'Matara', region: 'Southern' },
+  { title: 'Hambantota', region: 'Southern' },
   { title: 'Jaffna', region: 'Northern' },
-  // Add more areas and regions here
+  { title: 'Kilinochchi', region: 'Northern' },
+  { title: 'Mannar', region: 'Northern' },
+  { title: 'Vavuniya', region: 'Northern' },
+  { title: 'Mullaitivu', region: 'Northern' },
+  { title: 'Anuradhapura', region: 'North Central' },
+  { title: 'Polonnaruwa', region: 'North Central' },
+  { title: 'Ratnapura', region: 'Sabaragamuwa' },
+  { title: 'Kegalle', region: 'Sabaragamuwa' },
+  
+  { title: 'University of Ruhuna', region: 'University' },
+  { title: 'University of Colombo', region: 'University' },
+  { title: 'University of Kelaniya', region: 'University' },
+  { title: 'University of Moratuwa', region: 'University' },
+  { title: 'University of Peradeniya', region: 'University' },
+  { title: 'Eastern University', region: 'University' },
+  { title: 'Rajarata University', region: 'University' },
+  { title: 'Sabaragamuwa University', region: 'University' },
+  { title: 'University of Sri Jayawardenapura', region: 'University' },
+  { title: 'Wayamba University', region: 'University' },
+  { title: 'University of Vavuniya', region: 'University' },
 ];
 
 // Other search options
-const boardingTypes = ['Single Room', 'Shared Room', 'Apartment'];
+const boardingTypes = ['Single Room', 'Shared Room', 'Apartment', 'Annex'];
 const distances = ['< 1 km', '1 - 3 km', '3 - 5 km', '5+ km'];
-const priceRanges = ['< $100', '$100 - $300', '$300 - $500', '$500+'];
-const facilities = ['Wi-Fi', 'AC', 'Parking', 'Laundry'];
+const priceRanges = ['< Rs.5000', 'Rs.5000 - Rs.10 000', 'Rs.10 000 - Rs.15 000', 'Rs.15 000 - Rs.30 000', 'Rs.30 000 - Rs.50 000', 'Rs.50 000 +'];
+const facilities = ['Wi-Fi', 'A/C', 'Parking', 'Laundry', 'Cooking', 'Study Area', 'Pet Allowed', 'Meal Services', 'Garden View'];
 
 export default function SearchBar() {
   const [selectedArea, setSelectedArea] = useState(null);
@@ -44,6 +66,7 @@ export default function SearchBar() {
       {/* Grouped Area Autocomplete */}
       <Autocomplete
         className="custom-autocomplete"
+        id="area"
         options={areas}
         groupBy={(option) => option.region} // Group by region
         getOptionLabel={(option) => option.title} // Show the title of each area
@@ -56,7 +79,8 @@ export default function SearchBar() {
       {/* Boarding House Type */}
       <TextField
         select
-        label="Boarding House Type"
+        id="type"
+        label="Type of Place"
         value={selectedBoardingType}
         onChange={(e) => setSelectedBoardingType(e.target.value)}
         variant="outlined"
@@ -73,6 +97,7 @@ export default function SearchBar() {
       {/* Distance */}
       <TextField
         select
+        id="distance"
         label="Distance"
         value={selectedDistance}
         onChange={(e) => setSelectedDistance(e.target.value)}
@@ -90,6 +115,7 @@ export default function SearchBar() {
       {/* Price Range */}
       <TextField
         select
+        id="price"
         label="Price Range"
         value={selectedPriceRange}
         onChange={(e) => setSelectedPriceRange(e.target.value)}
@@ -107,6 +133,7 @@ export default function SearchBar() {
       {/* Facilities */}
       <Autocomplete
         multiple
+        id="facilities"
         options={facilities}
         value={selectedFacilities}
         onChange={(event, newValue) => setSelectedFacilities(newValue)}
@@ -116,7 +143,7 @@ export default function SearchBar() {
 
       {/* Search Button */}
       <Button className="search-button" variant="contained" color="primary" onClick={handleSearch}>
-      <SearchIcon/>
+        <SearchIcon />
       </Button>
     </div>
   );

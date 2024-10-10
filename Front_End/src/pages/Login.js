@@ -46,12 +46,18 @@ export default function Login() {
         <div className="login-right">
           {/* Update CloseIcon to use handleClose on click */}
           <CloseIcon className="close-icon" onClick={handleClose} />
+          <div className="login-right-signup">
+            <p className="signup-text">Don't have an account?</p>
+            <button className="signup-button">SIGN UP</button>
+          </div>
           <h2 className="signin-header">Sign in Here</h2>
           <form>
+            <div className="input">
             <input type="email" placeholder="Email" className="input-field" />
             <MailOutlineIcon className="icon"/>
             <input type="password" placeholder="Password" className="input-field" />
             <LockIcon className="icon"/>
+            </div>
             <div className="input-field-container">
               <button type="button" className="forgot-password" onClick={openForgotPassword}>Forget Your Password?</button>
             </div>

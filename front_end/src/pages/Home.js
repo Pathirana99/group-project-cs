@@ -3,6 +3,8 @@ import "./home.css";
 import NavigationBar from '../components/NavigationBar';
 import HeroSection from '../components/Home/HeroSection';
 import ComfortSection from '../components/Home/ComfortSection';
+import CardSection from '../components/Home/CardSection';
+import Footer from '../components/Footer';
 
 
 export default function Home() {
@@ -20,6 +22,14 @@ export default function Home() {
 
         <div className="comfort">
           <ComfortSection/>
+        </div>
+
+        <div className="cards">
+          <CardSection/>
+        </div>
+
+        <div className="footer">
+          <Footer/>
         </div>
 
           
