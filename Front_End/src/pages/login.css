@@ -47,7 +47,7 @@
 }
 
 
-.signup-text {
+.login-left .signup-text {
   font-size: 14px;
   color: #777777;
   text-align: center;
@@ -58,7 +58,16 @@
   font-style: normal;
 }
 
-.signup-button {
+.login-right-signup{
+  display: flex;              /* Flexbox layout */
+  align-items: center;         /* Vertically align items to the center */
+  gap: 5px; 
+  margin-top: -55px;
+  margin-bottom: 40px;
+  
+}
+
+.login-left .signup-button {
   background-color: #ACDEDB;
   border: none;
   color: white;
@@ -68,7 +77,25 @@
   margin-bottom: -120px; /* Added margin-bottom for consistency */
 }
 
-.signup-button:hover {
+.login-right-signup .signup-button:hover {
+  color:#00BFB4;
+}
+
+.login-right-signup .signup-button {
+  background: none;            /* Remove background */
+  border: none;                /* Remove border */
+  color: #ACDEDB;              /* Set the button text color */
+  cursor: pointer;             /* Pointer cursor to indicate it's clickable */
+  font-size: 14px;             /* Adjust font size */
+  padding: 0; 
+}
+.login-right-signup .signup-text{
+  margin: 0;                   /* Remove any default margin from the paragraph */
+  font-size: 14px;
+}
+
+
+.login-left .signup-button:hover {
   background-color: #00BFB4;
 }
 
@@ -103,6 +130,8 @@
   border-radius: 8px;
   line-height: 1.5; /* Adjust this to control vertical centering */
   padding-left: 50px; /* Adjust this for horizontal positioning */
+  justify-content: center;
+  align-items: center;
 }
 
 .input-field::placeholder {
@@ -292,4 +321,102 @@
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 16px;
+}
+/* Hide the left section and adjust the login-right for smaller screens */
+@media (max-width: 768px) {
+  .login {
+    flex-direction: column;
+    height: 90%;
+    justify-content: space-between;
+    margin-left:20px;
+    margin-right: 20px;
+  }
+
+  /* Hide the login-left section */
+  .login-left {
+    display: none;
+  }
+
+  /* Expand the login-right section to full width */
+  .login-right {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center elements in the middle */
+    min-height: 100vh;
+    box-sizing: border-box;
+  }
+
+  .signin-header {
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .input-field {
+    max-width: 100%;
+  }
+
+  .google-signin-button {
+    max-width: 100%;
+    margin-top: 20px;
+  }
+
+  .signin-button {
+    margin-top: 20px;
+    padding: 10px;
+    width: 100%;
+  }
+  .login-right .input {
+    width: 90%;
+  }
+
+  /* Place the signup text and button at the bottom */
+  .signup-text,
+  .signup-button {
+    margin-top: auto; /* Push to the bottom */
+    margin-bottom: 0;
+    align-self: center; /* Center horizontally */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .signup-button {
+    background-color: #ACDEDB;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px; /* Spacing above the button */
+
+  }
+
+  .signup-button:hover {
+    background-color: #00BFB4;
+  }
+}
+
+@media (max-width: 480px) {
+  .signin-header {
+    font-size: 24px;
+  }
+
+  .signin-button {
+    padding: 8px 16px;
+  }
+
+  .google-signin-button {
+    padding: 10px;
+  }
+
+  .signup-button {
+    padding: 6px 12px;
+  }
+  .login-right .input {
+    width: 80%;
+    margin-right:10%;
+  }
 }

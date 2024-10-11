@@ -1,14 +1,53 @@
 .homePage {
-    height: 100vh; /* Makes the section full height */
-    background: linear-gradient(to bottom,#BBFFFB 0% , #FFFFFF 9%, #FFFFFF 85% , #B1EBE8 100%); /* Horizontal gradient */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-align: center;
-  }
+  min-height: 100vh; /* Ensure minimum height is the full viewport height */
+  background: linear-gradient(to bottom, #BBFFFB 0%, #FFFFFF 9%, #FFFFFF 85%, #B1EBE8 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: black;
+  font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  
+}
 
+.homepage-container {
+  width: calc(100% - 400px); /* Subtract the 200px margin on both sides */
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-grow: 1; /* Allow this container to grow and take available space */
+}
+
+/* Media query for tablets (768px and smaller) */
+@media (max-width: 768px) {
   .homepage-container {
-    margin-left: 200PX;
-    margin-right: 200px;
+      width: calc(100% - 100px); /* Reduce margin to 50px on smaller screens */
   }
+}
+
+/* Media query for mobile phones (480px and smaller) */
+@media (max-width: 480px) {
+  .homepage-container {
+      width: calc(100% - 20px); /* Reduce margin to 10px on very small screens */
+  }
+}
+.image-section {
+  padding-top: 120px; /* Offset for fixed navbar */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  flex-grow: 1; /* Allow it to grow and take available space */
+}
+
+.comfort-section {
+  padding: 50px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  flex-grow: 1; /* Allow it to grow and take available space */
+}
+

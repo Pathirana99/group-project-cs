@@ -3,14 +3,20 @@
   display: flex;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100vw; 
   justify-content: space-evenly;
   align-items: center;
-  background-color: transparent; 
+  background-color:rgba(255, 255, 255, 0.933); 
   font-family: "Josefin Sans", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
   position: fixed;
+  z-index: 1000;
+  height: 128px;
+  padding: 5px;
+  
+  
+ 
 }
 
 /* Logo section styling */
@@ -37,6 +43,7 @@
   line-height: 16px;
   font-weight: 400;
   transition: color 0.3s ease; /* Smooth transition for hover effect */
+  transition: all 0.3s ease-in-out;
 }
 
 /* Change color on hover */
@@ -71,4 +78,61 @@
 /* Button hover effect */
 .navbarLinks li .MuiButton-root:hover {
   background-color: #009F96; /* Darker shade on hover */
+}
+
+/* Menu icon styling (visible only on mobile screens) */
+.menu-icon {
+  display: none; /* Hide by default */
+  font-size: 30px;
+  color: #000;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+}
+.menu-icon:hover{
+  color: #009F96;
+}
+
+/* Media queries for mobile responsiveness */
+@media (max-width: 768px) {
+  .navbarLinks {
+    display: none; /* Hide links on mobile */
+    flex-direction: column; /* Stack links vertically when shown */
+    background-color: rgba(8, 8, 8, 0.605); /* Background color for the mobile dropdown */
+    position: absolute;
+    top: 110px; /* Below the nav bar */
+    left: 30px;
+    width: 250px;
+    z-index: 1000;
+    text-align: center;
+    padding: 20px 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Add transition for opacity and transform */
+    opacity: 0; /* Initially hidden */
+    transform: translateY(-10px); /* Move it up slightly */
+    border-radius: 16px;
+  }
+
+  .navbarLinks li a {
+    color:white;
+  }
+  .loginIcon {
+    color: white; /* Set login icon color to white */
+  }
+  /* Show the menu icon on mobile screens */
+  .menu-icon {
+    display: block; /* Hide by default */
+    
+  }
+
+  .menu-icon.open {
+    transform: rotate(90deg); /* Rotate the icon when the menu is open */
+  }
+
+  /* When the menu is open */
+  .navbarLinks.open {
+    display: flex; /* Show links */
+    opacity: 1; /* Make it fully visible */
+    max-height: 300px;  /* Move back to original position */
+  }
 }
