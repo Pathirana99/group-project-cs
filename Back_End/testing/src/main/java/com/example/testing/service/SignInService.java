@@ -28,7 +28,7 @@ public class SignInService {
             String decodedpassword = new String(decodedBytes);
 
             if(decodedpassword.equals(signInDto.getPassword())) {
-               String token = jwtAuthenticator.generateJwtToken(loginUser);
+              // String token = jwtAuthenticator.generateJwtToken(loginUser);
                 return new SignInDto(loginUser.getEmail(),"Login Success");
             }else {
                 return new SignInDto(loginUser.getEmail(), "Login Failed1 !");
