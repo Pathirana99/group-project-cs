@@ -19,6 +19,6 @@ class TestingApplicationTests {
 		SecretKey key = Jwts.SIG.HS256.key().build();
 		byte[] encoded = key.getEncoded();
 		String encodedKey = Base64.getEncoder().encodeToString(encoded);
-		System.out.println(encodedKey)
+		System.out.println(encodedKey);
 	}
 }
