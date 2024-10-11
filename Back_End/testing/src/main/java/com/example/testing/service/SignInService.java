@@ -2,6 +2,7 @@ package com.example.testing.service;
 
 import com.example.testing.dto.ReturnLoginUserDto;
 import com.example.testing.dto.SignInDto;
+import com.example.testing.dto.SigninResponseDto;
 import com.example.testing.entity.LoginUser;
 import com.example.testing.repo.SigninRepo;
 import com.example.testing.utill.JWTAuthenticator;
@@ -19,7 +20,7 @@ public class SignInService {
     @Autowired
     JWTAuthenticator jwtAuthenticator;
 
-    public SignInDto SignIn(SignInDto signInDto) {
+    public SigninResponseDto SignIn(SignInDto signInDto) {
         Optional<LoginUser> loginUserByEmail = signinRepo.getLoginUserByEmail(signInDto.getEmail());
         if(loginUserByEmail.isPresent()) {
             LoginUser loginUser = loginUserByEmail.get();
@@ -28,13 +29,13 @@ public class SignInService {
             String decodedpassword = new String(decodedBytes);
 
             if(decodedpassword.equals(signInDto.getPassword())) {
-              // String token = jwtAuthenticator.generateJwtToken(loginUser);
-                return new SignInDto(loginUser.getEmail(),"Login Success");
+               // String token = jwtAuthenticator.generateJwtToken(loginUser);
+                return new SigninResponseDto(loginUser.getEmail(),"LOGIN SUCCESS");
             }else {
-                return new SignInDto(loginUser.getEmail(), "Login Failed1 !");
+                return new SigninResponseDto(loginUser.getEmail(), "WRONG PASSWORD");
             }
         }else {
-            return new SignInDto(signInDto.getEmail(), "Login Failed2 !");
+            return new SigninResponseDto(signInDto.getEmail(), "NO USER FOUND");
         }
     }
 }
