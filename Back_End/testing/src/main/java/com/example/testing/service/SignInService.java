@@ -28,13 +28,13 @@ public class SignInService {
             String decodedpassword = new String(decodedBytes);
 
             if(decodedpassword.equals(signInDto.getPassword())) {
-               // String token = jwtAuthenticator.generateJwtToken(loginUser);
-                return new SigninResponseDto(loginUser.getEmail(),"LOGIN SUCCESS");
+                String token = jwtAuthenticator.generateJwtToken(loginUser);
+                return new SigninResponseDto(loginUser.getEmail(),"LOGIN SUCCESS", token);
             }else {
-                return new SigninResponseDto(loginUser.getEmail(), "WRONG PASSWORD");
+                return new SigninResponseDto(loginUser.getEmail(), "WRONG PASSWORD", null);
             }
         }else {
-            return new SigninResponseDto(signInDto.getEmail(), "NO USER FOUND");
+            return new SigninResponseDto(signInDto.getEmail(), "NO USER FOUND", null);
         }
     }
 }

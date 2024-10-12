@@ -3,10 +3,12 @@ package com.example.testing.dto;
 public class SigninResponseDto {
     private String email;
     private String msg;
+    private String token;
 
-    public SigninResponseDto(String email, String msg) {
+    public SigninResponseDto(String email, String msg, String token) {
         this.email = email;
         this.msg = msg;
+        this.setToken(token);
     }
     public String getEmail() {return email;}
 
@@ -17,5 +19,13 @@ public class SigninResponseDto {
     }
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
