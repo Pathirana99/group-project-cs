@@ -7,7 +7,7 @@ import './login.css';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LockIcon from '@mui/icons-material/Lock';
 import CloseIcon from '@mui/icons-material/Close';
-import { GoogleLogin } from 'react-google-login';
+import { GoogleLogin } from '@react-oauth/google'; // Import from @react-oauth/google
 
 export default function Login() {
   const [step, setStep] = useState(null);
@@ -18,13 +18,15 @@ export default function Login() {
   const openChangePassword = () => setStep('change');
   const closePopup = () => setStep(null);
 
+  // Function to handle Google Login success
   const handleGoogleSuccess = (response) => {
     console.log('Google login successful:', response);
-    // Handle successful login here
+    // Handle successful login (like saving tokens, user data)
   };
 
-  const handleGoogleFailure = (response) => {
-    console.log('Google login failed:', response);
+  // Function to handle Google Login failure
+  const handleGoogleFailure = (error) => {
+    console.log('Google login failed:', error);
     // Handle failed login here
   };
 
@@ -53,10 +55,10 @@ export default function Login() {
           <h2 className="signin-header">Sign in Here</h2>
           <form>
             <div className="input">
-            <input type="email" placeholder="Email" className="input-field" />
-            <MailOutlineIcon className="icon"/>
-            <input type="password" placeholder="Password" className="input-field" />
-            <LockIcon className="icon"/>
+              <input type="email" placeholder="Email" className="input-field" />
+              <MailOutlineIcon className="icon"/>
+              <input type="password" placeholder="Password" className="input-field" />
+              <LockIcon className="icon"/>
             </div>
             <div className="input-field-container">
               <button type="button" className="forgot-password" onClick={openForgotPassword}>Forget Your Password?</button>
@@ -64,14 +66,13 @@ export default function Login() {
             <button type="submit" className="signin-button">SIGN IN</button>
           </form>
           <div className="or-divider"><span>OR</span></div>
+          
+          {/* Use GoogleLogin from @react-oauth/google */}
           <GoogleLogin
-            clientId="YOUR_GOOGLE_CLIENT_ID"
-            buttonText="Google"
             onSuccess={handleGoogleSuccess}
-            onFailure={handleGoogleFailure}
-            cookiePolicy={'single_host_origin'}
-            render={renderProps => (
-              <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="google-signin-button">
+            onError={handleGoogleFailure}
+            render={({ onClick, disabled }) => (
+              <button onClick={onClick} disabled={disabled} className="google-signin-button">
                 <img src="/images/1.2.png" alt="Google logo" className="googlelogo"/>
                 Google
               </button>
