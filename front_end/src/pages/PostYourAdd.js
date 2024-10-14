@@ -1,9 +1,11 @@
 import React from 'react'
+import PostAdd from '../components/PostYourAdd/PostAdd';
 
 export default function PostYourAdd() {
   return (
     <div>
-      <h1>postyour add page</h1>
+        <PostAdd/>
+      
     </div>
   )
 }

@@ -7,30 +7,56 @@ import './login.css';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LockIcon from '@mui/icons-material/Lock';
 import CloseIcon from '@mui/icons-material/Close';
-import { GoogleLogin } from 'react-google-login';
+import { GoogleLogin } from '@react-oauth/google'; // Import from @react-oauth/google
 
 export default function Login() {
   const [step, setStep] = useState(null);
   const navigate = useNavigate(); // Initialize navigate function
+  const [email, setEmail] = useState(''); // State for email input
+  const [password, setPassword] = useState('');
 
   const openForgotPassword = () => setStep('forgot');
   const openEnterCode = () => setStep('code');
   const openChangePassword = () => setStep('change');
   const closePopup = () => setStep(null);
 
+  // Function to handle Google Login success
   const handleGoogleSuccess = (response) => {
     console.log('Google login successful:', response);
-    // Handle successful login here
+    // Simulate storing authentication token in localStorage
+    localStorage.setItem('authToken', 'google-auth-token');
+
+    // Navigate to the home page or close login page after successful login
+    navigate('/');
   };
 
-  const handleGoogleFailure = (response) => {
-    console.log('Google login failed:', response);
+  // Function to handle Google Login failure
+  const handleGoogleFailure = (error) => {
+    console.log('Google login failed:', error);
     // Handle failed login here
   };
 
   // Function to go back to the previous page
   const handleClose = () => {
     navigate(-1); // Navigates back to the previous page
+  };
+
+  // Handle email/password form submission
+  const handleSignIn = (e) => {
+    e.preventDefault();
+
+    // Simulate email/password authentication process
+    if (email === 'test@example.com' && password === 'password') {
+      console.log('Email login successful');
+
+      // Store authentication token in localStorage
+      localStorage.setItem('authToken', 'email-auth-token');
+
+      // Navigate to the home page or close the login page
+      navigate('/');
+    } else {
+      console.log('Login failed. Incorrect email or password.');
+    }
   };
 
   return (
@@ -51,12 +77,17 @@ export default function Login() {
             <button className="signup-button">SIGN UP</button>
           </div>
           <h2 className="signin-header">Sign in Here</h2>
-          <form>
+          <form onSubmit={handleSignIn}>
             <div className="input">
-            <input type="email" placeholder="Email" className="input-field" />
-            <MailOutlineIcon className="icon"/>
-            <input type="password" placeholder="Password" className="input-field" />
-            <LockIcon className="icon"/>
+              <input type="email" placeholder="Email" className="input-field" value={email}
+              onChange={(e) => setEmail(e.target.value)} // Update email state
+              />
+              <MailOutlineIcon className="icon"/>
+              <input type="password" placeholder="Password" className="input-field" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)} // Update password state
+            />
+              <LockIcon className="icon"/>
             </div>
             <div className="input-field-container">
               <button type="button" className="forgot-password" onClick={openForgotPassword}>Forget Your Password?</button>
@@ -64,14 +95,13 @@ export default function Login() {
             <button type="submit" className="signin-button">SIGN IN</button>
           </form>
           <div className="or-divider"><span>OR</span></div>
+          
+          {/* Use GoogleLogin from @react-oauth/google */}
           <GoogleLogin
-            clientId="YOUR_GOOGLE_CLIENT_ID"
-            buttonText="Google"
             onSuccess={handleGoogleSuccess}
-            onFailure={handleGoogleFailure}
-            cookiePolicy={'single_host_origin'}
-            render={renderProps => (
-              <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="google-signin-button">
+            onError={handleGoogleFailure}
+            render={({ onClick, disabled }) => (
+              <button onClick={onClick} disabled={disabled} className="google-signin-button">
                 <img src="/images/1.2.png" alt="Google logo" className="googlelogo"/>
                 Google
               </button>

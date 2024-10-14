@@ -1,4 +1,3 @@
-
 .nav {
   display: flex;
   top: 0;
@@ -6,7 +5,7 @@
   width: 100vw; 
   justify-content: space-evenly;
   align-items: center;
-  background-color:rgba(255, 255, 255, 0.933); 
+  background-color: rgba(255, 255, 255, 0.933); 
   font-family: "Josefin Sans", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
@@ -14,9 +13,12 @@
   z-index: 1000;
   height: 128px;
   padding: 5px;
-  
-  
- 
+  transition: top 0.3s ease-in-out; /* Smooth transition when showing/hiding */
+}
+
+/* Class to hide the nav when scrolling down */
+.nav.hidden {
+  top: -150px; /* Move the nav bar upwards and hide it */
 }
 
 /* Logo section styling */
@@ -87,14 +89,16 @@
   color: #000;
   cursor: pointer;
   transition: transform 0.3s ease;
-
 }
-.menu-icon:hover{
+.menu-icon:hover {
   color: #009F96;
 }
 
 /* Media queries for mobile responsiveness */
 @media (max-width: 768px) {
+  .nav{
+    padding: 0px;
+  }
   .navbarLinks {
     display: none; /* Hide links on mobile */
     flex-direction: column; /* Stack links vertically when shown */
@@ -114,15 +118,16 @@
   }
 
   .navbarLinks li a {
-    color:white;
+    color: white;
   }
+  
   .loginIcon {
     color: white; /* Set login icon color to white */
   }
+  
   /* Show the menu icon on mobile screens */
   .menu-icon {
-    display: block; /* Hide by default */
-    
+    display: block; /* Display the menu icon on mobile */
   }
 
   .menu-icon.open {
