@@ -12,7 +12,7 @@
 }
 
 .homepage-container {
-  width: calc(100% - 400px); /* Subtract the 200px margin on both sides */
+  width: 90%; /* Subtract the 200px margin on both sides */
   max-width: 1200px;
   margin: 0 auto;
   flex-grow: 1; /* Allow this container to grow and take available space */

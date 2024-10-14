@@ -12,6 +12,8 @@ import { GoogleLogin } from '@react-oauth/google'; // Import from @react-oauth/g
 export default function Login() {
   const [step, setStep] = useState(null);
   const navigate = useNavigate(); // Initialize navigate function
+  const [email, setEmail] = useState(''); // State for email input
+  const [password, setPassword] = useState('');
 
   const openForgotPassword = () => setStep('forgot');
   const openEnterCode = () => setStep('code');
@@ -21,7 +23,11 @@ export default function Login() {
   // Function to handle Google Login success
   const handleGoogleSuccess = (response) => {
     console.log('Google login successful:', response);
-    // Handle successful login (like saving tokens, user data)
+    // Simulate storing authentication token in localStorage
+    localStorage.setItem('authToken', 'google-auth-token');
+
+    // Navigate to the home page or close login page after successful login
+    navigate('/');
   };
 
   // Function to handle Google Login failure
@@ -33,6 +39,24 @@ export default function Login() {
   // Function to go back to the previous page
   const handleClose = () => {
     navigate(-1); // Navigates back to the previous page
+  };
+
+  // Handle email/password form submission
+  const handleSignIn = (e) => {
+    e.preventDefault();
+
+    // Simulate email/password authentication process
+    if (email === 'test@example.com' && password === 'password') {
+      console.log('Email login successful');
+
+      // Store authentication token in localStorage
+      localStorage.setItem('authToken', 'email-auth-token');
+
+      // Navigate to the home page or close the login page
+      navigate('/');
+    } else {
+      console.log('Login failed. Incorrect email or password.');
+    }
   };
 
   return (
@@ -53,11 +77,16 @@ export default function Login() {
             <button className="signup-button">SIGN UP</button>
           </div>
           <h2 className="signin-header">Sign in Here</h2>
-          <form>
+          <form onSubmit={handleSignIn}>
             <div className="input">
-              <input type="email" placeholder="Email" className="input-field" />
+              <input type="email" placeholder="Email" className="input-field" value={email}
+              onChange={(e) => setEmail(e.target.value)} // Update email state
+              />
               <MailOutlineIcon className="icon"/>
-              <input type="password" placeholder="Password" className="input-field" />
+              <input type="password" placeholder="Password" className="input-field" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)} // Update password state
+            />
               <LockIcon className="icon"/>
             </div>
             <div className="input-field-container">

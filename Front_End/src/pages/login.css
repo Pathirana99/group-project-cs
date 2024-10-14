@@ -134,7 +134,7 @@
 .input-field::placeholder {
   color: #c2c0c0; /* Customize placeholder text color */
   opacity: 1; /* Make sure it's visible */
-  font-size: 14px; /* Adjust font size */
+  font-size: 16px; /* Adjust font size */
 }
 
 
