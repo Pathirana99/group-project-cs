@@ -50,9 +50,4 @@ public class BoardingHouseService {
         }
         return 0;
     }
-    /*
-    public List<BoardingHouse> searchLocation(String location) {
-        return boardingHouseRepo.searchByLocation(location);
-    }
- */
 }
