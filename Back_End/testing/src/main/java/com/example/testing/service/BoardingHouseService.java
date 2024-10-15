@@ -5,6 +5,7 @@ import com.example.testing.entity.BoardingHouse;
 import com.example.testing.repo.BoardingHouseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.Base64;
@@ -49,5 +50,9 @@ public class BoardingHouseService {
             return 1;
         }
         return 0;
+    }
+
+    public List<BoardingHouse> filterBylocation(String location) {
+        return boardingHouseRepo.findByLocation(location);
     }
 }

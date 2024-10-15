@@ -46,4 +46,8 @@ public class BoardingHouseController {
         }
         return new ResponseEntity<>("not found", HttpStatus.NOT_FOUND);
     }
+    @GetMapping("/location")
+    public List<BoardingHouse> filterByLocation(@RequestParam String location){
+        return service.filterBylocation(location);
+    }
 }
