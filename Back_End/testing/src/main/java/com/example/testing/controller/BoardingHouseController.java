@@ -52,6 +52,6 @@ public class BoardingHouseController {
         List<BoardingHouse> boardingHouses = service.searchLocation(location);
         return new ResponseEntity<>(boardingHouses, HttpStatus.OK);
     }
-    
+
      */
 }
