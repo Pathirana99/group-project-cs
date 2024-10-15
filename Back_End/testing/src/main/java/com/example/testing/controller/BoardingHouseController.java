@@ -5,10 +5,9 @@ import com.example.testing.service.BoardingHouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/boardingHouse")
@@ -24,6 +23,27 @@ public class BoardingHouseController {
         } else {
             return new ResponseEntity<>("Already regitered with this Email", HttpStatus.CREATED);
         }
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateBoarding(@PathVariable Integer id, @RequestBody BoardingHouseDto boardingHouseDto){
+        BoardingHouseDto update = service.updateBoarding(id, boardingHouseDto);
+        if(update != null) {
+            return new ResponseEntity<>(boardingHouseDto, HttpStatus.OK);
+        }
+        return new ResponseEntity<>("not found", HttpStatus.NOT_FOUND);
+    }
+    @GetMapping("/getAllBoarding")
+    public ResponseEntity<List<BoardingHouseDto>> getAllBoarding(){
+        List<BoardingHouseDto> allBoardign = service.getAllBoarding();
+        return new ResponseEntity<>(allBoardign, HttpStatus.OK);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteBoarding(@PathVariable Integer id){
+        int i = service.deleteBoarding(id);
+        if (i == 1){
+            return new ResponseEntity<>("deleted", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("not found", HttpStatus.NOT_FOUND);
     }
 
 }
