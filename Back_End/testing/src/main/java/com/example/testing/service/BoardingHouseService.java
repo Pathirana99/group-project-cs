@@ -29,7 +29,7 @@ public class BoardingHouseService {
     public BoardingHouseDto updateBoarding(Integer id, BoardingHouseDto boardingHouseDto) {
         if (boardingHouseRepo.existsById(id)) {
             BoardingHouse update = boardingHouseRepo.save(new BoardingHouse(id, boardingHouseDto.getCity(), boardingHouseDto.getType(), boardingHouseDto.getPhone(), boardingHouseDto.getLocation(), boardingHouseDto.getDescription(), boardingHouseDto.getEmail(), boardingHouseDto.getCity(), boardingHouseDto.getPrice(), boardingHouseDto.getStreet(), boardingHouseDto.getOwnername(), boardingHouseDto.getImage(), boardingHouseDto.getPassword()));
-            return new BoardingHouseDto(boardingHouseDto.getId(), boardingHouseDto.getCity(), boardingHouseDto.getType(), boardingHouseDto.getPhone(), boardingHouseDto.getLocation(), boardingHouseDto.getDescription(), boardingHouseDto.getEmail(), boardingHouseDto.getCity(), boardingHouseDto.getPrice(), boardingHouseDto.getStreet(), boardingHouseDto.getOwnername(), boardingHouseDto.getImage(), boardingHouseDto.getPassword());
+            return new BoardingHouseDto(update.getId(), update.getCity(), update.getType(), update.getPhone(), update.getLocation(), update.getDescription(), update.getEmail(), update.getCity(), update.getPrice(), update.getStreet(), update.getOwnername(), update.getImage(), update.getPassword());
         }
         return null;
     }
