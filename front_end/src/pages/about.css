@@ -1,0 +1,45 @@
+.about-container {
+    padding: 20px;
+    text-align: center;
+    
+  }
+  
+  .about-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .intro-text {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  
+  .about-container .cards-container {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .about-container .card {
+    background-color: #dcdcdc;  /* Slight grey background */
+    border-radius: 8px;
+    padding: 20px;
+    width: 30%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .about-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+  
+  .about-container p {
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+  
