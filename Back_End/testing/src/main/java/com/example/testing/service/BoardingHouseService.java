@@ -52,7 +52,7 @@ public class BoardingHouseService {
         return 0;
     }
 
-    public List<BoardingHouse> filterBylocation(String location) {
-        return boardingHouseRepo.findByLocation(location);
+    public List<BoardingHouse> filterByCity(String city) {
+        return boardingHouseRepo.findByCity(city);
     }
 }
