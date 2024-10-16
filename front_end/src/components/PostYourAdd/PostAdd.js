@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import './postAdd.css'; // Import the CSS file
-import { TextField, Button, RadioGroup, FormControlLabel, Radio, Autocomplete } from '@mui/material'; // Using Material-UI components
+import { TextField, Button, RadioGroup, FormControlLabel, Radio, Autocomplete,Step,Stepper,StepLabel } from '@mui/material'; // Using Material-UI components
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import AddApartment from './AddApartment';
+import AddRoom from './AddRoom';
+import AddAnnex from './AddAnnex';
+import AddOther from './AddOther';
+
 
 const citiesByProvince = [
   { city: 'Colombo', province: 'Western' },
@@ -25,8 +30,12 @@ const citiesByProvince = [
   { city: 'Kegalle', province: 'Sabaragamuwa' }
 ];
 
+const steps = ['Basic Infomation', 'Boarding Place Details', 'Additional Details'];
+
 const PostAdd = () => {
   // State to manage the current step
+
+  const [currentStep, setCurrentStep] = useState(0);
 
   const [location, setLocation] = useState({ lat: 6.9271, lng: 79.8612 }); // Default location (Colombo)
   const [loadingLocation, setLoadingLocation] = useState(false); // For loading state when fetching location
@@ -67,7 +76,12 @@ const PostAdd = () => {
     phoneNumbers: [''],
     placeType: 'Apartment', // Default selection
     city: '',
-    street: ''
+    street: '',
+    // Add more fields as needed for each form
+    apartmentDetails: {},
+    roomDetails: {},
+    annexDetails: {},
+    otherDetails: {},
   });
   const [errors, setErrors] = useState({});
 
@@ -125,8 +139,52 @@ const PostAdd = () => {
     setFormData({ ...formData, placeType: event.target.value });
   };
 
+  // Go to the next form step
+  const handleNext = () => {
+    setCurrentStep((prevStep) => prevStep + 1);
+  };
+
+  // Go to the previous form step
+  const handleBack = () => {
+    setCurrentStep((prevStep) => prevStep - 1);
+  };
+
+  const updateFormData = (data) => {
+    setFormData({ ...formData, ...data });
+  };
+
+  const renderForm = () => {
+    switch (formData.placeType) {
+      case 'Apartment':
+        return <AddApartment formData={formData.apartmentDetails} updateFormData={updateFormData} />;
+      case 'Room':
+        return <AddRoom formData={formData.roomDetails} updateFormData={updateFormData} />;
+      case 'Annex':
+        return <AddAnnex formData={formData.annexDetails} updateFormData={updateFormData} />;
+      case 'Other':
+        return <AddOther formData={formData.otherDetails} updateFormData={updateFormData} />;
+      default:
+        return <AddApartment formData={formData.apartmentDetails} updateFormData={updateFormData} />;
+    }
+  };
+
+
   return (
     <div className="postadd">
+      <div className="stepper">
+      <Stepper activeStep={currentStep} alternativeLabel className="custom-stepper">
+        {steps.map((label, index) => (
+          <Step key={index}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+      </div>
+
+      {currentStep === 0 && (
+        <div className="container">
+
+
       <h1>Register Your Boarding Place</h1>
       <img
         src='/images/2.1.png'
@@ -134,15 +192,15 @@ const PostAdd = () => {
         className="icon"
       />
       <div className="post-add-container">
-  
+      <form onSubmit={handleSubmit}>
         {/* Email, Name, Phone Number Section */}
         <div className="form-section">
-          <form onSubmit={handleSubmit}>
+          
             <label>E-mail</label>
             <TextField
-              label="Email"
               name="email"
               type="text"
+              placeholder="Your Email"
               value={formData.email}
               onChange={handleChange}
               error={!!errors.email}
@@ -153,13 +211,13 @@ const PostAdd = () => {
   
             <label>Name</label>   
             <TextField
-              label="Your Name"
               name="name"
               type="text"
               value={formData.name}
               onChange={handleChange}
               error={!!errors.name}
               helperText={errors.name}
+              placeholder="Your Name"
               fullWidth
               required
             />
@@ -168,7 +226,7 @@ const PostAdd = () => {
             {formData.phoneNumbers.map((phone, index) => (
               <div key={index} className="phone-number-row">
                 <TextField
-                  label={`Phone Number ${index + 1}`}
+                  placeholder={`Phone Number ${index + 1}`}
                   name={`phone${index}`}
                   type="text"
                   value={phone}
@@ -184,7 +242,6 @@ const PostAdd = () => {
             <div className="add-phone-link" onClick={addPhoneNumber}>
               <span>+</span> Add another phone number
             </div>
-        </form>
       </div>
   
         {/* Boarding Place Type Section */}
@@ -283,28 +340,68 @@ const PostAdd = () => {
             {loadingLocation ? 'Loading...' : 'Get Current Location'}
           </Button>
         </div>
+        </form>
+        </div>
+        </div>
+      )}
         
+        {currentStep === 1 && (
+        <div>
+          {renderForm()}
+        </div>
+      )}
+
+      {currentStep === 2 && (
+        <div>
+          <h1>Additional Details</h1>
+          {/* Render AddOther form component here on the third page */}
+          <AddOther formData={formData.otherDetails} updateFormData={updateFormData} />
+        </div>
+      )}
+
+       
+
+        {/* Navigation buttons */}
         <div className="buttonSection">
+        {currentStep > 0 && (
         <Button
           type="back"
           variant="contained" 
           color="primary"
+          onClick={handleBack}
           style={{ marginTop: '20px' }}
         >
           Back
         </Button>
+        )}
+        
+        {currentStep < steps.length - 1 && (
 
         <Button
           type="continue"
           variant="contained" 
           color="primary"
+          onClick={handleNext}
           style={{ marginTop: '20px' }}
         >
           Continue
         </Button>
+        )}
+        
+
+        {currentStep === steps.length - 1 && (
+          <Button 
+            type="submit"
+            onClick={handleSubmit} 
+            variant="contained"
+            >
+            Submit
+          </Button>
+        )}
+      
         </div>
 
-      </div>
+      
     </div>
   );
   
