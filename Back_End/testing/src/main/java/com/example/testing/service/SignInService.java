@@ -5,6 +5,7 @@ import com.example.testing.dto.SigninResponseDto;
 import com.example.testing.entity.LoginUser;
 import com.example.testing.repo.SigninRepo;
 import com.example.testing.utill.JWTAuthenticator;
+import com.example.testing.utill.SignInMail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,8 @@ public class SignInService {
     @Autowired
     JWTAuthenticator jwtAuthenticator;
 
+
+
     public SigninResponseDto SignIn(SignInDto signInDto) {
         Optional<LoginUser> loginUserByEmail = signinRepo.getLoginUserByEmail(signInDto.getEmail());
         if(loginUserByEmail.isPresent()) {
@@ -29,6 +32,7 @@ public class SignInService {
 
             if(decodedpassword.equals(signInDto.getPassword())) {
                 String token = jwtAuthenticator.generateJwtToken(loginUser);
+
                 return new SigninResponseDto(loginUser.getEmail(),"LOGIN SUCCESS", token);
             }else {
                 return new SigninResponseDto(loginUser.getEmail(), "WRONG PASSWORD", null);
