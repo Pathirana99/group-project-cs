@@ -114,6 +114,13 @@ const PostAdd = () => {
       formErrors[`phone0`] = 'Please enter a valid 10-digit phone number';
     }
 
+    if(!formData.city){
+      formErrors.city = 'required field';
+    }
+    if(!formData.street){
+      formErrors.street = 'required field';
+    }
+
     // Validate additional phone numbers only if they are provided
     formData.phoneNumbers.slice(1).forEach((phone, index) => {
       if (phone && !phone.match(/^\d{10}$/)) {
@@ -298,6 +305,8 @@ const PostAdd = () => {
                   label="City"
                   fullWidth
                   variant="outlined"
+                  error={!!errors.city}
+                  helperText={errors.city}
                   required
                 />
               )}
@@ -310,6 +319,8 @@ const PostAdd = () => {
                 name="street"
                 value={formData.street}
                 onChange={handleChange}
+                error={!!errors.street}
+                helperText={errors.street}
                 fullWidth
                 required
               />
@@ -346,7 +357,7 @@ const PostAdd = () => {
       )}
         
         {currentStep === 1 && (
-        <div>
+        <div >
           {renderForm()}
         </div>
       )}

@@ -1,21 +1,20 @@
-/* General styling for the post add page */
 .postadd {
   min-height: 100vh; /* Ensure the minimum height is the full viewport height */
   background: linear-gradient(to bottom, #BBFFFB 0%, #FFFFFF 9%, #FFFFFF 85%, #B1EBE8 100%);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   color: black;
   font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
-
 .container{
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
-/* Container styling */
 .post-add-container {
   width: 90%;
   max-width: 100vw;
@@ -23,7 +22,6 @@
   margin-top: 100PX;
   justify-content: center;
 }
-
 .container h1 {
   font-family: "Josefin Sans", sans-serif;
   font-size: 43px;
@@ -33,7 +31,6 @@
   margin: 32px;
 
 }
-
 .form-section {
   background-color: #dddddd8f; /* Light gray background for each section */
   padding: 20px;
@@ -41,14 +38,12 @@
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
 }
-
 /* Icon styling */
 .postadd .icon {
   width: 180px;
   display: block;
   margin: 90px auto; /* Centered the icon */
 }
-
 /* Form layout */
 form {
   display: flex;
@@ -56,7 +51,6 @@ form {
   gap: 24px; /* Increased gap for better spacing */
   margin: 40px 0; /* Adjusted margin */
 }
-
 /* Input label styling */
 label {
   text-align: left;
@@ -64,8 +58,6 @@ label {
   color: #333;
   font-family: "Josefin Sans", sans-serif;
 }
-
-
 .MuiOutlinedInput-root {
   background-color: white; /* Default background color when empty */
   border-radius: 8px !important;
@@ -186,13 +178,14 @@ label {
   background-color: #00C9AC;
   color: white;
 }
-
 .buttonSection {
   display: flex;
-  justify-content: space-between;
+  justify-content:space-between;
   margin-top: 32px;
   margin-bottom: 32px;
-  gap:500px;
+  align-items: center; /* Center buttons vertically */
+  width:calc(100%-10px); 
+  gap:64px
 }
 
 .buttonSection button {
@@ -205,7 +198,6 @@ label {
   border-radius: 16px;
 
 }
-
 .buttonSection button:hover{
   background-color: #009F96;
 }
@@ -256,20 +248,40 @@ label {
     width: 100%;
   }
 
-  button {
-    width: 100%;
+  .buttonSection button {
+    max-width: 100px; /* Set a max-width for buttons if needed */
+    padding: 10px 40px;
+    font-size: 14px;
   }
-
   .icon {
     width: 120px;
+  }
+  .buttonSection{
+    gap:64px
   }
 }
 
 @media (max-width:480px){
   .post-add-container{
     width: 80%;
+    margin-top: 50px;
   }
   .postadd h1 {
-    font-size: 24px;
+    font-size: 32px;
+  }
+  
+  .buttonSection button {
+    max-width: 90px; /* Set a max-width for buttons if needed */
+    padding: 10px 40px;
+    font-size: 10px;
+  }
+  .buttonSection{
+    margin-top: 16px;
+    gap:32px;
   }
 }
+
+
+
+
+

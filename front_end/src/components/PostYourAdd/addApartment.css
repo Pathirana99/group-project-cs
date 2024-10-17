@@ -5,13 +5,14 @@
   align-items: center;
   color: black;
   font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 .apartment-container {
     padding: 20px;
-    width: 90%;
+    width: 70%;
     max-width: 100vw;
-    margin: 0 auto;
     border-radius: 8px;
 }
 
@@ -23,7 +24,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
   }
 
-h1 {
+.apartment-container h1 {
     font-family: "Josefin Sans", sans-serif;
     font-size: 36px;
     line-height: 40px;
@@ -194,19 +195,72 @@ button {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
+  .apartment-container {
+    width: 90%;
+  }
+
+  .form-row {
+    flex-direction: column; /* Stack inputs on top of each other */
+  }
+
   .facilities .MuiFormControlLabel-label {
-    width:150px; /* Two boxes per row on tablet */
-    padding: 20px;
+    width: 160px; /* Adjust for medium screens */
+    padding: 15px;
+  }
+
+  .price, .duration {
+    flex-direction: column; /* Stack inputs */
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
+  .apartment-container {
+    width: 95%;
+  }
+
+  .apartment-container h1 {
+    font-size: 24px; /* Smaller heading */
+    line-height:auto;
+  }
+
   .facilities .MuiFormControlLabel-label {
-    width:100px; /* One box per row on mobile */
+    width: 150px; /* Adjust for smaller screens */
+    padding: 15px;
+  }
+}
+.form-section{
+  margin-bottom: 5px;
+}
+
+@media (max-width: 480px) {
+  .apartment-container {
+    width: 80%;
     padding: 10px;
   }
+
+  .form-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+
   .facilities .MuiFormControlLabel-label {
-    font-size: 14px;
+    width: 120px; /* One box per row on mobile */
+    padding: 10px;
+  }
+
+  label {
+    font-size: 18px;
+  }
+
+  .form-section {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 24px; /* Reduced for mobile */
+  }
+  .facilities .MuiFormControlLabel-label {
+    width: 100px;
   }
 }
