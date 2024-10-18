@@ -22,7 +22,7 @@
     background-color: #00BFB4; /* Light sea green background */
     color: white; /* Text color */
     height: 56px;
-    margin-top: -10px;
+    margin-top: -25px;
     margin-right: 5px;
     min-width: 64px; /* Minimum width for the button */
     flex-shrink: 0; /* Prevent the button from shrinking */

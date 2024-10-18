@@ -7,6 +7,7 @@ import AddApartment from './AddApartment';
 import AddRoom from './AddRoom';
 import AddAnnex from './AddAnnex';
 import AddOther from './AddOther';
+import AdditionalDetails from './AdditionalDetails';
 
 
 const citiesByProvince = [
@@ -82,6 +83,7 @@ const PostAdd = () => {
     roomDetails: {},
     annexDetails: {},
     otherDetails: {},
+    additionalDetails: [],
   });
   const [errors, setErrors] = useState({});
 
@@ -132,7 +134,7 @@ const PostAdd = () => {
 
     if (Object.keys(formErrors).length === 0) {
       // Submit the form if no errors
-      console.log('Form submitted:', formData);
+      console.log('Form submitted:', formData); // Here you can replace this with API call or another action
     }
   };
 
@@ -364,9 +366,8 @@ const PostAdd = () => {
 
       {currentStep === 2 && (
         <div>
-          <h1>Additional Details</h1>
           {/* Render AddOther form component here on the third page */}
-          <AddOther formData={formData.otherDetails} updateFormData={updateFormData} />
+          <AdditionalDetails formData={formData.additionalDetails} updateFormData={updateFormData} />
         </div>
       )}
 
@@ -405,6 +406,7 @@ const PostAdd = () => {
             type="submit"
             onClick={handleSubmit} 
             variant="contained"
+            style={{ marginTop: '20px' }}
             >
             Submit
           </Button>

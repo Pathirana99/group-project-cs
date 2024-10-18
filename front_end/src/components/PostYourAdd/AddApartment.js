@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {TextField,FormControl,Select,MenuItem,RadioGroup,FormControlLabel,Radio,Button,Checkbox,FormGroup} from '@mui/material';
 import './addApartment.css';
 
-const AddApartment = () => {
+const AddApartment = ({ formData, updateFormData }) => {
   // State for apartment form fields
-  const [formData, setFormData] = useState({
+  const [localFormData, setLocalFormData] = useState({
     apartmentName: '',
     floorNumber: 0,
     bedrooms: 0,
@@ -60,38 +60,60 @@ const AddApartment = () => {
   // Handler for text input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
 
     if (name === 'price' || name === 'advancePayment') {
       const formattedValue = formatPrice(value);
-      setFormData({ ...formData, [name]: formattedValue });
+      updateFormData({ apartmentDetails: { ...localFormData, [name]: formattedValue } });
+      setLocalFormData({ ...localFormData, [name]: formattedValue });
     } else {
-      setFormData({ ...formData, [name]: value });
+     updateFormData({ apartmentDetails: { ...localFormData, [name]: value } });
+      setLocalFormData({ ...localFormData, [name]: value });
     }
 
     // If advancePaymentDuration is set to "None", clear the advancePayment field
     if (name === 'advancePaymentDuration' && value === 'None') {
-      setFormData({
-        ...formData,
-        [name]: value,
-        advancePayment: '', // Clear advancePayment if "None" is selected
+      
+      updateFormData({
+        apartmentDetails: {
+          ...localFormData,
+          advancePayment: '',
+          advancePaymentDuration: value,
+        }
       });
-    } else {
-      setFormData({ ...formData, [name]: value });
+      setLocalFormData({
+        ...localFormData,
+        advancePayment: '',
+        advancePaymentDuration: value
+      });
     }
   };
 
   // Handler for checkbox changes
   const handleFacilityChange = (e) => {
     const { name, checked } = e.target;
-    setFormData({
-      ...formData,
+    updateFormData({
+      apartmentDetails: {
+        ...localFormData,
+        facilities: {
+          ...localFormData.facilities,
+          [name]: checked
+        }
+      }
+    });
+    setLocalFormData({
+      ...localFormData,
       facilities: {
-        ...formData.facilities,
+        ...localFormData.facilities,
         [name]: checked
       }
     });
   };
+
+  useEffect(() => {
+    if (formData && formData.apartmentDetails) {
+      setLocalFormData({ ...formData.apartmentDetails });
+    }
+  }, [formData]);
 
   return (
     <div className="apartment">
@@ -108,7 +130,7 @@ const AddApartment = () => {
             <label>Apartment Name</label>
             <TextField
               name="apartmentName"
-              value={formData.apartmentName}
+              value={localFormData.apartmentName || ''}
               onChange={handleInputChange}
               fullWidth
             />
@@ -118,7 +140,7 @@ const AddApartment = () => {
             <TextField
               type="number"
               name="floorNumber"
-              value={formData.floorNumber}
+              value={localFormData.floorNumber || 0}
               onChange={handleInputChange}
               fullWidth
               InputProps={{ inputProps: { min: 0 } }} // Set minimum value
@@ -132,7 +154,7 @@ const AddApartment = () => {
             <TextField
               type="number"
               name="bedrooms"
-              value={formData.bedrooms}
+              value={localFormData.bedrooms || 0}
               onChange={handleInputChange}
               fullWidth
               InputProps={{ inputProps: { min: 0 } }}
@@ -143,7 +165,7 @@ const AddApartment = () => {
             <TextField
               type="number"
               name="bathrooms"
-              value={formData.bathrooms}
+              value={localFormData.bathrooms || 0}
               onChange={handleInputChange}
               fullWidth
               InputProps={{ inputProps: { min: 0 } }}
@@ -156,7 +178,7 @@ const AddApartment = () => {
             <label>Floor Area (sq ft)</label>
             <TextField
               name="floorArea"
-              value={formData.floorArea}
+              value={localFormData.floorArea || ''}
               onChange={handleInputChange}
               fullWidth
             />
@@ -166,7 +188,7 @@ const AddApartment = () => {
             <TextField
               type="number"
               name="parking"
-              value={formData.parking}
+              value={localFormData.parking || 0}
               onChange={handleInputChange}
               fullWidth
               InputProps={{ inputProps: { min: 0 } }}
@@ -180,7 +202,7 @@ const AddApartment = () => {
             <TextField
               type="number"
               name="people"
-              value={formData.people}
+              value={localFormData.people || 0}
               onChange={handleInputChange}
               fullWidth
               InputProps={{ inputProps: { min: 0 } }}
@@ -192,7 +214,7 @@ const AddApartment = () => {
               <RadioGroup
                 row
                 name="petsAllowed"
-                value={formData.petsAllowed}
+                value={localFormData.petsAllowed || ''}
                 onChange={handleInputChange}
               >
                 <FormControlLabel value="yes" control={<Radio sx={{ display: "none" }} />} label ="YES" className="radio-button"/>
@@ -211,7 +233,7 @@ const AddApartment = () => {
             
             <TextField
               name="price"
-              value={formData.price}
+              value={localFormData.price || ''}
               onChange={handleInputChange}
               fullWidth
               onKeyDown={(e) => {
@@ -227,7 +249,7 @@ const AddApartment = () => {
             <FormControl fullWidth>
               <Select
                 name="rentDuration"
-                value={formData.rentDuration}
+                value={localFormData.rentDuration || 'Per Month'}
                 onChange={handleInputChange}
               >
                 <MenuItem value="Per Month">Per Month</MenuItem>
@@ -243,7 +265,7 @@ const AddApartment = () => {
             <div className="form-group">
             <TextField
               name="advancePayment"
-              value={formData.advancePayment}
+              value={localFormData.advancePayment || ''}
               onChange={handleInputChange}
               fullWidth
               
@@ -253,7 +275,7 @@ const AddApartment = () => {
             <FormControl fullWidth>
               <Select
                 name="advancePaymentDuration"
-                value={formData.advancePaymentDuration}
+                value={localFormData.advancePaymentDuration || 'Months'}
                 onChange={handleInputChange}
               >
                 <MenuItem value="Days">Days</MenuItem>
@@ -274,7 +296,7 @@ const AddApartment = () => {
               <RadioGroup
                 row
                 name="billsIncluded"
-                value={formData.billsIncluded}
+                value={localFormData.billsIncluded || ''}
                 onChange={handleInputChange}
               >
                 <FormControlLabel value="yes" control={<Radio sx={{ display: "none" }} />} label ="YES" className="radio-button"/>
@@ -295,7 +317,7 @@ const AddApartment = () => {
           <TextField
             name="title"
             placeholder="3 bedroom apartment in Matara for Rs.15 000 (per Month)"
-            value={formData.title}
+            value={localFormData.title || ''}
             onChange={handleInputChange}
             fullWidth
           />
@@ -306,7 +328,7 @@ const AddApartment = () => {
           </div>
           <TextField
             name="description"
-            value={formData.description}
+            value={localFormData.description || ''}
             onChange={handleInputChange}
             multiline
             rows={4}
@@ -324,7 +346,7 @@ const AddApartment = () => {
               control={
                 <Checkbox
                   name="acRooms"
-                  checked={formData.facilities.acRooms}
+                  checked={localFormData.facilities.acRooms || false}
                   onChange={handleFacilityChange}
                   className="button-checkbox"
                   sx={{ display: "none" }} 
@@ -336,7 +358,7 @@ const AddApartment = () => {
               control={
                 <Checkbox
                   name="sharedKitchen"
-                  checked={formData.facilities.sharedKitchen}
+                  checked={localFormData.facilities.sharedKitchen || false}
                   onChange={handleFacilityChange}
                   className="button-checkbox"
                   sx={{ display: "none" }} 
@@ -348,7 +370,7 @@ const AddApartment = () => {
               control={
                 <Checkbox
                   name="inRoomKitchenette"
-                  checked={formData.facilities.inRoomKitchenette}
+                  checked={localFormData.facilities.inRoomKitchenette || false}
                   onChange={handleFacilityChange}
                   className="button-checkbox"
                   sx={{ display: "none" }} 
@@ -360,7 +382,7 @@ const AddApartment = () => {
               control={
                 <Checkbox
                   name="mealServices"
-                  checked={formData.facilities.mealServices}
+                  checked={localFormData.facilities.mealServices || false}
                   onChange={handleFacilityChange}
                   className="button-checkbox"
                   sx={{ display: "none" }} 
@@ -371,7 +393,7 @@ const AddApartment = () => {
             control={
               <Checkbox
                 name="washingMachine"
-                checked={formData.facilities.washingMachine}
+                checked={localFormData.facilities.washingMachine || false}
                 onChange={handleFacilityChange}
                 className="button-checkbox"
                 sx={{ display: "none" }} 
@@ -383,7 +405,7 @@ const AddApartment = () => {
             control={
               <Checkbox
                 name="tv"
-                checked={formData.facilities.tv}
+                checked={localFormData.facilities.tv || false}
                 onChange={handleFacilityChange}
                 className="button-checkbox"
                 sx={{ display: "none" }} 
@@ -395,7 +417,7 @@ const AddApartment = () => {
             control={
               <Checkbox
                 name="balcony"
-                checked={formData.facilities.balcony}
+                checked={localFormData.facilities.balcony || false}
                 onChange={handleFacilityChange}
                 className="button-checkbox"
                 sx={{ display: "none" }} 
@@ -407,7 +429,7 @@ const AddApartment = () => {
             control={
               <Checkbox
                 name="gardenView"
-                checked={formData.facilities.gardenView}
+                checked={localFormData.facilities.gardenView || false}
                 onChange={handleFacilityChange}
                 className="button-checkbox"
                 sx={{ display: "none" }} 
@@ -419,7 +441,7 @@ const AddApartment = () => {
               control={
                 <Checkbox
                   name="freeWifi"
-                  checked={formData.facilities.freeWifi}
+                  checked={localFormData.facilities.freeWifi || false}
                   onChange={handleFacilityChange}
                   className="button-checkbox"
                   sx={{ display: "none" }} 
@@ -431,7 +453,7 @@ const AddApartment = () => {
               control={
                 <Checkbox
                   name="landlineTelephone"
-                  checked={formData.facilities.landlineTelephone}
+                  checked={localFormData.facilities.landlineTelephone || false}
                   onChange={handleFacilityChange}
                   className="button-checkbox"
                   sx={{ display: "none" }} 
@@ -443,7 +465,7 @@ const AddApartment = () => {
               control={
                 <Checkbox
                   name="petsAllowed"
-                  checked={formData.facilities.petsAllowed}
+                  checked={localFormData.facilities.petsAllowed || false}
                   onChange={handleFacilityChange}
                   className="button-checkbox"
                   sx={{ display: "none" }} 
@@ -455,7 +477,7 @@ const AddApartment = () => {
               control={
                 <Checkbox
                   name="garbageRemoval"
-                  checked={formData.facilities.garbageRemoval}
+                  checked={localFormData.facilities.garbageRemoval || false}
                   onChange={handleFacilityChange}
                   className="button-checkbox"
                   sx={{ display: "none" }} 
@@ -467,7 +489,7 @@ const AddApartment = () => {
               control={
                 <Checkbox
                   name="studyArea"
-                  checked={formData.facilities.studyArea}
+                  checked={localFormData.facilities.studyArea || false}
                   onChange={handleFacilityChange}
                   className="button-checkbox"
                   sx={{ display: "none" }} 
@@ -479,7 +501,7 @@ const AddApartment = () => {
               control={
                 <Checkbox
                   name="fireDetection"
-                  checked={formData.facilities.fireDetection}
+                  checked={localFormData.facilities.fireDetection || false}
                   onChange={handleFacilityChange}
                   className="button-checkbox"
                   sx={{ display: "none" }} 
@@ -491,7 +513,7 @@ const AddApartment = () => {
               control={
                 <Checkbox
                   name="gateCommunity"
-                  checked={formData.facilities.gateCommunity}
+                  checked={localFormData.facilities.gateCommunity || false}
                   onChange={handleFacilityChange}
                   className="button-checkbox"
                   sx={{ display: "none" }} 
@@ -503,7 +525,7 @@ const AddApartment = () => {
               control={
                 <Checkbox
                   name="cctv"
-                  checked={formData.facilities.cctv}
+                  checked={localFormData.facilities.cctv || false}
                   onChange={handleFacilityChange}
                   className="button-checkbox"
                   sx={{ display: "none" }} 
@@ -515,7 +537,7 @@ const AddApartment = () => {
               control={
                 <Checkbox
                   name="securityServices"
-                  checked={formData.facilities.securityServices}
+                  checked={localFormData.facilities.securityServices || false}
                   onChange={handleFacilityChange}
                   className="button-checkbox"
                   sx={{ display: "none" }} 
@@ -527,7 +549,7 @@ const AddApartment = () => {
               control={
                 <Checkbox
                   name="partiesEventsAllowed"
-                  checked={formData.facilities.partiesEventsAllowed}
+                  checked={localFormData.facilities.partiesEventsAllowed || false}
                   onChange={handleFacilityChange}
                   className="button-checkbox"
                   sx={{ display: "none" }} 
@@ -539,7 +561,7 @@ const AddApartment = () => {
               control={
                 <Checkbox
                   name="guestsAllowed"
-                  checked={formData.facilities.guestsAllowed}
+                  checked={localFormData.facilities.guestsAllowed || false}
                   onChange={handleFacilityChange}
                   className="button-checkbox"
                   sx={{ display: "none" }} 
@@ -551,7 +573,7 @@ const AddApartment = () => {
               control={
                 <Checkbox
                   name="onlyMale"
-                  checked={formData.facilities.onlyMale}
+                  checked={localFormData.facilities.onlyMale || false}
                   onChange={handleFacilityChange}
                   className="button-checkbox"
                   sx={{ display: "none" }} 
@@ -563,7 +585,7 @@ const AddApartment = () => {
               control={
                 <Checkbox
                   name="onlyFemale"
-                  checked={formData.facilities.onlyFemale}
+                  checked={localFormData.facilities.onlyFemale || false}
                   onChange={handleFacilityChange}
                   className="button-checkbox"
                   sx={{ display: "none" }} 
@@ -575,7 +597,7 @@ const AddApartment = () => {
               control={
                 <Checkbox
                   name="backupGenerator"
-                  checked={formData.facilities.backupGenerator}
+                  checked={localFormData.facilities.backupGenerator || false}
                   onChange={handleFacilityChange}
                   className="button-checkbox"
                   sx={{ display: "none" }} 
@@ -587,7 +609,7 @@ const AddApartment = () => {
               control={
                 <Checkbox
                   name="mainLineWater"
-                  checked={formData.facilities.mainLineWater}
+                  checked={localFormData.facilities.mainLineWater || false}
                   onChange={handleFacilityChange}
                   className="button-checkbox"
                   sx={{ display: "none" }} 

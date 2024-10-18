@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
+import { useNavigate, useLocation } from 'react-router-dom'; // Import useNavigate hook
 import ForgotPasswordPopup from '../components/ForgotPasswordPopup';
 import EnterCodePopup from '../components/EnterCodePopup';
 import ChangePasswordPopup from '../components/ChangePasswordPopup';
@@ -14,6 +14,10 @@ export default function Login() {
   const navigate = useNavigate(); // Initialize navigate function
   const [email, setEmail] = useState(''); // State for email input
   const [password, setPassword] = useState('');
+  const location = useLocation(); 
+
+   // Get the page the user was trying to access before being redirected to login
+   const redirectTo = location.state?.from?.pathname || '/';  // Defaults to home page if no previous page
 
   const openForgotPassword = () => setStep('forgot');
   const openEnterCode = () => setStep('code');
@@ -23,11 +27,8 @@ export default function Login() {
   // Function to handle Google Login success
   const handleGoogleSuccess = (response) => {
     console.log('Google login successful:', response);
-    // Simulate storing authentication token in localStorage
     localStorage.setItem('authToken', 'google-auth-token');
-
-    // Navigate to the home page or close login page after successful login
-    navigate('/');
+    navigate(redirectTo);  // Navigate to the intended page after successful login
   };
 
   // Function to handle Google Login failure
@@ -53,7 +54,7 @@ export default function Login() {
       localStorage.setItem('authToken', 'email-auth-token');
 
       // Navigate to the home page or close the login page
-      navigate('/');
+      navigate(redirectTo);
     } else {
       console.log('Login failed. Incorrect email or password.');
     }
