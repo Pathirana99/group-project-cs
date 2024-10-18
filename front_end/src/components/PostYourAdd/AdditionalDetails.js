@@ -10,7 +10,7 @@ const AdditionalDetails = ({ formData, updateFormData }) => {
   const [images, setImages] = useState([]);
   // When rooms change, update the formData in the parent component (PostAdd.js)
   useEffect(() => {
-    updateFormData({ otherDetails: rooms });
+    updateFormData({ additionalDetails: rooms });
   }, [rooms, updateFormData]);
 
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './postAdd.css'; // Import the CSS file
 import { TextField, Button, RadioGroup, FormControlLabel, Radio, Autocomplete,Step,Stepper,StepLabel } from '@mui/material'; // Using Material-UI components
 import MyLocationIcon from '@mui/icons-material/MyLocation';
@@ -7,6 +8,7 @@ import AddApartment from './AddApartment';
 import AddRoom from './AddRoom';
 import AddAnnex from './AddAnnex';
 import AddOther from './AddOther';
+import SuccessPopup from './SuccessPopup';
 import AdditionalDetails from './AdditionalDetails';
 
 
@@ -37,7 +39,8 @@ const PostAdd = () => {
   // State to manage the current step
 
   const [currentStep, setCurrentStep] = useState(0);
-
+  const [openPopup, setOpenPopup] = useState(false); // For success popup
+  const navigate = useNavigate();
   const [location, setLocation] = useState({ lat: 6.9271, lng: 79.8612 }); // Default location (Colombo)
   const [loadingLocation, setLoadingLocation] = useState(false); // For loading state when fetching location
 
@@ -135,6 +138,14 @@ const PostAdd = () => {
     if (Object.keys(formErrors).length === 0) {
       // Submit the form if no errors
       console.log('Form submitted:', formData); // Here you can replace this with API call or another action
+      // Show success popup
+      setOpenPopup(true);
+
+      // Simulate submission and navigate after popup
+      setTimeout(() => {
+        setOpenPopup(false); // Close popup
+        navigate('/ownerprofile'); // Redirect to the OwnerProfile page
+      }, 3000);
     }
   };
 
@@ -414,7 +425,8 @@ const PostAdd = () => {
       
         </div>
 
-      
+      {/* Success Popup */}
+      <SuccessPopup open={openPopup} onClose={() => setOpenPopup(false)} />
     </div>
   );
   
