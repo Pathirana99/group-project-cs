@@ -8,6 +8,8 @@ import PostYourAdd from './pages/PostYourAdd';
 import ProtectedRoute from './components/ProtectedRoute';
 import Loader from './components/Loader';
 import OwnerProfile from './pages/OwnerProfile';
+import ListPlaces from './pages/ListPlaces';
+import MoreDetails from './pages/MoreDetails';
 
 function App() {
   
@@ -37,6 +39,8 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/postyouradd" element={<ProtectedRoute element={<PostYourAdd />} isAuthenticated={isAuthenticated} />} />
       <Route path="/ownerprofile" element={<OwnerProfile />} />
+      <Route path="/list-places" element={<ListPlaces />} />
+      <Route path="/more-details/:placeId" element={<MoreDetails />} />
     </Routes>
   );
 }

@@ -85,12 +85,16 @@
 .search-bar .MuiInputBase-input {
     color: rgb(0, 0, 0); /* Set input text color to white */
 }
-
+.group {
+    flex: 0 0 48%; /* Adjust to fit two input fields in one row */
+    display: flex;
+    flex-direction: column;
+  }
 /* Responsive adjustments for smaller screens */
 @media screen and (max-width: 768px) {
     .search-bar .MuiInputBase-root {
         height: 56px; /* Ensure the height is consistent inside the input field */
-        border: 2px solid #00BFB4;
+        border: 2px solid #00BFB4 !important;
         background-color: transparent;
     }
     
@@ -99,6 +103,9 @@
         align-items: stretch;
         width: calc(100% - 80px); /* Adjust margin for smaller screens */
         margin: 10px 0; /* Smaller margins */
+    }
+    .search-bar .expand-icon {
+        display: block; /* Show the expand icon on smaller screens */
     }
 
     .search-bar .MuiInputLabel-root {
@@ -123,6 +130,15 @@
         width: 100%; /* Full width for mobile */
         margin-bottom: 10px; /* Add some space between fields */
     }
+    .search-bar .expand-button {
+        background-color: #00BFB4 !important;
+        color: white !important;
+        border-radius: 8px !important;
+        margin-left: 20px;
+        
+
+        
+      }
 }
 
 @media screen and (max-width: 480px) {
@@ -137,4 +153,10 @@
 .MuiAutocomplete-popper {
     width: auto !important; /* Ensure dropdown width adapts to input field */
     min-width: 20% !important; /* Set dropdown width to match input width */
+}
+
+@media (min-width: 768px) {
+    .search-bar .expand-button {
+      display: none;
+    }
 }

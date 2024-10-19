@@ -17,7 +17,7 @@ export default function Home() {
         </div>
 
         <div className="hero">
-          <HeroSection/>
+          <HeroSection isListPlacesPage={false}/>
         </div>
 
         <div className="comfort">

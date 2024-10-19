@@ -33,6 +33,17 @@ const citiesByProvince = [
   { city: 'Kegalle', province: 'Sabaragamuwa' }
 ];
 
+const university =['University of Ruhuna', 'University of Colombo',
+  'University of Kelaniya',
+  'University of Moratuwa',
+  'University of Peradeniya',
+  'Eastern University',
+  'Rajarata University',
+  'Sabaragamuwa University',
+  'University of Sri Jayawardenapura',
+  'Wayamba University',
+  'University of Vavuniya'
+]
 const steps = ['Basic Infomation', 'Boarding Place Details', 'Additional Details'];
 
 const PostAdd = () => {
@@ -81,6 +92,8 @@ const PostAdd = () => {
     placeType: 'Apartment', // Default selection
     city: '',
     street: '',
+    university: '',
+    distance: 0,
     // Add more fields as needed for each form
     apartmentDetails: {},
     roomDetails: {},
@@ -124,6 +137,13 @@ const PostAdd = () => {
     }
     if(!formData.street){
       formErrors.street = 'required field';
+    }
+    if(!formData.university){
+      formErrors.university= 'required field';
+    }
+    // Validate distance to university (must be numeric and required)
+    if (!formData.distance) {
+      formErrors.distance = 'Please enter a valid distance (numeric value required)';
     }
 
     // Validate additional phone numbers only if they are provided
@@ -363,6 +383,45 @@ const PostAdd = () => {
           >
             {loadingLocation ? 'Loading...' : 'Get Current Location'}
           </Button>
+        </div>
+
+        <div className="form-section">
+          
+          <label>Select the Nearest University</label>
+          <Autocomplete
+              options={university.map(item => item)}
+              value={formData.university}
+              onChange={(event, newValue) => {
+                setFormData({ ...formData, university: newValue || '' });
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  fullWidth
+                  variant="outlined"
+                  placeholder='Nearest University'
+                  error={!!errors.university}
+                  helperText={errors.university}
+                  required
+                />
+              )}
+              style={{ marginTop: '16px' }}
+            />
+             <label>Distance to University (in kilometers)</label>
+            <div style={{ marginTop: '16px' }}>
+              <TextField
+                name="distance"
+                type='number'
+                value={formData.distance}
+                placeholder="Distance to University"
+                onChange={handleChange}
+                error={!!errors.distance}
+                helperText={errors.distance}
+                fullWidth
+                required
+                inputProps={{ min: "0", step: 1,}} // Ensures no negative numbers
+              />
+            </div>
         </div>
         </form>
         </div>
