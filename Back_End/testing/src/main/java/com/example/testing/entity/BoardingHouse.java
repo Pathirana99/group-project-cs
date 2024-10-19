@@ -25,24 +25,23 @@ public class BoardingHouse {
     private String street;
     private Integer price;
     private String image;
-
-    private String ownername;
     private String email;
-    private String password;
-
-    public BoardingHouse(String city, String type, String phone, String location, String description, String email, String city1, Integer price, String street, String ownername, String image, String password) {
+    public BoardingHouse(String city, String type, String phone, String location, String description, String email, Integer price, String street,  String image) {
         this.city = city;
         this.type = type;
         this.phone = phone;
         this.location = location;
         this.description = description;
         this.email = email;
-        this.city = city1;
         this.price = price;
         this.street = street;
-        this.ownername = ownername;
-        this.image = image;
-        this.password = password;
 
+        this.image = image;
+
+
+    }
+
+    public BoardingHouse(Integer id, String city, String type, String phone, String location,
+                         String description, String email, Integer price, String street, String image) {
     }
 }
