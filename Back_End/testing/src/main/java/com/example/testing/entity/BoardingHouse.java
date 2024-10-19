@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -27,6 +29,9 @@ public class BoardingHouse {
     @ManyToOne
     @JoinColumn(name = "boarding_owner_id", nullable = false)
     private BoardingOwner boardingOwner;
+
+    @OneToMany(mappedBy = "boardingHouse", cascade = CascadeType.ALL)
+    private List<Room> rooms;
 
     public BoardingHouse(String city, String type, String phone, String location, String description, String email, Integer price, String street,  String image) {
         this.city = city;
