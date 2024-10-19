@@ -13,4 +13,8 @@ public class BoardingOwnerDto {
     private String name;
     private String email;
     private String password;
+
+    public BoardingOwnerDto(String email, Integer id) {
+    }
+
 }

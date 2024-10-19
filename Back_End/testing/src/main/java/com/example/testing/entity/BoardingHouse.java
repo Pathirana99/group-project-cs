@@ -1,9 +1,6 @@
 package com.example.testing.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,6 +23,11 @@ public class BoardingHouse {
     private Integer price;
     private String image;
     private String email;
+
+    @ManyToOne
+    @JoinColumn(name = "boarding_owner_id", nullable = false)
+    private BoardingOwner boardingOwner;
+
     public BoardingHouse(String city, String type, String phone, String location, String description, String email, Integer price, String street,  String image) {
         this.city = city;
         this.type = type;
@@ -35,13 +37,23 @@ public class BoardingHouse {
         this.email = email;
         this.price = price;
         this.street = street;
-
         this.image = image;
-
-
     }
 
     public BoardingHouse(Integer id, String city, String type, String phone, String location,
                          String description, String email, Integer price, String street, String image) {
+    }
+    public BoardingHouse(String city, String type, String phone, String location, String description,
+                         String email, Integer price, String street, String image, BoardingOwner boardingOwner) {
+        this.city = city;
+        this.type = type;
+        this.phone = phone;
+        this.location = location;
+        this.description = description;
+        this.email = email;
+        this.price = price;
+        this.street = street;
+        this.image = image;
+        this.boardingOwner = boardingOwner; // Set the boarding owner
     }
 }
