@@ -25,6 +25,8 @@ public class BoardingHouseDto {
     public BoardingHouseDto(String email, Integer id) {
     }
 
-    public BoardingHouseDto(Integer id, String city, String type, String phone, String location, String description, String email, Integer price, String street, String image) {
+    public BoardingHouseDto(Integer id, String city, String type,
+                            String phone, String location, String description,
+                            String email, Integer price, String street, String image) {
     }
 }

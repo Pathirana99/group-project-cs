@@ -8,6 +8,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 
 public class ContactService {
@@ -27,4 +29,9 @@ public class ContactService {
         mailSender.send(message);
         return new ContactDto(save.getId(),save.getMessage());
     }
+
+    public Optional<Contact> getMessage(Integer id){
+            return  contactRepo.getContactById(id);
+    }
+
 }
