@@ -115,6 +115,22 @@ const AddApartment = ({ formData, updateFormData }) => {
     }
   }, [formData]);
 
+  const handleQuickFillTitle = () => {
+    const quickFillTitle = `${localFormData.bedrooms} bedroom apartment in ${formData.city} for Rs.${localFormData.price} (per Month)`;
+    setLocalFormData({ ...localFormData, title: quickFillTitle });
+    updateFormData({
+      apartmentDetails: { ...localFormData, title: quickFillTitle }
+    });
+  };
+  
+  const handleQuickFillDescription = () => {
+    const quickFillDescription = `This ${localFormData.bedrooms}-bedroom apartment offers great amenities and is located in ${formData.city}. Priced at Rs.${localFormData.price} per month, it's ideal for families or groups.`;
+    setLocalFormData({ ...localFormData, description: quickFillDescription });
+    updateFormData({
+      apartmentDetails: { ...localFormData, description: quickFillDescription }
+    });
+  };
+
   return (
     <div className="apartment">
       <div className="apartment-container">
@@ -312,7 +328,9 @@ const AddApartment = ({ formData, updateFormData }) => {
         <div className="form-section">
         <div className="form-row">
           <label>Title</label>
-          <Button className="quickFill" variant="contained">Quick Fill</Button>
+          <Button className="quickFill" variant="contained"
+          onClick={() => handleQuickFillTitle()}
+          >Quick Fill</Button>
           </div>
           <TextField
             name="title"
@@ -324,7 +342,9 @@ const AddApartment = ({ formData, updateFormData }) => {
           <div className="description">
           <div className="form-row">
           <label>Description</label>
-          <Button className="quickFill" variant="contained">Quick Fill</Button>
+          <Button className="quickFill" variant="contained"
+           onClick={() => handleQuickFillDescription()}
+          >Quick Fill</Button>
           </div>
           <TextField
             name="description"

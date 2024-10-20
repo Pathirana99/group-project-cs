@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './postAdd.css'; // Import the CSS file
 import { TextField, Button, RadioGroup, FormControlLabel, Radio, Autocomplete,Step,Stepper,StepLabel } from '@mui/material'; // Using Material-UI components
 import MyLocationIcon from '@mui/icons-material/MyLocation';
@@ -7,6 +8,7 @@ import AddApartment from './AddApartment';
 import AddRoom from './AddRoom';
 import AddAnnex from './AddAnnex';
 import AddOther from './AddOther';
+import SuccessPopup from './SuccessPopup';
 import AdditionalDetails from './AdditionalDetails';
 
 
@@ -31,15 +33,28 @@ const citiesByProvince = [
   { city: 'Kegalle', province: 'Sabaragamuwa' }
 ];
 
+const university =['University of Ruhuna', 'University of Colombo',
+  'University of Kelaniya',
+  'University of Moratuwa',
+  'University of Peradeniya',
+  'Eastern University',
+  'Rajarata University',
+  'Sabaragamuwa University',
+  'University of Sri Jayawardenapura',
+  'Wayamba University',
+  'University of Vavuniya'
+]
 const steps = ['Basic Infomation', 'Boarding Place Details', 'Additional Details'];
 
 const PostAdd = () => {
   // State to manage the current step
 
   const [currentStep, setCurrentStep] = useState(0);
-
+  const [openPopup, setOpenPopup] = useState(false); // For success popup
+  const navigate = useNavigate();
   const [location, setLocation] = useState({ lat: 6.9271, lng: 79.8612 }); // Default location (Colombo)
   const [loadingLocation, setLoadingLocation] = useState(false); // For loading state when fetching location
+  const [isImageValid, setIsImageValid] = useState(false); // Track if image validation passes
 
   // Get current location using browser geolocation and update the map center
   const handleGetCurrentLocation = () => {
@@ -78,6 +93,8 @@ const PostAdd = () => {
     placeType: 'Apartment', // Default selection
     city: '',
     street: '',
+    university: '',
+    distance: 0,
     // Add more fields as needed for each form
     apartmentDetails: {},
     roomDetails: {},
@@ -122,6 +139,18 @@ const PostAdd = () => {
     if(!formData.street){
       formErrors.street = 'required field';
     }
+    if(!formData.university){
+      formErrors.university= 'required field';
+    }
+    // Validate distance to university (must be numeric and required)
+    if (!formData.distance) {
+      formErrors.distance = 'Please enter a valid distance (numeric value required)';
+    }
+
+    if (!isImageValid) {
+      alert('Please upload at least 5 images.');
+      return;
+    }
 
     // Validate additional phone numbers only if they are provided
     formData.phoneNumbers.slice(1).forEach((phone, index) => {
@@ -135,6 +164,14 @@ const PostAdd = () => {
     if (Object.keys(formErrors).length === 0) {
       // Submit the form if no errors
       console.log('Form submitted:', formData); // Here you can replace this with API call or another action
+      // Show success popup
+      setOpenPopup(true);
+
+      // Simulate submission and navigate after popup
+      setTimeout(() => {
+        setOpenPopup(false); // Close popup
+        navigate('/ownerprofile'); // Redirect to the OwnerProfile page
+      }, 3000);
     }
   };
 
@@ -353,6 +390,45 @@ const PostAdd = () => {
             {loadingLocation ? 'Loading...' : 'Get Current Location'}
           </Button>
         </div>
+
+        <div className="form-section">
+          
+          <label>Select the Nearest University</label>
+          <Autocomplete
+              options={university.map(item => item)}
+              value={formData.university}
+              onChange={(event, newValue) => {
+                setFormData({ ...formData, university: newValue || '' });
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  fullWidth
+                  variant="outlined"
+                  placeholder='Nearest University'
+                  error={!!errors.university}
+                  helperText={errors.university}
+                  required
+                />
+              )}
+              style={{ marginTop: '16px' }}
+            />
+             <label>Distance to University (in kilometers)</label>
+            <div style={{ marginTop: '16px' }}>
+              <TextField
+                name="distance"
+                type='number'
+                value={formData.distance}
+                placeholder="Distance to University"
+                onChange={handleChange}
+                error={!!errors.distance}
+                helperText={errors.distance}
+                fullWidth
+                required
+                inputProps={{ min: "0", step: 1,}} // Ensures no negative numbers
+              />
+            </div>
+        </div>
         </form>
         </div>
         </div>
@@ -367,7 +443,7 @@ const PostAdd = () => {
       {currentStep === 2 && (
         <div>
           {/* Render AddOther form component here on the third page */}
-          <AdditionalDetails formData={formData.additionalDetails} updateFormData={updateFormData} />
+          <AdditionalDetails formData={formData.additionalDetails} updateFormData={updateFormData} setIsImageValid={setIsImageValid} />
         </div>
       )}
 
@@ -414,7 +490,8 @@ const PostAdd = () => {
       
         </div>
 
-      
+      {/* Success Popup */}
+      <SuccessPopup open={openPopup} onClose={() => setOpenPopup(false)} />
     </div>
   );
   

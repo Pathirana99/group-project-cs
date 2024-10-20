@@ -15,7 +15,7 @@ const Loader = () => {
       }}
     >
       {/* Your Logo */}
-      <img src="/images/1.png" alt="Logo" width="400" />
+      <img src="/images/1.png" alt="Logo" width="300" />
       
       {/* MUI Circular Progress (Spinner) */}
       <CircularProgress sx={{ mt: 2 }} />

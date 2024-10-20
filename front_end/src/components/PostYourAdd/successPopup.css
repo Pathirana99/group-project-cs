@@ -1,0 +1,27 @@
+/* SuccessPopup.css */
+
+/* Center the content */
+.dialog-title-center {
+    text-align: center;
+  }
+  
+  .success-icon {
+    width: 128px;
+    
+  }
+  .dialog-text-center1 {
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+  .dialog-text-center2 {
+    text-align: center;
+    margin-top: 1rem;
+    color: gray;
+  }
+  
+  .dialog-button {
+    margin: 0 auto;
+    display: block;
+  }
+  

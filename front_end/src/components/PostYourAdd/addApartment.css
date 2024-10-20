@@ -11,12 +11,12 @@
 
 .apartment-container {
     padding: 20px;
-    width: 70%;
+    width: 50%;
     max-width: 100vw;
     border-radius: 8px;
 }
 
-.form-section {
+.apartment .form-section {
     background-color: #dddddd8f; /* Light gray background for each section */
     padding: 20px;
     margin-bottom: 20px;

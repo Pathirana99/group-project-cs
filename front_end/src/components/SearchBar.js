@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './searchBar.css';
 import { TextField, Button, MenuItem, Autocomplete } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
@@ -38,32 +39,69 @@ const areas = [
 ];
 
 // Other search options
-const boardingTypes = ['Single Room', 'Shared Room', 'Apartment', 'Annex'];
+const boardingTypes = ['Apartment', 'Annex','Room'];
 const distances = ['< 1 km', '1 - 3 km', '3 - 5 km', '5+ km'];
-const priceRanges = ['< Rs.5000', 'Rs.5000 - Rs.10 000', 'Rs.10 000 - Rs.15 000', 'Rs.15 000 - Rs.30 000', 'Rs.30 000 - Rs.50 000', 'Rs.50 000 +'];
+const priceRanges = [{ label: '< Rs.5000', min: 0, max: 5000 },
+  { label: 'Rs.5000 - Rs.10 000', min: 5000, max: 10000 },
+  { label: 'Rs.10 000 - Rs.15 000', min: 10000, max: 15000 },
+  { label: 'Rs.15 000 - Rs.30 000', min: 15000, max: 30000 },
+  { label: 'Rs.30 000 - Rs.50 000', min: 30000, max: 50000 },
+  { label: 'Rs.50 000 +', min: 50000, max: Infinity }];
 const facilities = ['Wi-Fi', 'A/C', 'Parking', 'Laundry', 'Cooking', 'Study Area', 'Pet Allowed', 'Meal Services', 'Garden View'];
 
-export default function SearchBar() {
+export default function SearchBar({ isListPlacesPage }) {
   const [selectedArea, setSelectedArea] = useState(null);
   const [selectedBoardingType, setSelectedBoardingType] = useState('');
   const [selectedDistance, setSelectedDistance] = useState('');
   const [selectedPriceRange, setSelectedPriceRange] = useState('');
   const [selectedFacilities, setSelectedFacilities] = useState([]);
+  const [isExpanded, setIsExpanded] = useState(false); // Ensure this line is present
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768); // Detect screen size
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Function to handle resize and detect if on mobile/tablet
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
 
   const handleSearch = () => {
     // Handle the search logic here
-    console.log({
-      selectedArea,
-      selectedBoardingType,
-      selectedDistance,
-      selectedPriceRange,
-      selectedFacilities,
+    navigate('/list-places', {
+      state: {
+        selectedArea,
+        selectedBoardingType,
+        selectedDistance,
+        selectedPriceRange,
+        selectedFacilities
+      }
     });
   };
 
   return (
     <div className="search-bar">
-      {/* Grouped Area Autocomplete */}
+
+       {/* Expand/Collapse Icon */}
+       {isListPlacesPage && (
+         <Button className="expand-button" onClick={() => setIsExpanded(!isExpanded)}>
+         {isExpanded ? "Search with Filters" : "Search with Filters"}
+       </Button>
+      )}
+
+      {/* Show the search bar fields only when expanded or on desktop */}
+      {(isExpanded || !isMobile) && (
+        <>
       <Autocomplete
         className="custom-autocomplete"
         id="area"
@@ -117,15 +155,18 @@ export default function SearchBar() {
         select
         id="price"
         label="Price Range"
-        value={selectedPriceRange}
-        onChange={(e) => setSelectedPriceRange(e.target.value)}
+        value={selectedPriceRange ? selectedPriceRange.label : ''} // Show label if selected
+        onChange={(e) => {
+          const selectedRange = priceRanges.find(range => range.label === e.target.value);
+          setSelectedPriceRange(selectedRange); // Store the whole object (min/max)
+        }}
         variant="outlined"
         fullWidth
         style={{ marginBottom: '10px' }}
       >
         {priceRanges.map((range) => (
-          <MenuItem key={range} value={range}>
-            {range}
+          <MenuItem key={range.label} value={range.label}>
+            {range.label}
           </MenuItem>
         ))}
       </TextField>
@@ -145,6 +186,8 @@ export default function SearchBar() {
       <Button className="search-button" variant="contained" color="primary" onClick={handleSearch}>
         <SearchIcon />
       </Button>
+      </>
+      )}
     </div>
   );
 }

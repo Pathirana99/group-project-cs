@@ -5,13 +5,25 @@ import './additionalDetails.css'; // Importing the CSS file for styling
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const AdditionalDetails = ({ formData, updateFormData }) => {
+const AdditionalDetails = ({ formData, updateFormData,setIsImageValid }) => {
   const [rooms, setRooms] = useState(formData?.additionalDetails || [{ title: '', status: 'Available Now', capacity: 0 }]);
   const [images, setImages] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
   // When rooms change, update the formData in the parent component (PostAdd.js)
   useEffect(() => {
-    updateFormData({ otherDetails: rooms });
+    updateFormData({ additionalDetails: rooms });
   }, [rooms, updateFormData]);
+
+   // Image validation: at least 5 images are required
+   useEffect(() => {
+    if (images.length >= 5) {
+      setErrorMessage('');
+      setIsImageValid(true); // Inform PostAdd that images are valid
+    } else {
+      setErrorMessage('Please upload at least 5 photos.');
+      setIsImageValid(false); // Inform PostAdd that images are not valid
+    }
+  }, [images, setIsImageValid]);
 
 
   const handleRoomChange = (index, field, value) => {
@@ -31,11 +43,6 @@ const AdditionalDetails = ({ formData, updateFormData }) => {
 
   const handleImageUpload = (event) => {
     const files = Array.from(event.target.files);
-    if (files.length + images.length > 5) {
-      alert('You can only upload up to 5 images.');
-      return;
-    }
-
     const newImages = files.map((file) => ({
       file,
       preview: URL.createObjectURL(file),
@@ -154,9 +161,7 @@ const AdditionalDetails = ({ formData, updateFormData }) => {
          {/* Image Upload Section */}
         <div className="image-upload">
          <h4>Upload Pictures of Your Place</h4>
-         {images.length > 0 && images.length < 5 &&  (
-            <p className="error-text">Upload at least 5 photos of your property.</p>
-          )}
+         {errorMessage && <p className="error-text">{errorMessage}</p>}
         <div className="upload-container">
           <div
             className="upload-box"

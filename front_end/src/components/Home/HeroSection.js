@@ -17,7 +17,7 @@ export default function HeroSection() {
         </div>
       </div>
       <div className="searchbar-section">
-      <SearchBar/>
+      <SearchBar />
       </div>
       </div>
     

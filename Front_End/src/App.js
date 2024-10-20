@@ -7,8 +7,12 @@ import Login from './pages/Login';
 import PostYourAdd from './pages/PostYourAdd';
 import ProtectedRoute from './components/ProtectedRoute';
 import Loader from './components/Loader';
+import OwnerProfile from './pages/OwnerProfile';
+import ListPlaces from './pages/ListPlaces';
+import MoreDetails from './pages/MoreDetails';
 
 function App() {
+  
   const [loading, setLoading] = useState(true);  // State to manage loader visibility
 
   // Simulate a page load or fetch data, then hide the loader
@@ -26,6 +30,7 @@ function App() {
   if (loading) {
     return <Loader />;
   }
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -33,6 +38,9 @@ function App() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/login" element={<Login />} />
       <Route path="/postyouradd" element={<ProtectedRoute element={<PostYourAdd />} isAuthenticated={isAuthenticated} />} />
+      <Route path="/ownerprofile" element={<OwnerProfile />} />
+      <Route path="/list-places" element={<ListPlaces />} />
+      <Route path="/more-details/:placeId" element={<MoreDetails />} />
     </Routes>
   );
 }
