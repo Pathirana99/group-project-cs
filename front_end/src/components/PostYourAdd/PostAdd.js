@@ -54,6 +54,7 @@ const PostAdd = () => {
   const navigate = useNavigate();
   const [location, setLocation] = useState({ lat: 6.9271, lng: 79.8612 }); // Default location (Colombo)
   const [loadingLocation, setLoadingLocation] = useState(false); // For loading state when fetching location
+  const [isImageValid, setIsImageValid] = useState(false); // Track if image validation passes
 
   // Get current location using browser geolocation and update the map center
   const handleGetCurrentLocation = () => {
@@ -144,6 +145,11 @@ const PostAdd = () => {
     // Validate distance to university (must be numeric and required)
     if (!formData.distance) {
       formErrors.distance = 'Please enter a valid distance (numeric value required)';
+    }
+
+    if (!isImageValid) {
+      alert('Please upload at least 5 images.');
+      return;
     }
 
     // Validate additional phone numbers only if they are provided
@@ -437,7 +443,7 @@ const PostAdd = () => {
       {currentStep === 2 && (
         <div>
           {/* Render AddOther form component here on the third page */}
-          <AdditionalDetails formData={formData.additionalDetails} updateFormData={updateFormData} />
+          <AdditionalDetails formData={formData.additionalDetails} updateFormData={updateFormData} setIsImageValid={setIsImageValid} />
         </div>
       )}
 

@@ -27,7 +27,17 @@
   justify-content: center;
   margin: 20px 0; /* Add some margin around the container */
 }
+.listplaces .place-title{
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+}
 
+.listplaces .place-description{
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 18px;
+  margin-top: 10px;
+}
 .place-card {
   margin:20px; /* Space between each card */
   width: 300px; /* Fixed width for each card */
@@ -58,7 +68,10 @@
 .place-card .MuiButton-root:hover {
   background-color:#009F96;
 }
-
+.listplaces .place-price{
+  font-weight: bold;
+  font-family: "Josefin Sans", sans-serif;
+}
 .listplaces-title {
   font-size: 24px;
   color: rgba(0, 0, 0, 0.77);
@@ -67,6 +80,11 @@
   width: 100%;
   margin: 0 auto; /* Optional: To center the title container itself */
   margin-bottom: 20px;
+}
+.listplaces-icon{
+  width: 180px;
+  display: block;
+  margin: 5px auto; /* Centered the icon */
 }
 
 @media screen and (max-width: 768px) {

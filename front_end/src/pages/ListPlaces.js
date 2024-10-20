@@ -37,7 +37,8 @@ export default function ListPlaces() {
         imageUrl: './images/3.1.jpg',
         beds: 3,
         baths: 2,
-        sqft: 1000
+        sqft: 1000,
+        description: 'Spacious 3 bedroom apartment near the University of Ruhuna, with modern amenities including Wi-Fi and parking, perfect for students or families. Located just 2 km from the university, this apartment provides easy access to nearby facilities and a peaceful environment for living.'
       },
       {
         id: 2,
@@ -50,7 +51,8 @@ export default function ListPlaces() {
         imageUrl: './images/3.1.jpg',
         beds: 1,
         baths: 1,
-        sqft: 500
+        sqft: 500,
+        description: 'Cozy single room with air conditioning and laundry services, conveniently located near the University of Colombo. Ideal for students looking for affordable accommodation with all essential services nearby.'
       }
   ];
 
@@ -136,6 +138,11 @@ export default function ListPlaces() {
       <div className="listplaces-title">
         <Typography variant="h4">{title}</Typography>
       </div>
+      <img
+        src='/images/2.5.png'
+        alt="boarding place icon"
+        className="listplaces-icon"
+      />
       <div className="places-container">
         {filteredPlaces.length > 0 ? (
           filteredPlaces.map((place) => (
@@ -145,7 +152,7 @@ export default function ListPlaces() {
                 <CardContent>
                   <Typography variant="h6" className="place-title">{place.title}</Typography>
                   <Typography variant="subtitle1" className="place-price">Rs.{place.price.toLocaleString()} Per Month</Typography>
-                  <Typography className="place-description">Large living & dining area with a good size balcony...</Typography>
+                  <Typography className="place-description">{place.description.substring(0, 100)}...</Typography>
                   <div className="place-icons">
                     <BedIcon /> {place.beds} beds &nbsp;
                     <BathtubIcon /> {place.baths} bath &nbsp;
