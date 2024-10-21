@@ -56,27 +56,6 @@ const PostAdd = () => {
   const [loadingLocation, setLoadingLocation] = useState(false); // For loading state when fetching location
   const [isImageValid, setIsImageValid] = useState(false); // Track if image validation passes
 
-  // Get current location using browser geolocation and update the map center
-  const handleGetCurrentLocation = () => {
-    if (navigator.geolocation) {
-      setLoadingLocation(true);
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setLocation({ lat: latitude, lng: longitude }); // Update the map center and marker
-          setLoadingLocation(false); // Stop loading after fetching location
-        },
-        (error) => {
-          console.error('Error fetching location:', error);
-          setLoadingLocation(false);
-          alert('Could not retrieve current location.');
-        }
-      );
-    } else {
-      alert('Geolocation is not supported by this browser.');
-    }
-  };
-
   // Map container styles
   const mapContainerStyle = {
     height: '300px',
@@ -95,6 +74,8 @@ const PostAdd = () => {
     street: '',
     university: '',
     distance: 0,
+    latitude: '', // New field for latitude
+    longitude: '', // New field for longitude
     // Add more fields as needed for each form
     apartmentDetails: {},
     roomDetails: {},
@@ -103,6 +84,28 @@ const PostAdd = () => {
     additionalDetails: [],
   });
   const [errors, setErrors] = useState({});
+
+  // Get current location using browser geolocation and update the map center and form fields
+  const handleGetCurrentLocation = () => {
+    if (navigator.geolocation) {
+      setLoadingLocation(true);
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setLocation({ lat: latitude, lng: longitude }); // Update the map center and marker
+          setFormData({ ...formData, latitude, longitude }); // Auto-fill latitude and longitude fields
+          setLoadingLocation(false); // Stop loading after fetching location
+        },
+        (error) => {
+          console.error('Error fetching location:', error);
+          setLoadingLocation(false);
+          alert('Could not retrieve current location.');
+        }
+      );
+    } else {
+      alert('Geolocation is not supported by this browser.');
+    }
+  };
 
   // Handle input changes
   const handleChange = (e, index) => {
@@ -389,6 +392,27 @@ const PostAdd = () => {
           >
             {loadingLocation ? 'Loading...' : 'Get Current Location'}
           </Button>
+
+          {/* Latitude and Longitude Fields */}
+          <div className="form-section">
+              <TextField
+                label="Latitude"
+                name="latitude"
+                value={formData.latitude}
+                onChange={handleChange}
+                fullWidth
+                disabled
+              />
+              <TextField
+                label="Longitude"
+                name="longitude"
+                value={formData.longitude}
+                onChange={handleChange}
+                fullWidth
+                disabled
+                style={{ marginTop: '16px' }}
+              />
+            </div>
         </div>
 
         <div className="form-section">
