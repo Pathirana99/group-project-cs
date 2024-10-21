@@ -7,7 +7,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 const AdditionalDetails = ({ formData, updateFormData,setIsImageValid }) => {
   const [rooms, setRooms] = useState(formData?.additionalDetails || [{ title: '', status: 'Available Now', capacity: 0 }]);
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState( formData?.additionalDetails || []);
   const [errorMessage, setErrorMessage] = useState('');
   // When rooms change, update the formData in the parent component (PostAdd.js)
   useEffect(() => {

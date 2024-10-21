@@ -28,13 +28,41 @@ export default function ListPlaces() {
   const filteredData = [
     {
         id: 1,
+        phone: ["0711982521", "0771234567"],
+        email: "lakmal@gmail.com",
         title: 'Apartment near University of Ruhuna',
+        date: "2024-10-11",
         area: 'Matara',
         price: 15000,
+        rentDuration:'Per Month',
+        advancePayment: 5000,
+        advancePaymentDuration: 'Months',
+        billsIncluded: 'NO',
         type: 'Apartment',
         facilities: ['Wi-Fi', 'Parking'],
         distance: 2,
-        imageUrl: './images/3.1.jpg',
+        latitude: 6.0241,
+        longitude: 80.2168,
+        rooms: [
+          {
+            title: "Room 1",
+            capacity: 2,
+            status: "Available Now",
+          },
+          {
+            title: "Room 2",
+            capacity: 1,
+            status: "Available Soon",
+          },
+        ],
+        imageUrls: [
+          "/images/3.4.jpg",
+          "/images/3.5.jpg",
+          "/images/3.5.jpg",
+          "/images/3.5.jpg",
+          "/images/3.5.jpg",
+          "/images/3.5.jpg"
+        ],
         beds: 3,
         baths: 2,
         sqft: 1000,
@@ -42,13 +70,41 @@ export default function ListPlaces() {
       },
       {
         id: 2,
-        title: 'Single Room near Colombo University',
+        phone: ["0711982521", "0771234567"],
+        email: "nuwan23@gmail.com",
+        title: 'Single Room near Moratuwa University',
+        date: '2024-10-21',
         area: 'University of Moratuwa',
         price: 12000,
+        rentDuration:'Per Month',
+        advancePayment:'' ,
+        advancePaymentDuration: 'None',
+        billsIncluded: 'Yes',
         type: 'Single Room',
         facilities: ['A/C', 'Laundry'],
         distance: 10,
-        imageUrl: './images/3.1.jpg',
+        latitude: 5.9414,
+        longitude: 80.5707,
+        rooms: [
+          {
+            title: "Room 1",
+            capacity: 2,
+            status: " Not Available",
+          }
+        ],
+         imageUrls: [
+          "/images/3.2.jpg",
+          "/images/3.3.jpeg",
+          "/images/3.3.jpeg",
+          "/images/3.3.jpeg",
+          "/images/3.3.jpeg",
+          "/images/3.3.jpeg",
+          "/images/3.5.jpg",
+          "/images/3.5.jpg",
+          "/images/3.5.jpg",
+          "/images/3.5.jpg",
+          "/images/3.5.jpg"
+        ],
         beds: 1,
         baths: 1,
         sqft: 500,
@@ -122,8 +178,8 @@ export default function ListPlaces() {
   }, [generateTitle]);
 
   
-  const handleMoreDetails = (placeId) => {
-    navigate(`/more-details/${placeId}`); // Navigate to MoreDetails page with the placeId
+  const handleMoreDetails = (place) => {
+    navigate(`/more-details/${place.id}`, { state: { place } }); // Navigate to MoreDetails page with the placeId
   };
 
   return (
@@ -148,7 +204,7 @@ export default function ListPlaces() {
           filteredPlaces.map((place) => (
             <div className="place-card" key={place.id}>
               <Card className="custom-card">
-                <CardMedia component="img" height="200" image={place.imageUrl} alt={place.title} className="custom-media" />
+                <CardMedia component="img" height="200" image={place.imageUrls?.[0]} alt={place.title} className="custom-media" />
                 <CardContent>
                   <Typography variant="h6" className="place-title">{place.title}</Typography>
                   <Typography variant="subtitle1" className="place-price">Rs.{place.price.toLocaleString()} Per Month</Typography>
@@ -158,7 +214,7 @@ export default function ListPlaces() {
                     <BathtubIcon /> {place.baths} bath &nbsp;
                     <SquareFootIcon /> {place.sqft} sqft
                   </div>
-                  <Button variant="contained" className="more-details-button" onClick={() => handleMoreDetails(place.id)}>
+                  <Button variant="contained" className="more-details-button" onClick={() => handleMoreDetails(place)}>
                     More Details
                   </Button>
                 </CardContent>
@@ -169,9 +225,9 @@ export default function ListPlaces() {
           <Typography>No places found matching your search criteria.</Typography>
         )}
       </div>
-    </div>
-    <div className="footer">
+      <div className="footer">
       <Footer />
+    </div>
     </div>
   </div>
   );

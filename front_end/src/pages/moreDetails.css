@@ -1,0 +1,182 @@
+.moredetails {
+    min-height: 100vh; /* Ensure minimum height is the full viewport height */
+    background: linear-gradient(to bottom, #BBFFFB 0%, #FFFFFF 40%, #FFFFFF 85%, #B1EBE8 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+    font-family: "Josefin Sans", sans-serif;
+}
+
+.more-details-container {
+    width: 85%; 
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.content-section {
+    display: flex;
+    margin-top: 200px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.left-section {
+    width: 65%;
+}
+
+.image-slider {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.main-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.slider-container {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.slider-controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    z-index: 10; /* Ensure controls are above the images */
+}
+
+.thumbnail-slider {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the slider */
+}
+
+.thumbnail-container {
+    display: flex;
+    overflow-x: auto; /* Allow horizontal scrolling */
+    scroll-behavior: smooth; /* Smooth scrolling */
+    gap: 10px; /* Space between thumbnails */
+    padding: 10px 0; /* Add padding for aesthetics */
+}
+
+.thumbnail-image {
+    cursor: pointer;
+    transition: transform 0.3s, border 0.3s;
+    min-width: 100px; /* Set a min-width for thumbnails */
+}
+
+.thumbnail-image:hover {
+    transform: scale(1.05);
+}
+
+.thumbnail-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px; /* Slight rounding for thumbnails */
+}
+
+.thumbnail-image.active {
+    border: 2px solid #00BFB4; /* Highlight the active thumbnail */
+}
+
+.property-info, .facilities-section, .description-section, .map-section {
+    margin-bottom: 20px;
+}
+
+.facilities-list {
+    list-style: none;
+    padding: 0;
+}
+
+.facilities-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.facilities-list img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.right-section {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.contact-details, .price-details {
+    background-color: #e4ebeb;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.contact-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.call-button, .chat-button {
+    width: 48%;
+    background-color: #00BFB4 !important;
+    font-size: 18px !important;
+}
+
+.call-button, .chat-button:hover{
+    background-color:#00aba2 !important;
+}
+
+.map-section {
+    height: 600px;
+    width: 100%;
+  }
+
+.map-section > div {
+    height: 100%;
+    width: 100%;
+  }
+
+.map-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .content-section {
+        flex-direction: column; /* Stack sections vertically on smaller screens */
+    }
+
+    .left-section, .right-section {
+        width: 100%; /* Full width for mobile */
+    }
+
+    .thumbnail-container {
+        gap: 5px; /* Reduce gap on smaller screens */
+    }
+
+    .thumbnail-image {
+        min-width: 80px; /* Smaller thumbnails on mobile */
+    }
+    .right-section{
+        margin-top: 30px;
+    }
+    .contact-details, .price-details {
+        width: 90%;
+    }
+}
