@@ -15,6 +15,7 @@ export default function Login() {
   const [email, setEmail] = useState(''); // State for email input
   const [password, setPassword] = useState('');
   const location = useLocation(); 
+  const [error, setError] = useState(''); // State to show login errors
 
    // Get the page the user was trying to access before being redirected to login
    const redirectTo = location.state?.from?.pathname || '/';  // Defaults to home page if no previous page
@@ -23,6 +24,21 @@ export default function Login() {
   const openEnterCode = () => setStep('code');
   const openChangePassword = () => setStep('change');
   const closePopup = () => setStep(null);
+
+
+  // Mock hardcoded user data with roles
+  const mockUsers = {
+    'user@example.com': { password: 'userpass', role: 'user' },
+    'owner@example.com': { password: 'ownerpass', role: 'owner' },
+    'admin@example.com': { password: 'adminpass', role: 'admin' }
+  };
+
+    
+ // Navigate to the signup page when the signup button is clicked
+ const handleSignup = () => {
+   navigate('/signup'); // Navigate to your signup page
+  };
+    
 
   // Function to handle Google Login success
   const handleGoogleSuccess = (response) => {
@@ -42,21 +58,27 @@ export default function Login() {
     navigate(-1); // Navigates back to the previous page
   };
 
-  // Handle email/password form submission
-  const handleSignIn = (e) => {
-    e.preventDefault();
+      // Handle email/password form submission
+      const handleSignIn = (e) => {
+          e.preventDefault();
+          // Check if user exists in mockUsers data
+      const user = mockUsers[email];
 
-    // Simulate email/password authentication process
-    if (email === 'test@example.com' && password === 'password') {
-      console.log('Email login successful');
+      if (user && user.password === password) {
+        console.log('Email login successful');
 
-      // Store authentication token in localStorage
-      localStorage.setItem('authToken', 'email-auth-token');
-
-      // Navigate to the home page or close the login page
-      navigate(redirectTo);
+    // Store authentication token in localStorage
+    localStorage.setItem('authToken', 'email-auth-token');
+      // Redirect based on user role
+      if (user.role === 'user') {
+        navigate('/userprofile');
+      } else if (user.role === 'owner') {
+        navigate('/ownerprofile');
+      } else if (user.role === 'admin') {
+        navigate('/adminprofile');
+      }
     } else {
-      console.log('Login failed. Incorrect email or password.');
+      setError('Incorrect email or password');
     }
   };
 
@@ -66,7 +88,7 @@ export default function Login() {
         <div className="login-left">
           <img src="/images/1.png" alt="logo" className="logo"/>
           <p className="signup-text">Don't have an account?</p>
-          <button className="signup-button">SIGN UP</button>
+          <button className="signup-button" onClick={handleSignup}>SIGN UP</button>
           <img src="/images/1.1.png" alt="login vector" className='vectorimage1'/>
         </div>
 
@@ -75,7 +97,7 @@ export default function Login() {
           <CloseIcon className="close-icon" onClick={handleClose} />
           <div className="login-right-signup">
             <p className="signup-text">Don't have an account?</p>
-            <button className="signup-button">SIGN UP</button>
+            <button className="signup-button" onClick={handleSignup}>SIGN UP</button>
           </div>
           <h2 className="signin-header">Sign in Here</h2>
           <form onSubmit={handleSignIn}>
@@ -95,6 +117,7 @@ export default function Login() {
             </div>
             <button type="submit" className="signin-button">SIGN IN</button>
           </form>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
           <div className="or-divider"><span>OR</span></div>
           
           {/* Use GoogleLogin from @react-oauth/google */}

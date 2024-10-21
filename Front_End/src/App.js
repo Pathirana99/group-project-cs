@@ -7,9 +7,12 @@ import Login from './pages/Login';
 import PostYourAdd from './pages/PostYourAdd';
 import ProtectedRoute from './components/ProtectedRoute';
 import Loader from './components/Loader';
-import OwnerProfile from './pages/OwnerProfile';
+import OwnerProfile from './pages/Profile/OwnerProfile';
+import AdminProfile from './pages/Profile/AdminProfile';
+import UserProfile from './pages/Profile/UserProfile';
 import ListPlaces from './pages/ListPlaces';
 import MoreDetails from './pages/MoreDetails';
+import Signup from './pages/Signup';
 
 function App() {
   
@@ -39,8 +42,11 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/postyouradd" element={<ProtectedRoute element={<PostYourAdd />} isAuthenticated={isAuthenticated} />} />
       <Route path="/ownerprofile" element={<OwnerProfile />} />
+      <Route path="/userprofile" element={<UserProfile />} />
+      <Route path="/adminprofile" element={<AdminProfile />} />
       <Route path="/list-places" element={<ListPlaces />} />
       <Route path="/more-details/:placeId" element={<MoreDetails />} />
+      <Route path="/signup" element={<Signup/>}/>
     </Routes>
   );
 }

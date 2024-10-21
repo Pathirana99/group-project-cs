@@ -15,7 +15,7 @@
 
 .login {
   width:850px;
-  height: 600px;
+  height: 700px;
   display: flex;
   background-color: white;
   border-radius: 8px;
@@ -59,7 +59,6 @@
 }
 
 .login-right-signup{
-  display: flex;              /* Flexbox layout */
   align-items: center;         /* Vertically align items to the center */
   gap: 5px; 
   margin-top:-20px;
@@ -78,17 +77,15 @@
 }
 
 .login-right-signup .signup-button {
-  background: none;            /* Remove background */
-  border: none;                /* Remove border */
-  color:#72d6c9;              /* Set the button text color */
-  cursor: pointer;             /* Pointer cursor to indicate it's clickable */
-  font-size: 14px;             /* Adjust font size */
-  padding: 0; 
+  background-color: white;
+  color: gray;
+  border: 2px solid #00BFB4;
 }
 .login-right-signup .signup-text{
   margin: 0;                   /* Remove any default margin from the paragraph */
   font-size: 14px;
   padding:10px 20px;
+  align-items: center;
 }
 
 
@@ -157,7 +154,7 @@
   text-align: right;
   color: #72d6c9;
   text-decoration: none;
-  margin-bottom: 16px;
+  margin-bottom: -10px;
   background: none;
   border: none;
   cursor: pointer;
@@ -177,7 +174,7 @@
   padding: 10px 20px;
   border-radius: 8px;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin-bottom: -5px;
   text-align: center;
   display: block;
   margin-left: auto; /* Center the button horizontally */
