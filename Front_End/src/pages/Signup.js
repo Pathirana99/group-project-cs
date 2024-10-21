@@ -5,7 +5,7 @@ import LockIcon from '@mui/icons-material/Lock';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import CloseIcon from '@mui/icons-material/Close';
 import { GoogleLogin } from '@react-oauth/google'; // Import from @react-oauth/google
-import './signup.css';
+import './Signup.css';
 
 export default function Signup() {
   const [name, setName] = useState(''); // State for name input
