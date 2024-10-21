@@ -42,7 +42,7 @@ export default function ListPlaces() {
       },
       {
         id: 2,
-        title: 'Single Room near Colombo University',
+        title: 'Single Room near Moratuwa University',
         area: 'University of Moratuwa',
         price: 12000,
         type: 'Single Room',
