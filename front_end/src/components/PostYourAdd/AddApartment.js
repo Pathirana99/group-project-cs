@@ -12,12 +12,12 @@ const AddApartment = ({ formData, updateFormData }) => {
     floorArea: '',
     parking: 0,
     people: 0,
-    petsAllowed: '',
+    petsAllowed: 'no',
     price: '',
     rentDuration: 'Per Month',
     advancePayment: '',
     advancePaymentDuration: 'Months',
-    billsIncluded: '',
+    billsIncluded: 'no',
     title: '',
     description: '',
     facilities: {
@@ -116,7 +116,7 @@ const AddApartment = ({ formData, updateFormData }) => {
   }, [formData]);
 
   const handleQuickFillTitle = () => {
-    const quickFillTitle = `${localFormData.bedrooms} bedroom apartment in ${formData.city} for Rs.${localFormData.price} (per Month)`;
+    const quickFillTitle = `${localFormData.bedrooms} bedroom apartment for Rs.${localFormData.price} (per Month)`;
     setLocalFormData({ ...localFormData, title: quickFillTitle });
     updateFormData({
       apartmentDetails: { ...localFormData, title: quickFillTitle }
@@ -124,7 +124,7 @@ const AddApartment = ({ formData, updateFormData }) => {
   };
   
   const handleQuickFillDescription = () => {
-    const quickFillDescription = `This ${localFormData.bedrooms}-bedroom apartment offers great amenities and is located in ${formData.city}. Priced at Rs.${localFormData.price} per month, it's ideal for families or groups.`;
+    const quickFillDescription = `This ${localFormData.bedrooms}-bedroom apartment offers great amenities. Priced at Rs.${localFormData.price} per month, it's ideal for families or groups.`;
     setLocalFormData({ ...localFormData, description: quickFillDescription });
     updateFormData({
       apartmentDetails: { ...localFormData, description: quickFillDescription }
@@ -230,7 +230,7 @@ const AddApartment = ({ formData, updateFormData }) => {
               <RadioGroup
                 row
                 name="petsAllowed"
-                value={localFormData.petsAllowed || ''}
+                value={localFormData.petsAllowed || 'no'}
                 onChange={handleInputChange}
               >
                 <FormControlLabel value="yes" control={<Radio sx={{ display: "none" }} />} label ="YES" className="radio-button"/>
@@ -312,7 +312,7 @@ const AddApartment = ({ formData, updateFormData }) => {
               <RadioGroup
                 row
                 name="billsIncluded"
-                value={localFormData.billsIncluded || ''}
+                value={localFormData.billsIncluded || 'no'}
                 onChange={handleInputChange}
               >
                 <FormControlLabel value="yes" control={<Radio sx={{ display: "none" }} />} label ="YES" className="radio-button"/>

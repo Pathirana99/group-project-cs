@@ -467,7 +467,9 @@ const PostAdd = () => {
       {currentStep === 2 && (
         <div>
           {/* Render AddOther form component here on the third page */}
-          <AdditionalDetails formData={formData.additionalDetails} updateFormData={updateFormData} setIsImageValid={setIsImageValid} />
+          <AdditionalDetails formData={formData.additionalDetails} updateFormData={updateFormData} setIsImageValid={setIsImageValid} 
+          showRoomSection={formData.placeType === 'Apartment' || formData.placeType === 'Other' || formData.placeType === 'Room'} // Pass the showRooms prop
+          />
         </div>
       )}
 

@@ -143,6 +143,7 @@ label {
   border: 1px solid #ddd;
   border-radius: 8px;
   text-align: center;
+  margin-top: 10px;
   background-color: white;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
