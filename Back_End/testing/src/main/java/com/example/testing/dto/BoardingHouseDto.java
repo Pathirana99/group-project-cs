@@ -20,10 +20,13 @@ public class BoardingHouseDto {
     private Integer price;
     private String image;
 
-    private String ownername;
     private String email;
-    private String password;
 
     public BoardingHouseDto(String email, Integer id) {
+    }
+
+    public BoardingHouseDto(Integer id, String city, String type,
+                            String phone, String location, String description,
+                            String email, Integer price, String street, String image) {
     }
 }

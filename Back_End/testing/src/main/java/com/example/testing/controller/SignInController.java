@@ -1,6 +1,5 @@
 package com.example.testing.controller;
 
-import com.example.testing.dto.ReturnLoginUserDto;
 import com.example.testing.dto.SignInDto;
 import com.example.testing.dto.SigninResponseDto;
 import com.example.testing.service.SignInService;

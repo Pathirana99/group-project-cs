@@ -2,8 +2,10 @@ package com.example.testing.service;
 
 import com.example.testing.dto.LoginUserDto;
 import com.example.testing.dto.ReturnLoginUserDto;
+import com.example.testing.dto.SignInDto;
 import com.example.testing.entity.LoginUser;
 import com.example.testing.repo.LoginUserRepo;
+import com.example.testing.utill.SignInMail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,9 @@ import java.util.List;
 public class LoginUserService {
     @Autowired
     LoginUserRepo loginUserRepo;
+    @Autowired
+    SignInMail signInMail;
+
     public ReturnLoginUserDto saveLoginUser(LoginUserDto loginUserDto){
         String encodedPassword = Base64.getEncoder().encodeToString(loginUserDto.getPassword().getBytes());
 
@@ -23,6 +28,7 @@ public class LoginUserService {
             return null;
         }
         LoginUser save = loginUserRepo.save(new LoginUser(loginUserDto.getContactNo(), encodedPassword, loginUserDto.getEmail()));
+        signInMail.sendEmail(loginUserDto);
         return new ReturnLoginUserDto(save.getEmail(), save.getId());
     }
     public LoginUserDto updateLoginUser(Integer id, LoginUserDto loginUserDto){
