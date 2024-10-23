@@ -1,10 +1,14 @@
 import React from 'react'
 import './about.css';
+import NavigationBar from '../components/NavigationBar';
+import Footer from '../components/Footer';
 
 export default function About() {
   return (
-    <div>
-      
+      <div className='about'>
+        <div className='nav'>
+          <NavigationBar/>
+        </div>
       <div className="about-container">
       <h1>ABOUT US</h1>
       <p className="intro-text">
@@ -34,8 +38,10 @@ export default function About() {
           </p>
         </div>
       </div>
+      <div className="footer">
+          <Footer/>
+        </div>
     </div>
-
     </div>
   )
 }

@@ -5,7 +5,7 @@ import './additionalDetails.css'; // Importing the CSS file for styling
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const AdditionalDetails = ({ formData, updateFormData,setIsImageValid }) => {
+const AdditionalDetails = ({ formData, updateFormData,setIsImageValid ,showRoomSection}) => {
   const [rooms, setRooms] = useState(formData?.additionalDetails || [{ title: '', status: 'Available Now', capacity: 0 }]);
   const [images, setImages] = useState( formData?.additionalDetails || []);
   const [errorMessage, setErrorMessage] = useState('');
@@ -85,6 +85,8 @@ const AdditionalDetails = ({ formData, updateFormData,setIsImageValid }) => {
   return (
     <div className="additional-container">
         <div className="form-container">
+        {showRoomSection && (
+          <div>
         <h4>Room Details & Availability</h4>
         {rooms.map((room, index) => (
             <Card key={index} className="room-card">
@@ -158,6 +160,8 @@ const AdditionalDetails = ({ formData, updateFormData,setIsImageValid }) => {
         >
             Add More
         </Button>
+        </div>
+        )}
          {/* Image Upload Section */}
         <div className="image-upload">
          <h4>Upload Pictures of Your Place</h4>
