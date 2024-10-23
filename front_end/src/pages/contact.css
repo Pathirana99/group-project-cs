@@ -1,10 +1,10 @@
-.container {
+.contactus-container {
     background-color: #e0e0e0;
     padding: 24px;
     border-radius: 8px;
   }
   
-  .header {
+  .contactus-header {
     background-color: #a0e1e0;
     padding: 16px;
     border-radius: 8px;
@@ -12,31 +12,31 @@
     margin-bottom: 16px;
   }
   
-  .contact-info {
+  .contactus-info {
     padding-right: 16px;
   }
   
-  .contact-item {
+  .contactus-item {
     display: flex;
     align-items: center;
     margin-bottom: 8px;
   }
   
-  .contact-icon {
+  .contactus-icon {
     margin-right: 8px;
   }
   
-  .contact-text {
+  .contactus-text {
     margin-left: 32px;
   }
   
-  .send-message-form {
+  .contactus-send-message-form {
     background-color: #d0d0d0;
     padding: 24px;
     border-radius: 8px;
   }
   
-  .send-button {
+  .contactus-send-button {
     background-color: #5ccbc4;
   }
   
