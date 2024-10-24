@@ -1,5 +1,5 @@
 import React,{useState, useRef} from 'react';
-import { Typography, Button,Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from '@mui/material';
+import { Typography, Button,Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,Rating} from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 import './moreDetails.css';
@@ -8,10 +8,13 @@ import Footer from '../components/Footer';
 import ChatPopup from '../components/ChatPopup';
 import CallIcon from '@mui/icons-material/Call';
 import EmailIcon from '@mui/icons-material/Email';
+import RateDialog from '../components/RateDialog';
 
 export default function MoreDetails() {
   const { state } = useLocation();
   const { place } = state || {};
+
+  const [isRateDialogOpen, setIsRateDialogOpen] = useState(false);
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: 'AIzaSyAZVdMOfQEqb3T04P_-HTMR_Vg4aTIoVz8', // Add your API key here
@@ -65,6 +68,18 @@ export default function MoreDetails() {
     setIsChatOpen(false);
   };
 
+  const handleOpenRateDialog = () => {
+    setIsRateDialogOpen(true);
+  };
+
+  const handleCloseRateDialog = () => {
+    setIsRateDialogOpen(false);
+  };
+
+  const handleRateSubmit = (ratingData) => {
+    console.log("Rating Submitted:", ratingData);
+    // Here add logic to save the rating data to your backend
+  };
 
   return (
     <div className="moredetails">  
@@ -202,6 +217,26 @@ export default function MoreDetails() {
                 <Typography variant="body2" sx={{fontSize:'20px',margin:'2px',fontFamily:'"Josefin Sans", sans-serif'}}>Bills Included</Typography>
               )}
             </div>
+
+            {/* Display the rating, showing 5 stars by default */}
+            <div className="ratings-section">
+              <Rating
+                name="read-only"
+                value={place.rating || 0}  // If no rating, show 0 (empty stars)
+                readOnly
+                size="large"
+                max={5}
+              />
+
+              {/* Rate Button */}
+              <div className='rate-form-button'>
+              <Button variant="contained" color="primary" onClick={handleOpenRateDialog} sx={{backgroundColor:'#00BFB4',color:'white','&:hover':{backgroundColor:'#00aba2'}}}>
+                  RATE
+                </Button>
+                </div>
+
+            </div>
+
             {/* Google Map */}
             <div className="map-section">
               <Typography variant="h6">Map:</Typography>
@@ -219,6 +254,14 @@ export default function MoreDetails() {
         <div className='footer'>
         <Footer/>
       </div>
+
+      {/* RateDialog Component */}
+      <RateDialog
+          open={isRateDialogOpen}
+          onClose={handleCloseRateDialog}
+          onSubmit={handleRateSubmit} // Pass the submit handler
+        />
+
       </div>
      
     </div>

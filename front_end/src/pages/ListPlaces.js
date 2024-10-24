@@ -43,6 +43,7 @@ export default function ListPlaces() {
         distance: 2,
         latitude: 6.0241,
         longitude: 80.2168,
+        rating:3,
         rooms: [
           {
             title: "Room 1",
@@ -85,6 +86,7 @@ export default function ListPlaces() {
         distance: 10,
         latitude: 5.9414,
         longitude: 80.5707,
+        rating:0,
         rooms: [
           {
             title: "Room 1",

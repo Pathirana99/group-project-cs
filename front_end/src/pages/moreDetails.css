@@ -155,6 +155,19 @@
     height: auto;
     border-radius: 10px;
 }
+.rating-view-section{
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between the rating stars and the numeric value */
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.rate-form-button{
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 
 /* Responsive Styles */
 @media (max-width: 768px) {
