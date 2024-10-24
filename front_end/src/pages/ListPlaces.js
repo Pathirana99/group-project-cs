@@ -1,6 +1,6 @@
 import React,{ useState, useEffect,useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Card, CardContent, CardMedia, Typography,Button } from '@mui/material';
+import { Card, CardContent, CardMedia, Typography,Button,Rating} from '@mui/material';
 import './listPlaces.css';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
@@ -77,7 +77,7 @@ export default function ListPlaces() {
         date: '2024-10-21',
         area: 'University of Moratuwa',
         price: 12000,
-        rentDuration:'Per Month',
+        rentDuration:'Per Week',
         advancePayment:'' ,
         advancePaymentDuration: 'None',
         billsIncluded: 'Yes',
@@ -209,7 +209,14 @@ export default function ListPlaces() {
                 <CardMedia component="img" height="200" image={place.imageUrls?.[0]} alt={place.title} className="custom-media" />
                 <CardContent>
                   <Typography variant="h6" className="place-title">{place.title}</Typography>
-                  <Typography variant="subtitle1" className="place-price">Rs.{place.price.toLocaleString()} Per Month</Typography>
+                  <Typography variant="subtitle1" className="place-price">Rs.{place.price.toLocaleString()} {place.rentDuration}</Typography>
+                  <Rating
+                    name="read-only"
+                    value={place.rating || 0}  // If no rating, show 0 (empty stars)
+                    readOnly
+                    size="small"
+                    max={5}
+                  />
                   <Typography className="place-description">{place.description.substring(0, 100)}...</Typography>
                   <div className="place-icons">
                     <BedIcon /> {place.beds} beds &nbsp;
