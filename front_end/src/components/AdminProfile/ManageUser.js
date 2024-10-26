@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel, Button ,Box,Dialog, DialogActions, DialogContent, DialogTitle, TextField,InputLabel} from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel, Button ,Box,Dialog, DialogActions, DialogContent, DialogTitle, TextField,InputLabel,Select,MenuItem} from '@mui/material';
 
 const ManageUser = () => {
 
     const [users, setUsers] = useState([
         { id: 1, name: 'Kamal Jayathissa', email: 'kamal@example.com', role: 'Admin' },
         { id: 2, name: 'Deshan Pathirana', email: 'deshan@example.com', role: 'User' },
-        { id: 3, name: 'Sandun Chinthka', email: 'sandun@example.com', role: 'User' },
+        { id: 3, name: 'Sandun Chinthka', email: 'sandun@example.com', role: 'Owner' },
     ]);
 
     const [open, setOpen] = useState(false);
@@ -101,6 +101,13 @@ const ManageUser = () => {
     };
 
     const handleSaveNewUser = () => {
+
+        // Check for duplicate email
+        const isDuplicate = users.some((user) => user.email === newUser.email);
+        if (isDuplicate) {
+            alert("This email is already associated with an existing user.");
+            return;
+        }
         // Add the new user to the hard-coded users array
         const newUserData = { id: users.length + 1, ...newUser }; // Assign a new ID
         setUsers((prevUsers) => [...prevUsers, newUserData]); // Update the user list
@@ -122,7 +129,7 @@ const ManageUser = () => {
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', marginBottom: '20px' }}>
             <Button variant="contained" color="primary" onClick={handleAddUser} sx={{ margin: '10px',fontSize:'18px',backgroundColor:'#72d6c9',padding:'10px 20px','&:hover': {backgroundColor:'#3DC0B9'} }}>
-                + Add User
+                + New User
             </Button>
         <TableContainer>
             <Table>
@@ -221,16 +228,19 @@ const ManageUser = () => {
                     <InputLabel shrink sx={{fontSize:"24px",fontWeight:'600',marginBottom:'0',fontFamily:'"Josefin Sans", sans-serif'}}>
                         Role
                     </InputLabel>
-                    <TextField
+                    <Select
                         margin="dense"
-                        placeholder="Role"
-                        name="role"
-                        type="text"
                         fullWidth
                         variant="outlined"
+                        name="role"
                         value={selectedUser?.role || ''}
                         onChange={handleInputChange}
-                    />
+                        sx={{ fontSize: "16px", fontFamily: '"Josefin Sans", sans-serif' }}
+                    >
+                        <MenuItem value="Admin">Admin</MenuItem>
+                        <MenuItem value="Owner">Owner</MenuItem>
+                        <MenuItem value="User">User</MenuItem>
+                    </Select>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}  sx={{margin:'5px',fontSize:'16px',fontFamily:'"Josefin Sans", sans-serif',color:'black','&:hover': {backgroundColor:'#C8C8C8'}}}>
@@ -315,15 +325,19 @@ const ManageUser = () => {
                     <InputLabel shrink sx={{fontSize:"24px",fontWeight:'600',marginBottom:'0',fontFamily:'"Josefin Sans", sans-serif'}}>
                         Role
                     </InputLabel>
-                    <TextField
+                    <Select
                         margin="dense"
                         name="role"
-                        type="text"
                         fullWidth
                         variant="outlined"
                         value={newUser.role}
                         onChange={handleNewUserInputChange}
-                    />
+                        sx={{ fontSize: "16px", fontFamily: '"Josefin Sans", sans-serif' }}
+                    >
+                        <MenuItem value="Admin">Admin</MenuItem>
+                        <MenuItem value="Owner">Owner</MenuItem>
+                        <MenuItem value="User">User</MenuItem>
+                    </Select>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => setOpenAddUser(false)} sx={{margin:'5px',fontSize:'16px',fontFamily:'"Josefin Sans", sans-serif',color:'black','&:hover': {backgroundColor:'#C8C8C8'}}}>

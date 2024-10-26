@@ -4,6 +4,9 @@ import { Line, Bar, Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend, ArcElement, Filler } from 'chart.js'; // Include Filler
 import './adminContent.css';
 import ManageUser from './ManageUser';
+import ManageOwner from './ManageOwner';
+import ManagePlaces from './ManagePlaces';
+import ManageRating from './ManageRating';
 
 // Register the required components
 ChartJS.register(
@@ -278,15 +281,15 @@ const AdminContent = ({ activeMenuItem, cardData,setActiveMenuItem}) => {
       )}
 
       {activeMenuItem === 'Manage Boarding Owner' && (
-        <Typography variant="body1">Manage Boarding Owner Content</Typography>
+        <Typography variant="body1"><ManageOwner setActiveMenuItem={setActiveMenuItem}/></Typography>
       )}
 
       {activeMenuItem === 'Manage Boarding Places' && (
-        <Typography variant="body1">Manage Boarding Places Content</Typography>
+        <Typography variant="body1"><ManagePlaces/></Typography>
       )}
 
       {activeMenuItem === 'Manage Ratings' && (
-        <Typography variant="body1">Manage Ratings Content</Typography>
+        <Typography variant="body1"><ManageRating/></Typography>
       )}
     </div>
   );

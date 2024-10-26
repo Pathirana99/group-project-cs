@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Avatar, Typography} from '@mui/material';
 import AdminContent from '../../components/AdminProfile/AdminContent';
 import './adminProfile.css'; // Import the CSS file
-//insatll npm install axios
 //import axios from 'axios'; 
 
 const AdminProfile = () => {
