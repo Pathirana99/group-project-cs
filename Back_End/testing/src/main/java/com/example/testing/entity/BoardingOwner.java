@@ -37,4 +37,8 @@ public class BoardingOwner {
         boardingHouses.remove(boardingHouse);
         boardingHouse.setBoardingOwner(null);
     }
+
+    public BoardingOwner(Integer id) {
+        this.id = id;
+    }
 }

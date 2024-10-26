@@ -23,7 +23,6 @@ public class BoardingHouse {
     private String city;
     private String street;
     private Integer price;
-    private String image;
     private String email;
 
     @ManyToOne
@@ -42,7 +41,6 @@ public class BoardingHouse {
         this.email = email;
         this.price = price;
         this.street = street;
-        this.image = image;
     }
 
     public BoardingHouse(Integer id, String city, String type, String phone, String location,
@@ -58,7 +56,12 @@ public class BoardingHouse {
         this.email = email;
         this.price = price;
         this.street = street;
-        this.image = image;
         this.boardingOwner = boardingOwner; // Set the boarding owner
+    }
+
+    public BoardingHouse(String city, String type, String phone, String location, String description, String email, Integer price, String street) {
+    }
+
+    public BoardingHouse(String city, String type, String phone, String location, String description, String email, Integer price, String street, BoardingOwner boardingOwner) {
     }
 }
