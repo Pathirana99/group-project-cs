@@ -20,16 +20,14 @@ public class LoginUserController {
     JWTAuthenticator jwtAuthenticator;
 
     @PostMapping("/saveLoginUser")
-    public ResponseEntity<Object> saveLoginUser(@RequestBody LoginUserDto loginUserDto, @RequestHeader(name = "Authorization") String authHeader){
-            if (jwtAuthenticator.validateJwtToken(authHeader)) {
+    public ResponseEntity<Object> saveLoginUser(@RequestBody LoginUserDto loginUserDto){
                 ReturnLoginUserDto returnLoginUserDto = service.saveLoginUser(loginUserDto);
                 if (returnLoginUserDto != null) {
                     return new ResponseEntity<>("Register Success", HttpStatus.OK);
                 } else {
                     return new ResponseEntity<>("Already regitered with this Email", HttpStatus.CREATED);
                 }
-            }
-        return new ResponseEntity<>("Invalid Token", HttpStatus.UNAUTHORIZED);
+        //return new ResponseEntity<>("Invalid Token", HttpStatus.UNAUTHORIZED);
     }
 
     @PutMapping("/{id}")

@@ -19,10 +19,15 @@ public class LoginUser {
     private Integer contactNo;
     private String password;
     private String email;
+    private String role;
 
-    public LoginUser(Integer contactNo, String password, String email) {
+    public LoginUser(Integer contactNo, String password, String email, String role) {
         this.contactNo = contactNo;
         this.password = password;
         this.email = email;
+        this.role = role;
+    }
+
+    public LoginUser(Integer id, Integer contactNo, String password, String email) {
     }
 }
