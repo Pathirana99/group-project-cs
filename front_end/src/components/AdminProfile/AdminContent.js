@@ -201,7 +201,7 @@ const AdminContent = ({ activeMenuItem, cardData,setActiveMenuItem}) => {
 
       {activeMenuItem === 'Dashboard' && (
         <>
-        <div className="dashboard-cards" onClick={() => setActiveMenuItem('Manage Boarding Owner')}>
+        <div className="dashboard-cards">
         <div className="dashboard-card" onClick={() => setActiveMenuItem('Manage User')}>
         <div className="card-content">
               <Typography variant="h4" className="card-number">{cardData.totalUsers}</Typography>
@@ -213,8 +213,7 @@ const AdminContent = ({ activeMenuItem, cardData,setActiveMenuItem}) => {
                 />
             </div>
           </div>
-
-          <div className="dashboard-card" onClick={() => setActiveMenuItem('Manage Boarding Places')}>
+          <div className="dashboard-card" onClick={() => setActiveMenuItem('Manage Boarding Owner')}>
             <div className="card-content">
               <Typography variant="h4" className="card-number">{cardData.totalBoardingOwners}</Typography>
               <Typography variant="h4" className="admin-card-label">Total Boarding Owners</Typography>
@@ -227,7 +226,7 @@ const AdminContent = ({ activeMenuItem, cardData,setActiveMenuItem}) => {
             </div>
           </div>
 
-          <div className="dashboard-card">
+          <div className="dashboard-card" onClick={() => setActiveMenuItem('Manage Boarding Places')}>
             <div className="card-content">
               <Typography variant="h4" className="card-number">{cardData.totalBoardingPlaces}</Typography>
               <Typography variant="h4" className="admin-card-label">Total Boarding</Typography>

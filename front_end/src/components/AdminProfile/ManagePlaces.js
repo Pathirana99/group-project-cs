@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Dialog,RadioGroup,FormControlLabel,Radio,Checkbox, DialogTitle,TextField, DialogContent,TableHead, Typography, Table, TableRow, TableCell, TableBody } from '@mui/material';
+import { Button, Dialog,DialogActions,RadioGroup,FormControlLabel,Radio,Checkbox, DialogTitle,TextField, DialogContent,TableHead, Typography, Table, TableRow, TableCell, TableBody } from '@mui/material';
 //import axios from 'axios';
-
-// Common ActionButton Component
-const ActionButton = ({ label, onClick, variant = "contained", style = {} }) => (
-    <Button variant={variant} style={{ margin: '4px', ...style }} onClick={onClick}>
-      {label}
-    </Button>
-  );
 
 const ManagePlaces = () => {
   const [boardingPlaces, setBoardingPlaces] = useState([]); // Data from the backend
@@ -72,7 +65,7 @@ const ManagePlaces = () => {
           id: 2,
           ownerId:5,
           placeName: 'Sunset Villa',
-          location: 'Colombo',
+          city: 'Colombo',
           ownerName: 'Deshan Anurudda',
           rating:5,
           phone: '0718532411',
@@ -253,29 +246,45 @@ const ManagePlaces = () => {
       <Table>
       <TableHead>
           <TableRow>
-            <TableCell>PlaceId</TableCell>
-            <TableCell>Owner</TableCell>
-            <TableCell>City</TableCell>
-            <TableCell>Room Title</TableCell>
-            <TableCell>Capacity</TableCell>
-            <TableCell>Status</TableCell>
-            <TableCell>Action</TableCell>
+            <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'24px'}}>PlaceId</TableCell>
+            <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'24px'}}>Owner</TableCell>
+            <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'24px'}}>City</TableCell>
+            <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'24px'}}>Room Title</TableCell>
+            <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'24px'}}>Capacity</TableCell>
+            <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'24px'}}>Status</TableCell>
+            <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'24px'}}>Action</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {filteredPlaces.map((place) => (
             place.rooms.map((room, index) => (
                 <TableRow key={`${place.id}-${index}`}>
-                  <TableCell>{place.id}</TableCell>
-                  <TableCell>{index === 0 ? highlightText( place.ownerName,searchTerm) : ''}</TableCell>
-                  <TableCell>{highlightText(room.title,searchTerm)}</TableCell>
-                  <TableCell>{highlightText(room.capacity,searchTerm)}</TableCell>
-                  <TableCell>{highlightText(room.status,searchTerm)}</TableCell>
+                  <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'20px'}}>
+                    {index === 0 ?(place.id):''}
+                  </TableCell>
+                  <TableCell  sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'20px'}}>
+                    {index === 0 ? highlightText( place.ownerName,searchTerm) : ''}
+                  </TableCell>
+                  <TableCell  sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'20px'}}>
+                    {index === 0 ? highlightText(place.city,searchTerm) : ''}
+                  </TableCell>
+                  <TableCell  sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'20px'}}>
+                    {highlightText(room.title,searchTerm)}
+                  </TableCell>
+                  <TableCell  sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'20px'}}>
+                    {highlightText(room.capacity,searchTerm)}
+                  </TableCell>
+                  <TableCell  sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'20px'}}>
+                    {highlightText(room.status,searchTerm)}
+                  </TableCell>
                   <TableCell>
                     {index === 0 && (
                       <>
-                        <ActionButton label="More" onClick={() => handleMoreDetails(place)} />
-                        <ActionButton label="Delete" onClick={() => handleDeleteClick(place.id)} variant="outlined" />
+                        <Button variant="contained" onClick={() => handleMoreDetails(place)} sx={{margin:'5px',backgroundColor:'#72d6c9','&:hover': {backgroundColor:'#3DC0B9'}}} >
+                          More </Button>
+                        <Button variant="contained" onClick={() => handleDeleteClick(place.id)} sx={{margin:'5px',backgroundColor:'red','&:hover': {backgroundColor:'#AB3448'}}}>
+                          Delete
+                        </Button>
                       </>
                     )}
                   </TableCell>
@@ -288,7 +297,7 @@ const ManagePlaces = () => {
      {/* Dialog for more details */}
      {selectedPlace && (
         <Dialog open={Boolean(selectedPlace)} onClose={() => setSelectedPlace(null)}>
-          <DialogTitle>{selectedPlace.title} - Details</DialogTitle>
+          <DialogTitle sx={{fontSize:"32px",fontWeight:'600',color:'#3DC0B9',marginBottom:'0',fontFamily:'"Josefin Sans", sans-serif'}}>{selectedPlace.title} - Details</DialogTitle>
           <DialogContent>
             {Object.entries(selectedPlace).map(([key, value]) => {
               if (key === "imageUrls") {
@@ -333,15 +342,24 @@ const ManagePlaces = () => {
 
       {/* Delete Confirmation Dialog */}
       <Dialog open={openDeleteDialog} onClose={handleCancelDelete}>
-        <DialogTitle>Confirm Delete</DialogTitle>
+        <DialogTitle sx={{fontSize:"32px",fontWeight:'600',color:'#3DC0B9',marginBottom:'0',fontFamily:'"Josefin Sans", sans-serif'}}>Confirm Delete</DialogTitle>
         <DialogContent>
           <Typography>Are you sure you want to delete this boarding place?</Typography>
         </DialogContent>
-        <div style={{ padding: '16px' }}>
-          <ActionButton label="Cancel" onClick={handleCancelDelete} variant="outlined" />
-          <ActionButton label="Delete" onClick={handleConfirmDelete} style={{ marginLeft: '8px' }} />
-        </div>
-      </Dialog>
+        <DialogActions>
+          <Button 
+          onClick={handleCancelDelete} 
+          sx={{fontSize:'16px',fontFamily:'"Josefin Sans", sans-serif',color:'black','&:hover': {backgroundColor:'#C8C8C8'}}}
+          >Cancel
+          </Button>
+
+          <Button 
+          onClick={handleConfirmDelete} 
+          sx={{fontSize:'16px',fontFamily:'"Josefin Sans", sans-serif',color:'red','&:hover': {backgroundColor:'#C8C8C8'}}}
+          > Delete
+          </Button>
+          </DialogActions>
+        </Dialog>
 
       {/* Dialog for viewing large image */}
       {selectedImage && (
@@ -355,7 +373,7 @@ const ManagePlaces = () => {
 
      {/* New Place Dialog */}
      <Dialog open={openNewPlaceDialog} onClose={handleCloseNewPlaceDialog}>
-        <DialogTitle>Add New Boarding Place</DialogTitle>
+        <DialogTitle sx={{fontSize:"32px",fontWeight:'600',color:'#3DC0B9',marginBottom:'0',fontFamily:'"Josefin Sans", sans-serif'}}>Add New Boarding Place</DialogTitle>
         <DialogContent>
           <TextField
             name="title"
@@ -460,8 +478,8 @@ const ManagePlaces = () => {
           </div>
         </DialogContent>
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <ActionButton label="Cancel" onClick={handleCloseNewPlaceDialog} />
-          <ActionButton label="Add Place" onClick={handleSubmitNewPlace} />
+          <Button label="Cancel" onClick={handleCloseNewPlaceDialog} />
+          <Button label="Add Place" onClick={handleSubmitNewPlace} />
         </div>
       </Dialog>
     </div>

@@ -33,24 +33,28 @@ const ManageRating = () => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>#</TableCell>
-            <TableCell>PlaceId</TableCell>
-            <TableCell>User</TableCell>
-            <TableCell>Rating</TableCell>
-            <TableCell>Actions</TableCell>
+            <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'24px'}}>#</TableCell>
+            <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'24px'}}>PlaceId</TableCell>
+            <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'24px'}}>User</TableCell>
+            <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'24px'}}>Rating</TableCell>
+            <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'24px'}}>Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {pendingRatings.map((rating, index) => (
             <TableRow key={rating.id}>
-              <TableCell>{index + 1}</TableCell>
-              <TableCell>{rating.placeName}</TableCell>
-              <TableCell>{rating.userName}</TableCell>
-              <TableCell>{rating.score}</TableCell>
-              <TableCell>{rating.review}</TableCell>
+              <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'20px'}}>{index + 1}</TableCell>
+              <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'20px'}}>{rating.placeName}</TableCell>
+              <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'20px'}}>{rating.userName}</TableCell>
+              <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'20px'}}>{rating.score}</TableCell>
+              <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'20px'}}>{rating.review}</TableCell>
               <TableCell>
-                <Button onClick={() => handleApprove(rating.id)}>Approve</Button>
-                <Button onClick={() => handleReject(rating.id)}>Reject</Button>
+                <Button variant="contained" onClick={() => handleApprove(rating.id)} sx={{margin:'5px',backgroundColor:'#72d6c9','&:hover': {backgroundColor:'#3DC0B9'}}}>
+                  Approve
+                </Button>
+                <Button  variant="contained" onClick={() => handleReject(rating.id)} sx={{margin:'5px',backgroundColor:'#72d6c9','&:hover': {backgroundColor:'#3DC0B9'}}}>
+                  Reject
+                </Button>
               </TableCell>
             </TableRow>
           ))}
