@@ -1,0 +1,109 @@
+.userprofile {
+    min-height: 100vh; /* Full viewport height */
+    background: linear-gradient(to bottom, #BBFFFB 0%, #FFFFFF 9%, #FFFFFF 85%, #B1EBE8 100%);
+    display: flex;
+    flex-direction: column;
+    color: black;
+    font-family: "Josefin Sans", sans-serif;
+  }
+  
+  /* Container for sidebar and main content */
+  .userprofile-container {
+    display: flex;
+    width: 90%;
+    max-height: 600px;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-grow: 1;
+    margin-top: 180px;
+  }
+  
+  /* Sidebar styling */
+  .userprofile-sidebar {
+    width: 250px; /* Fixed width for sidebar */
+    background-color: #D0F0F0;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Main content area styling */
+  .userprofile-content {
+    flex-grow: 1; /* Takes up remaining space */
+    background-color: #D0F0F0;
+    padding: 20px;
+    overflow-y: auto; 
+    margin-left: 20px;
+  }
+  /* Menu item styling */
+  .userprofile .sidebar-menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+  }
+  .userprofile .avatar {
+    width: 60px !important;
+    height: 60px !important;
+    background-color: #72d6c9 !important;
+    margin-bottom: 10px;
+    margin: 0 auto;
+   }
+  .sidebar-menu-item.active {
+    background-color: #A0D7D7;
+    border-radius: 5px;
+  }
+  
+  /* Show icon-only sidebar on small screens */
+  @media (max-width: 768px) {
+    
+  
+    .userprofile-sidebar {
+      width: 60px; /* Smaller width for small screens */
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+  
+    /* Hide sidebar text and show icons only */
+    .userprofile .sidebar-menu-item {
+      justify-content: center;
+    }
+  
+    .userprofile .sidebar-menu-item .menu-text {
+      display: none; /* Hide text on small screens */
+    }
+  
+    .userprofile .sidebar-menu-item .menu-icon {
+      font-size: 24px; /* Increase icon size */
+    }
+    .userprofile .avatar{
+        display: none !important;
+    }
+    .userprofile .sidebar-title{
+        display:none;
+    }
+    .userprofile-container {
+        margin-top: 100px;
+    }
+  }
+/* Stack sidebar on top for mobile view */
+@media (max-width: 600px) {
+    .userprofile-container {
+      flex-direction: column;
+      margin-top: 50px;
+      max-height:100vh;
+    }
+  
+    .userprofile-sidebar {
+      width: 100%;
+      position: relative;
+    }
+  
+    .userprofile-content {
+      margin-left: 0;
+    }
+  
+    .sidebar-mobile {
+      display: block;
+      background-color: #D0F0F0;
+    }
+  }
