@@ -21,15 +21,6 @@ public class BoardingHouseDto {
     private String image;
     private String email;
 
-    public BoardingHouseDto(Integer id, String title, String type, String phone, String location, String description, String city, String street, Integer price) {
-    }
-
-    public BoardingHouseDto(Integer id, String city, String type, String phone, String location, String description, String email, String city1, Integer price, String street) {
-    }
-
-    public BoardingHouseDto(Integer id, String city, String type, String phone, String location, String description, String email, Integer price, String street) {
-    }
-
     public BoardingHouseDto(Integer id, String city, String type, String phone, String location, String description, String email, Integer price, String street, Object image) {
     }
     public BoardingHouseDto(Integer id, String city, String type, String phone, String location,

@@ -1,7 +1,6 @@
 package com.example.testing.controller;
 
 import com.example.testing.dto.BoardingHouseDto;
-import com.example.testing.entity.BoardingHouse;
 import com.example.testing.service.BoardingHouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

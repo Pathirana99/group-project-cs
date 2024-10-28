@@ -8,7 +8,6 @@ import com.example.testing.repo.BoardingOwnerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -55,7 +54,6 @@ public class BoardingHouseService {
         if (existingBoardingHouse.isPresent()) {
             BoardingHouse boardingHouse = existingBoardingHouse.get();
 
-            // Update fields
             boardingHouse.setCity(boardingHouseDto.getCity());
             boardingHouse.setType(boardingHouseDto.getType());
             boardingHouse.setPhone(boardingHouseDto.getPhone());
@@ -66,10 +64,8 @@ public class BoardingHouseService {
             boardingHouse.setStreet(boardingHouseDto.getStreet());
             boardingHouse.setImage(boardingHouseDto.getImage());
 
-            // Save updated BoardingHouse entity
             BoardingHouse updatedBoardingHouse = boardingHouseRepo.save(boardingHouse);
 
-            // Convert the updated entity to DTO
             return new BoardingHouseDto(
                     updatedBoardingHouse.getId(),
                     updatedBoardingHouse.getCity(),
@@ -83,7 +79,7 @@ public class BoardingHouseService {
                     String.valueOf(updatedBoardingHouse.getImage())
             );
         }
-        return null; // Return null if not found
+        return null;
     }
 /*
     public List<BoardingHouseDto> getAllBoarding() {
