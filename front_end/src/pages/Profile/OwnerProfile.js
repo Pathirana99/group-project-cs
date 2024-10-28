@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import NavigationBar from '../../components/NavigationBar';
+import Footer from '../../components/Footer';
 import OwnerContent from '../../components/OwnerProfile/OwnerContent';
 import {Avatar,Typography} from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -78,6 +79,9 @@ const OwnerProfile = () => {
           setActiveMenuItem={setActiveMenuItem} 
         />
       </div>
+    </div>
+    <div className='footer'>
+    <Footer/>
     </div>
     </div>
   );

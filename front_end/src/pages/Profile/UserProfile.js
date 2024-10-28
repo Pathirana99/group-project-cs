@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React,{useState} from 'react';
 import NavigationBar from '../../components/NavigationBar';
-import { Avatar, Typography } from '@mui/material';
+import Footer from '../../components/Footer';
+import UserContent from '../../components/UserProfile/UserContent';
+import {Avatar,Typography} from '@mui/material';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
@@ -14,6 +16,7 @@ const UserProfile = () => {
   const toggleSidebar = () => {
     setSidebarVisible(!isSidebarVisible);
   };
+
 
   return (
     <div className="userprofile">
@@ -31,17 +34,11 @@ const UserProfile = () => {
       <div className={`userprofile-container ${isSidebarVisible ? 'show-sidebar' : ''}`}>
         {/* Sidebar Section */}
         <div className={`userprofile-sidebar ${isSidebarVisible ? 'show-sidebar' : ''}`}>
-          <div className="sidebar-header">
-            <Avatar className="avatar" />
-            <Typography 
-              variant="h6" 
-              className="sidebar-title" 
-              sx={{ margin: '2px', fontFamily: '"Josefin Sans", sans-serif' }}
-            >
-              User
-            </Typography>
-          </div>
-          <ul className="sidebar-menu">
+        <div className="sidebar-header">
+          <Avatar className="avatar" />
+          <Typography variant="h6" className="sidebar-title"sx={{margin:'2px',fontFamily:'"Josefin Sans", sans-serif'}} >User</Typography>
+        </div>
+        <ul className="sidebar-menu">
             <li
               className={`sidebar-menu-item ${activeMenuItem === 'Profile' ? 'active' : ''}`}
               onClick={() => setActiveMenuItem('Profile')}
@@ -64,16 +61,22 @@ const UserProfile = () => {
               <span className="menu-text">Ratings</span>
             </li>
           </ul>
-        </div>
+
+      </div>
 
         {/* Main Content Section */}
         <div className="userprofile-content">
           {/* Content can go here */}
-          
-        </div>
+          <UserContent 
+          activeMenuItem={activeMenuItem} 
+          setActiveMenuItem={setActiveMenuItem} 
+        />
       </div>
     </div>
+    <div className='footer'>
+    <Footer/>
+    </div>
+  </div>
   );
 };
-
 export default UserProfile;
