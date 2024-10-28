@@ -75,8 +75,8 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
     http
             .csrf(csrf -> csrf.disable()) // Disable CSRF for simplicity, consider enabling in production
             .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/SignInUser/SignIn").permitAll()
-                    .requestMatchers("/loginuser/saveLoginUser").hasRole("ADMIN")
+                    .requestMatchers("/SignInUser/SignIn","/boardingHouse/saveBoarding","/loginuser/saveLoginUser").permitAll()
+                   // .requestMatchers("/loginuser/saveLoginUser").hasRole("ADMIN")
                    // .requestMatchers("/loginuser/saveLoginUser").hasRole("USER")// Allow unauthenticated access to this endpoint
                     .anyRequest().authenticated() // All other requests require authentication
             )

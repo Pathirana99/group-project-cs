@@ -59,9 +59,6 @@ public class BoardingHouse {
         this.boardingOwner = boardingOwner; // Set the boarding owner
     }
 
-    public BoardingHouse(String city, String type, String phone, String location, String description, String email, Integer price, String street) {
-    }
-
     public BoardingHouse(String city, String type, String phone, String location, String description, String email, Integer price, String street, BoardingOwner boardingOwner) {
     }
 }
