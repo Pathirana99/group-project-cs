@@ -87,3 +87,23 @@
         margin-top: 100px;
     }
   }
+  /* Stack sidebar on top for mobile view */
+@media (max-width: 600px) {
+  .ownerprofile-container {
+    flex-direction: column;
+    margin-top: 50px;
+    max-height:100vh;
+  }
+  .ownerprofile-sidebar {
+    width: 100%;
+    position: relative;
+  }
+
+  .ownerprofile-content {
+    margin-left: 0;
+  }
+  .sidebar-mobile {
+    display: block;
+    background-color: #D0F0F0;
+  }
+}
