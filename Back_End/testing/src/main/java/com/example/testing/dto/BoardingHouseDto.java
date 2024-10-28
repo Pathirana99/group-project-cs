@@ -17,23 +17,33 @@ public class BoardingHouseDto {
     private String description;
     private String city;
     private String street;
-    private Integer price;
+    private Double price;
     private String image;
     private String email;
-    private Integer ownerid;
 
-    public BoardingHouseDto(String email, Integer id) {
-    }
-
-    public BoardingHouseDto(Integer id, String city, String type,
-                            String phone, String location, String description,
-                            String email, Integer price, String street, String image) {
+    public BoardingHouseDto(Integer id, String title, String type, String phone, String location, String description, String city, String street, Integer price) {
     }
 
     public BoardingHouseDto(Integer id, String city, String type, String phone, String location, String description, String email, String city1, Integer price, String street) {
-
     }
 
     public BoardingHouseDto(Integer id, String city, String type, String phone, String location, String description, String email, Integer price, String street) {
     }
+
+    public BoardingHouseDto(Integer id, String city, String type, String phone, String location, String description, String email, Integer price, String street, Object image) {
+    }
+    public BoardingHouseDto(Integer id, String city, String type, String phone, String location,
+                            String description, String email, Double price, String street, String image) {
+        this.id = id;
+        this.city = city;
+        this.type = type;
+        this.phone = phone;
+        this.location = location;
+        this.description = description;
+        this.email = email;
+        this.price = price;
+        this.street = street;
+        this.image = image;
+    }
+
 }

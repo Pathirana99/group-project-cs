@@ -16,28 +16,28 @@ public class BoardingHouseController {
     @Autowired
     BoardingHouseService service;
 
-    @PostMapping("/saveBoarding")
-    public ResponseEntity<Object> saveBoarding(@RequestBody BoardingHouseDto boardingHouseDto){
-        BoardingHouseDto save = service.saveBoarding(boardingHouseDto);
-        if (save != null) {
-            return new ResponseEntity<>("Register Success", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Already regitered with this Email", HttpStatus.CREATED);
-        }
+    @PostMapping("/{ownerId}/houses")
+    public BoardingHouseDto createBoardingHouse(@PathVariable Integer ownerId, @RequestBody BoardingHouseDto boardingHouseDto) {
+        return service.saveBoardingHouse(boardingHouseDto, ownerId);
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<Object> updateBoarding(@PathVariable Integer id, @RequestBody BoardingHouseDto boardingHouseDto){
-        BoardingHouseDto update = service.updateBoarding(id, boardingHouseDto);
-        if(update != null) {
-            return new ResponseEntity<>(boardingHouseDto, HttpStatus.OK);
-        }
-        return new ResponseEntity<>("not found", HttpStatus.NOT_FOUND);
+    @GetMapping("/city/{city}")
+    public List<BoardingHouseDto> getBoardingHousesByCity(@PathVariable String city) {
+        return service.getBoardingHousesByCity(city);
     }
     @GetMapping("/getAllBoarding")
-    public ResponseEntity<List<BoardingHouseDto>> getAllBoarding(){
-        List<BoardingHouseDto> allBoardign = service.getAllBoarding();
-        return new ResponseEntity<>(allBoardign, HttpStatus.OK);
+    public List<BoardingHouseDto> getAllBoardingHouses() {
+        return service.getAllBoardingHouses();
     }
+    @PutMapping("/{id}/updateBoarding")
+    public ResponseEntity<Object> updateBoarding(@PathVariable Integer id, @RequestBody BoardingHouseDto boardingHouseDto) {
+        BoardingHouseDto updatedBoardingHouseDto = service.updateBoarding(id, boardingHouseDto);
+
+        if (updatedBoardingHouseDto != null) {
+            return new ResponseEntity<>(updatedBoardingHouseDto, HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Boarding House not found", HttpStatus.NOT_FOUND);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteBoarding(@PathVariable Integer id){
         int i = service.deleteBoarding(id);
@@ -45,9 +45,5 @@ public class BoardingHouseController {
             return new ResponseEntity<>("deleted", HttpStatus.OK);
         }
         return new ResponseEntity<>("not found", HttpStatus.NOT_FOUND);
-    }
-    @GetMapping("/location")
-    public List<BoardingHouse> filterByCity(@RequestParam String city){
-        return service.filterByCity(city);
     }
 }
