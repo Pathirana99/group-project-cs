@@ -1,0 +1,60 @@
+/* OwnerPostedAds.css */
+
+.owner-posted-ads {
+    padding: 20px;
+    font-family: "Josefin Sans", sans-serif;
+  }
+  
+  .owner-title {
+    margin-bottom: 20px;
+    font-family: "Josefin Sans", sans-serif;
+  }
+  
+  .owner-posted-ads .places-container {
+    display: flex;
+    
+  }
+  
+  .owner-posted-ads .place-card {
+    display: flex;
+    margin-bottom: 20px;
+    gap: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    min-height: 220px; /* Adjust as needed */
+    align-items: center;
+  }
+  
+  .owner-posted-ads .place-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover; /* Ensures images cover the area without distortion */
+  }
+  
+  .owner-posted-ads .place-content {
+    flex: 1;
+    min-height: 150px; /* Ensures content area has a minimum height */
+    padding: 16px; /* Add padding for better spacing */
+  }
+  
+  .owner-posted-ads .place-title {
+    font-weight: bold; /* Emphasizes the title */
+    font-family: "Josefin Sans", sans-serif;
+  }
+  
+  .owner-posted-ads .place-price {
+    margin: 8px 0; /* Adds spacing around the price */
+    font-family: "Josefin Sans", sans-serif;
+  }
+  
+  .place-description {
+    margin: 10px 0; /* Adds spacing around the description */
+    font-family: "Josefin Sans", sans-serif;
+  }
+  
+  .owner-posted-adsc.place-icons {
+    margin-top: 10px; /* Adds spacing above the icons */
+    display: flex;
+    align-items: center; /* Aligns icons vertically */
+  }

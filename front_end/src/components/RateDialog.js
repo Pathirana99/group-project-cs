@@ -13,6 +13,7 @@ const RateDialog = ({ open, onClose, onSubmit }) => {
       stayed: stayStatus,
       fullname: fullname,
     };
+    console.log(ratingData); 
     onSubmit(ratingData); // Pass the data back to the parent component
     onClose(); // Close the dialog
   };

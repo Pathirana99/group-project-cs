@@ -1,0 +1,89 @@
+/* Overall container with full screen height */
+.ownerprofile {
+    min-height: 100vh; /* Full viewport height */
+    background: linear-gradient(to bottom, #BBFFFB 0%, #FFFFFF 9%, #FFFFFF 85%, #B1EBE8 100%);
+    display: flex;
+    flex-direction: column;
+    color: black;
+    font-family: "Josefin Sans", sans-serif;
+  }
+  
+  /* Container for sidebar and main content */
+  .ownerprofile-container {
+    display: flex;
+    width: 90%;
+    max-height: 600px;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-grow: 1;
+    margin-top: 150px;
+  }
+  
+  /* Sidebar styling */
+  .ownerprofile-sidebar {
+    width: 250px; /* Fixed width for sidebar */
+    background-color: #D0F0F0;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Main content area styling */
+  .ownerprofile-content {
+    flex-grow: 1; /* Takes up remaining space */
+    background-color: #dff3f2;
+    padding: 20px;
+    overflow-y: auto; 
+    margin-left: 20px;
+  }
+  /* Menu item styling */
+  .ownerprofile .sidebar-menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+   .ownerprofile .avatar {
+    width: 60px !important;
+    height: 60px !important;
+    background-color: #72d6c9 !important;
+    margin-bottom: 10px;
+    margin: 0 auto;
+   }
+
+  .sidebar-menu-item.active {
+    background-color: #A0D7D7;
+    border-radius: 5px;
+  }
+  
+  /* Show icon-only sidebar on small screens */
+  @media (max-width: 768px) {
+    
+  
+    .ownerprofile-sidebar {
+      width: 60px; /* Smaller width for small screens */
+      padding: 10px;
+    }
+  
+    /* Hide sidebar text and show icons only */
+    .sidebar-menu-item {
+      justify-content: center;
+    }
+  
+    .ownerprofile .sidebar-menu-item .menu-text {
+      display: none; /* Hide text on small screens */
+    }
+  
+    .ownerprofile .sidebar-menu-item .menu-icon {
+      font-size: 24px; /* Increase icon size */
+    }
+    .ownerprofile .avatar{
+        display: none !important;
+    }
+    .ownerprofile .sidebar-title{
+        display:none;
+    }
+    .ownerprofile-container {
+        margin-top: 100px;
+    }
+  }

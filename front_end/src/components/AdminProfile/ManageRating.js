@@ -36,6 +36,7 @@ const ManageRating = () => {
             <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'24px'}}>#</TableCell>
             <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'24px'}}>PlaceId</TableCell>
             <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'24px'}}>User</TableCell>
+            <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'24px'}}>Stayed</TableCell>
             <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'24px'}}>Rating</TableCell>
             <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'24px'}}>Actions</TableCell>
           </TableRow>
@@ -44,10 +45,10 @@ const ManageRating = () => {
           {pendingRatings.map((rating, index) => (
             <TableRow key={rating.id}>
               <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'20px'}}>{index + 1}</TableCell>
-              <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'20px'}}>{rating.placeName}</TableCell>
+              <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'20px'}}>{rating.placeid}</TableCell>
               <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'20px'}}>{rating.userName}</TableCell>
-              <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'20px'}}>{rating.score}</TableCell>
-              <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'20px'}}>{rating.review}</TableCell>
+              <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'20px'}}>{rating.stayed}</TableCell>
+              <TableCell sx={{fontFamily:'"Josefin Sans", sans-serif',fontSize:'20px'}}>{rating.rating}</TableCell>
               <TableCell>
                 <Button variant="contained" onClick={() => handleApprove(rating.id)} sx={{margin:'5px',backgroundColor:'#72d6c9','&:hover': {backgroundColor:'#3DC0B9'}}}>
                   Approve
