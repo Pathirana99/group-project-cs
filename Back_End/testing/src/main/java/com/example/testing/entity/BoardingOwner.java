@@ -23,6 +23,10 @@ public class BoardingOwner {
     @OneToMany(mappedBy = "boardingOwner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BoardingHouse> boardingHouses;
 
+    @OneToOne
+    @JoinColumn(name = "login_user_id")
+    private LoginUser loginUser;
+
     public BoardingOwner(String name, String email, String password) {
         this.name = name;
         this.email = email;

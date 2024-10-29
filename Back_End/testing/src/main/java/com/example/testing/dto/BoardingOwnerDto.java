@@ -15,6 +15,7 @@ public class BoardingOwnerDto {
     private String name;
     private String email;
     private String password;
+    private Integer loginUserId;
     private List<BoardingHouseDto> boardingHouses;
 
     public Integer getId() {
