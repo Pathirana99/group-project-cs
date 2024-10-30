@@ -6,8 +6,16 @@ import com.example.testing.entity.BoardingOwner;
 import com.example.testing.repo.BoardingHouseRepo;
 import com.example.testing.repo.BoardingOwnerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -81,19 +89,6 @@ public class BoardingHouseService {
         }
         return null;
     }
-/*
-    public List<BoardingHouseDto> getAllBoarding() {
-        List<BoardingHouse> all = boardingHouseRepo.findAll();
-        List<BoardingHouseDto> boardingHouseDtos = new ArrayList<>();
-
-        for (BoardingHouse boardingHouse : all) {
-            boardingHouseDtos.add(new BoardingHouseDto(boardingHouse.getId(), boardingHouse.getCity(), boardingHouse.getType(), boardingHouse.getPhone(), boardingHouse.getLocation(), boardingHouse.getDescription(), boardingHouse.getEmail(),boardingHouse.getPrice(), boardingHouse.getStreet()));
-        }
-        return boardingHouseDtos;
-    }
-
-
- */
     public int deleteBoarding(Integer id) {
         if (boardingHouseRepo.existsById(id)) {
             boardingHouseRepo.deleteById(id);
@@ -114,5 +109,46 @@ public class BoardingHouseService {
         dto.setPrice(boardingHouse.getPrice());
         dto.setEmail(boardingHouse.getEmail());
         return dto;
+    }
+    private final String uploadDirectory = "D:/final project/group project/group-project-cs/Back_End/testing/src/main/resources/uploads/";
+
+    // Method to save uploaded images
+    public void saveImages(Integer boardingHouseId, MultipartFile[] files) throws IOException {
+        Path boardingHousePath = Paths.get(uploadDirectory + boardingHouseId);
+        // Create directory if it doesn't exist
+        if (!Files.exists(boardingHousePath)) {
+            Files.createDirectories(boardingHousePath);
+        }
+
+        for (MultipartFile file : files) {
+            Path filePath = boardingHousePath.resolve(file.getOriginalFilename());
+            file.transferTo(filePath);
+        }
+    }
+
+    // Method to get all image paths for a boarding house
+    public List<Path> getImages(Integer boardingHouseId) throws IOException {
+        Path boardingHousePath = Paths.get(uploadDirectory + boardingHouseId);
+        List<Path> imagePaths = new ArrayList<>();
+
+        if (Files.exists(boardingHousePath) && Files.isDirectory(boardingHousePath)) {
+            DirectoryStream<Path> directoryStream = Files.newDirectoryStream(boardingHousePath);
+            for (Path path : directoryStream) {
+                imagePaths.add(path);
+            }
+        }
+        return imagePaths;
+    }
+
+    // Method to get an image resource by name
+    public FileSystemResource getImageResource(Integer boardingHouseId, String imageName) throws IOException {
+        Path imagePath = Paths.get(uploadDirectory + boardingHouseId + "/" + imageName);
+
+        // Check if the image file exists and return as resource
+        if (Files.exists(imagePath)) {
+            return new FileSystemResource(imagePath.toFile());
+        } else {
+            return null; // Return null if file doesn't exist
+        }
     }
 }
