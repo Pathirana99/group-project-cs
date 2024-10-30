@@ -21,10 +21,18 @@ public class BoardingOwnerController {
     BoardingHouseService houseService;
 
 
-    @PostMapping("/saveOwnerWithHousesAndRooms")
-    public ResponseEntity<BoardingOwner> saveOwnerWithHousesAndRooms(@RequestBody BoardingOwnerDto ownerDto) {
-        BoardingOwner savedOwner = service.saveOwnerWithHousesAndRooms(ownerDto);
-        return new ResponseEntity<>(savedOwner, HttpStatus.CREATED);
+    @PostMapping("/saveOwnerWithHousesAndRooms/{loginUserId}")
+    public ResponseEntity<?> saveOwnerWithHousesAndRooms(
+            @PathVariable Integer loginUserId,
+            @RequestBody BoardingOwnerDto ownerDto) {
+        try {
+            BoardingOwner savedOwner = service.saveOwnerWithHousesAndRooms(loginUserId, ownerDto);
+            return new ResponseEntity<>(savedOwner, HttpStatus.CREATED);
+        } catch (Exception e) {
+            // Log the error message and stack trace
+            e.printStackTrace();
+            return new ResponseEntity<>("Error occurred: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
     @GetMapping("/{ownerId}/houses")
     public List<BoardingHouseDto> getBoardingHousesByOwner(@PathVariable Integer ownerId) {

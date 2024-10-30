@@ -11,6 +11,7 @@ import com.example.testing.repo.BoardingHouseRepo;
 import com.example.testing.repo.BoardingOwnerRepo;
 import com.example.testing.repo.LoginUserRepo;
 import com.example.testing.repo.RoomRepo;
+import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,16 +33,21 @@ public class BoardingOwnerService {
     RoomRepo roomRepo;
 
     @Transactional
-    public BoardingOwner saveOwnerWithHousesAndRooms(BoardingOwnerDto ownerDto) {
-        // Step 1: Save BoardingOwner
+    public BoardingOwner saveOwnerWithHousesAndRooms(Integer loginUserId, BoardingOwnerDto ownerDto) {
+        // Step 1: Fetch LoginUser by ID
+        LoginUser loginUser = loginUserRepo.findById(loginUserId)
+                .orElseThrow(() -> new ResourceNotFoundException("LoginUser not found with ID: " + loginUserId));
+
+        // Step 2: Save BoardingOwner and associate with LoginUser
         BoardingOwner boardingOwner = new BoardingOwner();
         boardingOwner.setName(ownerDto.getName());
         boardingOwner.setEmail(ownerDto.getEmail());
         boardingOwner.setPassword(ownerDto.getPassword());
+        boardingOwner.setLoginUser(loginUser); // Assuming you have a setLoginUser method
 
         BoardingOwner savedOwner = boardingOwnerRepo.save(boardingOwner);
 
-        // Step 2: Save BoardingHouses and associate with BoardingOwner
+        // Step 3: Save BoardingHouses and associate with BoardingOwner
         for (BoardingHouseDto houseDto : ownerDto.getBoardingHouses()) {
             BoardingHouse boardingHouse = new BoardingHouse();
             boardingHouse.setTitle(houseDto.getTitle());
@@ -57,7 +63,7 @@ public class BoardingOwnerService {
 
             BoardingHouse savedHouse = boardingHouseRepo.save(boardingHouse);
 
-            // Step 3: Save Rooms and associate with BoardingHouse
+            // Step 4: Save Rooms and associate with BoardingHouse
             for (RoomDto roomDto : houseDto.getRooms()) {
                 Room room = new Room();
                 room.setTitle(roomDto.getTitle());
@@ -68,10 +74,7 @@ public class BoardingOwnerService {
                 roomRepo.save(room);
             }
         }
-
-        // Fetch the owner with the associated boarding houses and rooms to return
-        return boardingOwnerRepo.findById(savedOwner.getId())
-                .orElseThrow(() -> new RuntimeException("Error retrieving saved owner with relationships"));
+        return savedOwner;
     }
     public List<BoardingHouseDto> getBoardingHousesByOwner(Integer ownerId) {
         List<BoardingHouse> boardingHouses = boardingHouseRepo.findByBoardingOwnerId(ownerId);
