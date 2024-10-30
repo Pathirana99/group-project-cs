@@ -20,10 +20,11 @@ public class BoardingOwner {
     private String email;
     private String password;
 
-    @OneToMany(mappedBy = "boardingOwner", cascade = CascadeType.ALL, orphanRemoval = true)
+
+    @OneToMany(mappedBy = "boardingOwner", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<BoardingHouse> boardingHouses;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "login_user_id")
     private LoginUser loginUser;
 

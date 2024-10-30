@@ -80,11 +80,13 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
                     .requestMatchers("/SignInUser/SignIn",
                             "/boardingHouse/saveBoarding",
                             "/loginuser/saveLoginUser",
-                            "/owner/saveOwner",
+                            "/owner/saveOwnerWithHousesAndRooms",
                             "/boardingHouse/{ownerId}/houses",
                             "/owner/{ownerId}/houses",
                             "/boardingHouse/getAllBoarding",
-                            "/boardingHouse/{id}/updateBoarding").permitAll()
+                            "/boardingHouse/{id}/updateBoarding",
+                            "/rooms/{boardingHouseId}/room",
+                            "/rooms/getRooms").permitAll()
                     //.requestMatchers("/boardingHouse/city/{city}").hasRole("USER")
                     .requestMatchers("/boardingHouse/city/{city}").hasRole("OWNER")
                    //.requestMatchers("/boardingHouse/{id}/updateBoarding").permitAll()
