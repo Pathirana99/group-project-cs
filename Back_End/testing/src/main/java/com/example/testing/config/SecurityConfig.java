@@ -24,9 +24,8 @@ import org.springframework.security.web.authentication.WebAuthenticationDetails;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    @Autowired
+
     private final JwtFilter jwtFilter;
-    @Autowired
     private final SignInService signInService;
 
     public SecurityConfig(JwtFilter jwtFilter, SignInService signInService) {
@@ -80,7 +79,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
                     .requestMatchers("/SignInUser/SignIn",
                             "/boardingHouse/saveBoarding",
                             "/loginuser/saveLoginUser",
-                            "/owner/saveOwnerWithHousesAndRooms",
+                            "/saveOwnerWithHousesAndRooms/{loginUserId}",
                             "/boardingHouse/{ownerId}/houses",
                             "/owner/{ownerId}/houses",
                             "/boardingHouse/getAllBoarding",

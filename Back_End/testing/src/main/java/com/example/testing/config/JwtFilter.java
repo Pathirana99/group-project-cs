@@ -21,7 +21,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Autowired
     JwtUtill jwtUtil;
-
+@Autowired
     private SignInService signInService;
 
     public JwtFilter(JwtUtill jwtUtil) {
