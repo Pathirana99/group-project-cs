@@ -400,6 +400,9 @@ const PostAdd = () => {
                 name="latitude"
                 value={formData.latitude}
                 onChange={handleChange}
+                error={!!errors.university}
+                helperText={errors.university}
+                required
                 fullWidth
                 disabled
               />
@@ -408,6 +411,9 @@ const PostAdd = () => {
                 name="longitude"
                 value={formData.longitude}
                 onChange={handleChange}
+                error={!!errors.university}
+                helperText={errors.university}
+                required
                 fullWidth
                 disabled
                 style={{ marginTop: '16px' }}

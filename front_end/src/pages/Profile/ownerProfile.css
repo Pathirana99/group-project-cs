@@ -12,7 +12,6 @@
   .ownerprofile-container {
     display: flex;
     width: 90%;
-    max-height: 600px;
     max-width: 1200px;
     margin: 0 auto;
     flex-grow: 1;
@@ -54,6 +53,9 @@
   .sidebar-menu-item.active {
     background-color: #A0D7D7;
     border-radius: 5px;
+  }
+  .ownerprofile .footer{
+    margin-top: 100px;
   }
   
   /* Show icon-only sidebar on small screens */
