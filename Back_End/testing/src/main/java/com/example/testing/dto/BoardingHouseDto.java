@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -17,16 +19,25 @@ public class BoardingHouseDto {
     private String description;
     private String city;
     private String street;
-    private Integer price;
+    private Double price;
     private String image;
-
     private String email;
+    private List<RoomDto> rooms;
 
-    public BoardingHouseDto(String email, Integer id) {
+    public BoardingHouseDto(Integer id, String city, String type, String phone, String location, String description, String email, Integer price, String street, Object image) {
+    }
+    public BoardingHouseDto(Integer id, String city, String type, String phone, String location,
+                            String description, String email, Double price, String street, String image) {
+        this.id = id;
+        this.city = city;
+        this.type = type;
+        this.phone = phone;
+        this.location = location;
+        this.description = description;
+        this.email = email;
+        this.price = price;
+        this.street = street;
+        this.image = image;
     }
 
-    public BoardingHouseDto(Integer id, String city, String type,
-                            String phone, String location, String description,
-                            String email, Integer price, String street, String image) {
-    }
 }

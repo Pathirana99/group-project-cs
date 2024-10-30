@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface SigninRepo extends JpaRepository<LoginUser, Integer> {
     Optional<LoginUser> getLoginUserByEmail(String email);
+
+    LoginUser findByEmail(String email);
 }

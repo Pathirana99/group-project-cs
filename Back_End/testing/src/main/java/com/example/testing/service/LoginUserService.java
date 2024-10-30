@@ -2,15 +2,19 @@ package com.example.testing.service;
 
 import com.example.testing.dto.LoginUserDto;
 import com.example.testing.dto.ReturnLoginUserDto;
-import com.example.testing.dto.SignInDto;
 import com.example.testing.entity.LoginUser;
 import com.example.testing.repo.LoginUserRepo;
 import com.example.testing.utill.SignInMail;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -20,21 +24,25 @@ public class LoginUserService {
     LoginUserRepo loginUserRepo;
     @Autowired
     SignInMail signInMail;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
-    public ReturnLoginUserDto saveLoginUser(LoginUserDto loginUserDto){
-        String encodedPassword = Base64.getEncoder().encodeToString(loginUserDto.getPassword().getBytes());
+    public ReturnLoginUserDto saveLoginUser(LoginUserDto loginUserDto) {
+        String encodedPassword = passwordEncoder.encode(loginUserDto.getPassword());
 
-        if(loginUserRepo.existsLoginUserByEmail(loginUserDto.getEmail())) {
+        if (loginUserRepo.existsLoginUserByEmail(loginUserDto.getEmail())) {
             return null;
         }
-        LoginUser save = loginUserRepo.save(new LoginUser(loginUserDto.getContactNo(), encodedPassword, loginUserDto.getEmail()));
+
+        LoginUser save = loginUserRepo.save(
+                new LoginUser(loginUserDto.getContactNo(),encodedPassword,loginUserDto.getEmail(),loginUserDto.getRole()));
         signInMail.sendEmail(loginUserDto);
         return new ReturnLoginUserDto(save.getEmail(), save.getId());
     }
     public LoginUserDto updateLoginUser(Integer id, LoginUserDto loginUserDto){
         if(loginUserRepo.existsById(id)){
             LoginUser update = loginUserRepo.save(new LoginUser(id, loginUserDto.getContactNo(), loginUserDto.getPassword(), loginUserDto.getEmail()));
-            return new LoginUserDto(update.getId(), update.getContactNo(), update.getPassword(), update.getEmail());
+            return new LoginUserDto(update.getId(), update.getContactNo(), update.getPassword(), update.getEmail(), update.getRole());
         }
         return null;
     }
@@ -43,7 +51,7 @@ public class LoginUserService {
 
         List<LoginUserDto> loginUserDtos = new ArrayList<>();
         for(LoginUser loginUser : all){
-            loginUserDtos.add(new LoginUserDto(loginUser.getId(), loginUser.getContactNo(), loginUser.getPassword(), loginUser.getEmail()));
+            loginUserDtos.add(new LoginUserDto(loginUser.getId(), loginUser.getContactNo(), loginUser.getPassword(), loginUser.getEmail(), loginUser.getRole()));
         }
         return loginUserDtos;
     }

@@ -13,6 +13,7 @@ import java.util.Date;
 @Component
 
 public class JWTAuthenticator {
+    /*
     private final String jwtSecret = "5VQX/LvxKH1AKIl5ztx4072LjwNozi1hBG6Ul/1RVjA=";
     private final int jwtExpirationMs = 86400000;
 
@@ -43,5 +44,7 @@ public class JWTAuthenticator {
         return false;
 
     }
+
+     */
 }
 

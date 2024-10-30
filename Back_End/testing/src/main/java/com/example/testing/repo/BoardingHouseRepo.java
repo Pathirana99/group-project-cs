@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface BoardingHouseRepo extends JpaRepository<BoardingHouse, Integer> {
     boolean existsByEmail(String email);
+    List<BoardingHouse> findByBoardingOwnerId(Integer ownerId);
     List<BoardingHouse> findByCity(String city);
 }

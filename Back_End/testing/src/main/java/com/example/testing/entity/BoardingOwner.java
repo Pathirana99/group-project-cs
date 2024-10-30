@@ -20,8 +20,13 @@ public class BoardingOwner {
     private String email;
     private String password;
 
-    @OneToMany(mappedBy = "boardingOwner", cascade = CascadeType.ALL, orphanRemoval = true)
+
+    @OneToMany(mappedBy = "boardingOwner", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<BoardingHouse> boardingHouses;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "login_user_id")
+    private LoginUser loginUser;
 
     public BoardingOwner(String name, String email, String password) {
         this.name = name;
@@ -36,5 +41,45 @@ public class BoardingOwner {
     public void removeBoardingHouse(BoardingHouse boardingHouse) {
         boardingHouses.remove(boardingHouse);
         boardingHouse.setBoardingOwner(null);
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<BoardingHouse> getBoardingHouses() {
+        return boardingHouses;
+    }
+
+    public void setBoardingHouses(List<BoardingHouse> boardingHouses) {
+        this.boardingHouses = boardingHouses;
     }
 }
