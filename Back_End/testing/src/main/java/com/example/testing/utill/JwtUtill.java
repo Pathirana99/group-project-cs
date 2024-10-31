@@ -23,31 +23,30 @@ public class JwtUtill {
         byte[] keyBytes = SECRET_KEY.getBytes();
         return new SecretKeySpec(keyBytes, "HmacSHA256");
     }
-    // Secret key for JWT token, ensuring it's at least 256 bits
+
     private final SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
-    // Extract email from token
     public String extractEmail(String token) {
         return extractClaim(token, claims -> claims.get("email", String.class));
     }
 
-    // Extract role from token
     public String extractRole(String token) {
         return extractClaim(token, claims -> claims.get("role", String.class));
     }
 
-    // Extract expiration date from token
+    public Integer extractUserId(String token) {
+        return extractClaim(token, claims -> claims.get("userId", Integer.class));
+    }
+
     public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    // Extract a specific claim from token
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
-    // Extract all claims from token
     private Claims extractAllClaims(String token) {
         Key key = JwtUtill.getSigningKey();
         return Jwts.parser()
@@ -57,30 +56,28 @@ public class JwtUtill {
                 .getBody();
     }
 
-    // Check if token is expired
     private Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
-    public String generateToken(UserDetails userDetails, String email, String role) {
-       // String userRole = (role != null) ? role.toUpperCase() : "DEFAULT_ROLE";
+
+    public String generateToken(UserDetails userDetails, String email, String role, Integer userId) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("email", email);
         claims.put("role", role);
-        return createToken(claims, userDetails.getPassword());
+        claims.put("userId", userId); // Add LoginUser ID as a claim
+        return createToken(claims, userDetails.getUsername());
     }
 
-    // Create token with claims and subject
     private String createToken(Map<String, Object> claims, String subject) {
         return Jwts.builder()
                 .setClaims(claims)
-                .setSubject(subject) // Usually the username
+                .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // Token valid for 10 hours
                 .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    // Validate token
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String email = extractEmail(token);
         return (email.equals(userDetails.getUsername()) && !isTokenExpired(token));
