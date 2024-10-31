@@ -1,8 +1,6 @@
 package com.example.testing.config;
 
 import com.example.testing.service.SignInService;
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,6 +10,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,13 +18,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final JwtFilter jwtFilter;
+    JwtFilter jwtFilter;
     private final SignInService signInService;
 
     public SecurityConfig(JwtFilter jwtFilter, SignInService signInService) {
@@ -51,34 +49,14 @@ public class SecurityConfig {
                 .authenticationProvider(authenticationProvider())
                 .build();
     }
-/*
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/SignInUser/SignIn").permitAll()
-                        .requestMatchers("/loginuser/saveLoginUser").hasRole("OWNER")
 
-                        .anyRequest().authenticated()
-                )
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
-                .authenticationProvider(authenticationProvider())
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-        return http.build();
-    }
-
- */
 @Bean
 public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
-            .csrf(csrf -> csrf.disable()) // Disable CSRF for simplicity, consider enabling in production
+            .csrf(AbstractHttpConfigurer::disable) // Disable CSRF for simplicity, consider enabling in production
             .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/SignInUser/SignIn",
+                    .requestMatchers( "/loginuser/saveLoginUser","/SignInUser/SignIn",
                             "/boardingHouse/saveBoarding",
-                            "/loginuser/saveLoginUser",
                             "/saveOwnerWithHousesAndRooms/{loginUserId}",
                             "/boardingHouse/{ownerId}/houses",
                             "/owner/{ownerId}/houses",
@@ -87,7 +65,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
                             "/rooms/{boardingHouseId}/room",
                             "/rooms/getRooms").permitAll()
                     //.requestMatchers("/boardingHouse/city/{city}").hasRole("USER")
-                    .requestMatchers("/boardingHouse/city/{city}").hasRole("OWNER")
+                    //.requestMatchers("/boardingHouse/city/{city}").hasRole("OWNER")
                    //.requestMatchers("/boardingHouse/{id}/updateBoarding").permitAll()
                    // .requestMatchers("/loginuser/saveLoginUser").hasRole("USER")// Allow unauthenticated access to this endpoint
                     .anyRequest().authenticated() // All other requests require authentication
@@ -121,9 +99,12 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
 
         return new InMemoryUserDetailsManager(user, admin, owner);
     }
+    /*
     public static class CustomAuthenticationDetails extends WebAuthenticationDetails {
         public CustomAuthenticationDetails(HttpServletRequest request) {
             super(request);
         }
     }
+
+     */
 }
