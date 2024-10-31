@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom'; // Import useNavigate hook
 import ForgotPasswordPopup from '../components/ForgotPasswordPopup';
@@ -24,15 +25,6 @@ export default function Login() {
   const openEnterCode = () => setStep('code');
   const openChangePassword = () => setStep('change');
   const closePopup = () => setStep(null);
-
-
-  // Mock hardcoded user data with roles
-  const mockUsers = {
-    'user@example.com': { password: 'userpass', role: 'user' },
-    'owner@example.com': { password: 'ownerpass', role: 'owner' },
-    'admin@example.com': { password: 'adminpass', role: 'admin' }
-  };
-
     
  // Navigate to the signup page when the signup button is clicked
  const handleSignup = () => {
@@ -59,28 +51,45 @@ export default function Login() {
   };
 
       // Handle email/password form submission
-      const handleSignIn = (e) => {
-          e.preventDefault();
-          // Check if user exists in mockUsers data
-      const user = mockUsers[email];
+const handleSignIn = async (e) => {
+  e.preventDefault();
+  setError(''); // Reset error message
 
-      if (user && user.password === password) {
-        console.log('Email login successful');
+  try {
+      // Send a POST request to the backend API
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/SignInUser/SignIn`, {
+          email,
+          password,
+      });
 
-    // Store authentication token in localStorage
-    localStorage.setItem('authToken', 'email-auth-token');
+      const { role } = response.data; // Assuming your backend returns a user object with a role
+
+      console.log('Email login successful');
+
+      // Store authentication token in localStorage
+      localStorage.setItem('authToken', response.data.token); // Assuming the token is returned
+
       // Redirect based on user role
-      if (user.role === 'user') {
-        navigate('/userprofile');
-      } else if (user.role === 'owner') {
-        navigate('/ownerprofile');
-      } else if (user.role === 'admin') {
-        navigate('/adminprofile');
+      if (role === 'user') {
+          navigate('/userprofile');
+      } else if (role === 'owner') {
+          navigate('/ownerprofile');
+      } else if (role === 'admin') {
+          navigate('/adminprofile');
       }
-    } else {
-      setError('Incorrect email or password');
-    }
-  };
+  } catch (error) {
+      if (error.response) {
+          // Handle specific errors based on the response from the backend
+          if (error.response.status === 401) {
+              setError('Incorrect email or password');
+          } else {
+              setError('Login failed. Please try again.');
+          }
+      } else {
+          setError('Login failed. Please try again.');
+      }
+  }
+};
 
   return (
     <div className="login-container">
