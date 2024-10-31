@@ -2,15 +2,10 @@ package com.example.testing.service;
 
 import com.example.testing.dto.BoardingHouseDto;
 import com.example.testing.dto.BoardingOwnerDto;
+import com.example.testing.dto.FacilityDto;
 import com.example.testing.dto.RoomDto;
-import com.example.testing.entity.BoardingHouse;
-import com.example.testing.entity.BoardingOwner;
-import com.example.testing.entity.LoginUser;
-import com.example.testing.entity.Room;
-import com.example.testing.repo.BoardingHouseRepo;
-import com.example.testing.repo.BoardingOwnerRepo;
-import com.example.testing.repo.LoginUserRepo;
-import com.example.testing.repo.RoomRepo;
+import com.example.testing.entity.*;
+import com.example.testing.repo.*;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +17,6 @@ import java.util.stream.Collectors;
 @Service
 
 public class BoardingOwnerService {
-
     @Autowired
     LoginUserRepo loginUserRepo;
     @Autowired
@@ -31,7 +25,14 @@ public class BoardingOwnerService {
     BoardingHouseRepo boardingHouseRepo;
     @Autowired
     RoomRepo roomRepo;
+    @Autowired
+    FacilityRepo facilityRepo;
 
+    //private final LoginUserRepo loginUserRepo;
+
+    public BoardingOwnerService(LoginUserRepo loginUserRepo) {
+        this.loginUserRepo = loginUserRepo;
+    }
     @Transactional
     public BoardingOwner saveOwnerWithHousesAndRooms(Integer loginUserId, BoardingOwnerDto ownerDto) {
         // Step 1: Fetch LoginUser by ID
@@ -43,7 +44,7 @@ public class BoardingOwnerService {
         boardingOwner.setName(ownerDto.getName());
         boardingOwner.setEmail(ownerDto.getEmail());
         boardingOwner.setPassword(ownerDto.getPassword());
-        boardingOwner.setLoginUser(loginUser); // Assuming you have a setLoginUser method
+        boardingOwner.setLoginUser(loginUser);
 
         BoardingOwner savedOwner = boardingOwnerRepo.save(boardingOwner);
 
@@ -63,17 +64,29 @@ public class BoardingOwnerService {
 
             BoardingHouse savedHouse = boardingHouseRepo.save(boardingHouse);
 
-            // Step 4: Save Rooms and associate with BoardingHouse
-            for (RoomDto roomDto : houseDto.getRooms()) {
-                Room room = new Room();
-                room.setTitle(roomDto.getTitle());
-                room.setCapacity(roomDto.getCapacity());
-                room.setIsavailable(roomDto.getIsavailable());
-                room.setBoardingHouse(savedHouse);
+            // Step 4: Save Facilities associated with BoardingHouse
+            if (houseDto.getFacilities() != null) { // Null check added
+                for (FacilityDto facilityDto : houseDto.getFacilities()) {
+                    Facility facility = new Facility();
+                    facility.setName(facilityDto.getName());
+                    facility.setBoardingHouse(savedHouse);
+                    facilityRepo.save(facility);
+                }
+            }
 
-                roomRepo.save(room);
+            // Step 5: Save Rooms associated with BoardingHouse
+            if (houseDto.getRooms() != null) { // Null check added
+                for (RoomDto roomDto : houseDto.getRooms()) {
+                    Room room = new Room();
+                    room.setTitle(roomDto.getTitle());
+                    room.setCapacity(roomDto.getCapacity());
+                    room.setIsavailable(roomDto.getIsavailable());
+                    room.setBoardingHouse(savedHouse);
+                    roomRepo.save(room);
+                }
             }
         }
+
         return savedOwner;
     }
     public List<BoardingHouseDto> getBoardingHousesByOwner(Integer ownerId) {

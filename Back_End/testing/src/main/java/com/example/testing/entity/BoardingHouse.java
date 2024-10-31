@@ -1,10 +1,13 @@
 package com.example.testing.entity;
 
+import com.example.testing.dto.FacilityDto;
+import com.example.testing.dto.RoomDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -31,6 +34,9 @@ public class BoardingHouse {
 
     @OneToMany(mappedBy = "boardingHouse", cascade = CascadeType.ALL)
     private List<Room> rooms;
+
+    @OneToMany(mappedBy = "boardingHouse", cascade = CascadeType.ALL)
+    private List<Facility> facilities = new ArrayList<>();
 
     public BoardingHouse(String city, String type, String phone, String location, String description, String email, Integer price, String street,  String image) {
         this.city = city;

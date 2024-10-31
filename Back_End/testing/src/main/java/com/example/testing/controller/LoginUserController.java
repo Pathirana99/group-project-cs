@@ -27,7 +27,6 @@ public class LoginUserController {
                 } else {
                     return new ResponseEntity<>("Already regitered with this Email", HttpStatus.CREATED);
                 }
-        //return new ResponseEntity<>("Invalid Token", HttpStatus.UNAUTHORIZED);
     }
 
     @PutMapping("/{id}")
