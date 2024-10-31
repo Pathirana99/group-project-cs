@@ -17,13 +17,22 @@ import java.util.stream.Collectors;
 @Service
 
 public class BoardingOwnerService {
-
+    @Autowired
     LoginUserRepo loginUserRepo;
+    @Autowired
     BoardingOwnerRepo boardingOwnerRepo;
+    @Autowired
     BoardingHouseRepo boardingHouseRepo;
+    @Autowired
     RoomRepo roomRepo;
+    @Autowired
     FacilityRepo facilityRepo;
 
+    //private final LoginUserRepo loginUserRepo;
+
+    public BoardingOwnerService(LoginUserRepo loginUserRepo) {
+        this.loginUserRepo = loginUserRepo;
+    }
     @Transactional
     public BoardingOwner saveOwnerWithHousesAndRooms(Integer loginUserId, BoardingOwnerDto ownerDto) {
         // Step 1: Fetch LoginUser by ID
@@ -56,21 +65,25 @@ public class BoardingOwnerService {
             BoardingHouse savedHouse = boardingHouseRepo.save(boardingHouse);
 
             // Step 4: Save Facilities associated with BoardingHouse
-            for (FacilityDto facilityDto : houseDto.getFacilities()) {
-                Facility facility = new Facility();
-                facility.setName(facilityDto.getName());
-                facility.setBoardingHouse(savedHouse);
-                facilityRepo.save(facility);
+            if (houseDto.getFacilities() != null) { // Null check added
+                for (FacilityDto facilityDto : houseDto.getFacilities()) {
+                    Facility facility = new Facility();
+                    facility.setName(facilityDto.getName());
+                    facility.setBoardingHouse(savedHouse);
+                    facilityRepo.save(facility);
+                }
             }
 
             // Step 5: Save Rooms associated with BoardingHouse
-            for (RoomDto roomDto : houseDto.getRooms()) {
-                Room room = new Room();
-                room.setTitle(roomDto.getTitle());
-                room.setCapacity(roomDto.getCapacity());
-                room.setIsavailable(roomDto.getIsavailable());
-                room.setBoardingHouse(savedHouse);
-                roomRepo.save(room);
+            if (houseDto.getRooms() != null) { // Null check added
+                for (RoomDto roomDto : houseDto.getRooms()) {
+                    Room room = new Room();
+                    room.setTitle(roomDto.getTitle());
+                    room.setCapacity(roomDto.getCapacity());
+                    room.setIsavailable(roomDto.getIsavailable());
+                    room.setBoardingHouse(savedHouse);
+                    roomRepo.save(room);
+                }
             }
         }
 

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -35,7 +36,7 @@ public class BoardingHouse {
     private List<Room> rooms;
 
     @OneToMany(mappedBy = "boardingHouse", cascade = CascadeType.ALL)
-    private List<Facility> facilities;
+    private List<Facility> facilities = new ArrayList<>();
 
     public BoardingHouse(String city, String type, String phone, String location, String description, String email, Integer price, String street,  String image) {
         this.city = city;
