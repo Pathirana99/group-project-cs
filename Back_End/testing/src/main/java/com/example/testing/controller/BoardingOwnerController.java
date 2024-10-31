@@ -1,5 +1,6 @@
 package com.example.testing.controller;
 
+import com.example.testing.dto.BoardingHouseDto;
 import com.example.testing.dto.BoardingOwnerDto;
 import com.example.testing.entity.BoardingOwner;
 import com.example.testing.service.BoardingHouseService;
