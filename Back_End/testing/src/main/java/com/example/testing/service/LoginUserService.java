@@ -55,6 +55,17 @@ public class LoginUserService {
         }
         return loginUserDtos;
     }
+    public LoginUserDto getLoginUserById(Integer id) {
+        return loginUserRepo.findById(id)
+                .map(loginUser -> new LoginUserDto(
+                        loginUser.getId(),
+                        loginUser.getContactNo(),
+                        loginUser.getPassword(),
+                        loginUser.getEmail(),
+                        loginUser.getRole()))
+                .orElse(null);
+    }
+
     public int deleteLoginUser(Integer id){
         if (loginUserRepo.existsById(id)){
             loginUserRepo.deleteById(id);

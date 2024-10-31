@@ -43,6 +43,14 @@ public class LoginUserController {
         List<LoginUserDto> allLoginUser = service.getAllLoginUser();
         return new ResponseEntity<>(allLoginUser, HttpStatus.OK);
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getLoginUserById(@PathVariable Integer id) {
+        LoginUserDto loginUserDto = service.getLoginUserById(id);
+        if (loginUserDto != null) {
+            return new ResponseEntity<>(loginUserDto, HttpStatus.OK);
+        }
+        return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+    }
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteLoginUser(@PathVariable Integer id){
         int i = service.deleteLoginUser(id);
