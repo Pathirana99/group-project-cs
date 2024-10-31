@@ -1,5 +1,6 @@
 package com.example.testing.dto;
 
+import com.example.testing.entity.Facility;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,7 @@ public class BoardingHouseDto {
     private Double price;
     private String image;
     private String email;
+    private List<FacilityDto> facilities;
     private List<RoomDto> rooms;
 
     public BoardingHouseDto(Integer id, String city, String type, String phone, String location, String description, String email, Integer price, String street, Object image) {
@@ -39,5 +41,6 @@ public class BoardingHouseDto {
         this.street = street;
         this.image = image;
     }
+
 
 }

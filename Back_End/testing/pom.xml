@@ -94,6 +94,7 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+<<<<<<< Updated upstream
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 			<version>6.3.3</version>
@@ -113,6 +114,13 @@
             <artifactId>velocity</artifactId>
             <version>1.7</version>
         </dependency>
+=======
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+			<version>3.3.2</version>
+		</dependency>
+
+>>>>>>> Stashed changes
 
 
     </dependencies>
