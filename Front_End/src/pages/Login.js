@@ -61,7 +61,7 @@ const handleSignIn = async (e) => {
           email,
           password,
       });
-
+        console.log(response);
       const { role, token } = response.data; // Assuming your backend returns a user object with a role
 
       console.log('Email login successful');

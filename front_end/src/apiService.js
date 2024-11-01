@@ -60,8 +60,9 @@ export const fetchUserData = async (token, userId) => {
     });
     return response.data; // Return user data
   } catch (error) {
-    console.error('Error fetching user data:', error);
+    console.error('Error fetching user data:', error.response ? error.response.data : error.message);
     throw error; // Propagate the error for further handling
   }
 };
 // Other functions (create, update, delete) can be added similarly
+ 
