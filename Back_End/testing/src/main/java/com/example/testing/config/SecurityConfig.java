@@ -64,7 +64,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
                             "/boardingHouse/{id}/updateBoarding",
                             "/rooms/{boardingHouseId}/room",
                             "/rooms/getRooms").permitAll()
-                    //.requestMatchers("/boardingHouse/city/{city}").hasRole("USER")
+                    .requestMatchers("/boardingHouse/city/{city}","/loginuser/{id}").hasRole("USER")
                     //.requestMatchers("/boardingHouse/city/{city}").hasRole("OWNER")
                    //.requestMatchers("/boardingHouse/{id}/updateBoarding").permitAll()
                    // .requestMatchers("/loginuser/saveLoginUser").hasRole("USER")// Allow unauthenticated access to this endpoint

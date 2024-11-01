@@ -62,20 +62,26 @@ const handleSignIn = async (e) => {
           password,
       });
 
-      const { role } = response.data; // Assuming your backend returns a user object with a role
+      const { role, token } = response.data; // Assuming your backend returns a user object with a role
 
       console.log('Email login successful');
 
       // Store authentication token in localStorage
-      localStorage.setItem('authToken', response.data.token); // Assuming the token is returned
+      localStorage.setItem('authToken',token); // Assuming the token is returned
 
       // Redirect based on user role
-      if (role === 'user') {
+      switch (role) {
+        case 'User':
           navigate('/userprofile');
-      } else if (role === 'owner') {
+          break;
+        case 'Owner':
           navigate('/ownerprofile');
-      } else if (role === 'admin') {
+          break;
+        case 'Admin':
           navigate('/adminprofile');
+          break;
+        default:
+          navigate('/'); // Fallback in case role is unrecognized
       }
   } catch (error) {
       if (error.response) {

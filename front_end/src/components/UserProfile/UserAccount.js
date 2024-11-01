@@ -1,26 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextField, Button, Typography, Container, Grid } from '@mui/material';
-
-// Sample hard-coded data representing owner information from the database
-const userData = {
-  userId: 'O12345',
-  email: 'user@example.com',
-  name: 'Kamal Jayathissa',
-};
+import { fetchUserData, changePassword } from '../../apiService'; // Import the API functions
 
 const UserAccount = () => {
-  const [userId] = useState(userData.ownerId);
-  const [email] = useState(userData.email);
-  const [name] = useState(userData.name);
+  const [userData, setUserData] = useState({
+    userId: '',
+    email: '',
+    name: '',
+  });
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
-  const handleChangePassword = (e) => {
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const data = await fetchUserData(); // Call API to get user data
+        setUserData(data);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchUserDetails();
+  }, []);
+
+  const handleChangePassword = async (e) => {
     e.preventDefault();
-    setError(''); // Clear previous error messages
-    setSuccessMessage(''); // Clear previous success messages
+    setError('');
+    setSuccessMessage('');
 
     // Basic validation for password change
     if (!newPassword || !confirmPassword) {
@@ -32,30 +41,32 @@ const UserAccount = () => {
       return;
     }
 
-    // Reset form fields
-    setNewPassword('');
-    setConfirmPassword('');
-    
-    // Here you can add logic to update the password in the database
-    setSuccessMessage('Password changed successfully!'); // Show success message
+    try {
+      await changePassword(newPassword); // Call API to update the password
+      setSuccessMessage('Password changed successfully!');
+      setNewPassword('');
+      setConfirmPassword('');
+    } catch (error) {
+      setError('Error changing password. Please try again.');
+    }
   };
 
   return (
     <Container maxWidth="sm" style={{ padding: '20px', backgroundColor: '#f5f5f5', borderRadius: '8px' }}>
-      <Typography variant="h5" gutterBottom style={{ color: 'gray',fontSize:'36px' }}>
+      <Typography variant="h5" gutterBottom style={{ color: 'gray', fontSize: '36px' }}>
         User Account
       </Typography>
 
-      {/* Display owner details */}
+      {/* Display user details */}
       <Grid container spacing={1}>
         <Grid item xs={12}>
-          <Typography variant="h6" >User ID: {userId}</Typography>
+          <Typography variant="h6">User ID: {userData.userId}</Typography>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="h6">Email: {email}</Typography>
+          <Typography variant="h6">Email: {userData.email}</Typography>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="h6">Name: {name}</Typography>
+          <Typography variant="h6">Name: {userData.name}</Typography>
         </Grid>
       </Grid>
 

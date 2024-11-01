@@ -39,7 +39,7 @@ public class SignInController {
             LoginUser user = signInService.findByEmail(request.getEmail());
 
             // Generate JWT token
-            final String jwt = jwtUtil.generateToken(userDetails, user.getEmail(), user.getRole());
+            final String jwt = jwtUtil.generateToken(userDetails, user.getEmail(), user.getRole(),user.getId());
 
             // Create response with both JWT and role
             AuthenticationResponse authResponse = new AuthenticationResponse(jwt, user.getRole());
